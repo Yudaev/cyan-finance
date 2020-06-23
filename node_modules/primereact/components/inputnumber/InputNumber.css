@@ -1,0 +1,101 @@
+.p-inputnumber {
+    display: inline-flex;
+}
+
+.p-inputnumber-button-up,
+.p-inputnumber-button-down {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.p-inputnumber-input {
+    flex: 1 1 auto;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-up {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-down {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-inputnumber-button {
+    flex: 1 1 auto;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-inputnumber-button .p-inputnumber-button-icon {
+    font-size: inherit;
+}
+
+.p-inputnumber-buttons-horizontal .p-inputnumber-button-up {
+    order: 3;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    order: 2;
+    border-radius: 0;
+}
+
+.p-inputnumber-buttons-horizontal .p-inputnumber-button-down {
+    order: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.p-inputnumber-buttons-vertical {
+    flex-direction: column;
+}
+
+.p-inputnumber-buttons-vertical .p-inputnumber-button-up {
+    order: 1;
+    flex: 1 1 auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: auto;
+}
+
+.p-inputnumber-buttons-vertical .p-inputnumber-input {
+    order: 2;
+    border-radius: 0;
+    text-align: center;
+}
+
+.p-inputnumber-buttons-vertical .p-inputnumber-button-down {
+    order: 3;
+    flex: 1 1 auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    width: auto;
+}
+
+.p-fluid .p-inputnumber {
+    width: 100%;
+}
+
+.p-fluid .p-inputnumber .p-inputnumber-input {
+    width: 1%;
+}
+
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-input,
+.p-fluid .p-inputnumber-buttons-vertical .p-inputnumber-button {
+    width: 100%;
+}
