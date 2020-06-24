@@ -1,7 +1,6 @@
 import ReactDom from 'react-dom';
 import React from 'react';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 let container = document.getElementById('app');
 
