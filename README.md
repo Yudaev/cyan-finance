@@ -1,1 +1,1 @@
-# cyan-money
+# cyan-finance
