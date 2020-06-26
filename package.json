@@ -19,6 +19,7 @@
     "babel-loader": "^8.1.0",
     "connected-react-router": "^6.8.0",
     "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
     "history": "^4.10.1",
     "html-webpack-plugin": "^4.3.0",
     "less-loader": "^6.1.1",
