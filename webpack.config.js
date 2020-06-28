@@ -68,8 +68,12 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: path.resolve(__dirname, 'public', 'index.html')   
+            template: path.resolve(__dirname, 'src', 'public', 'index.html')   
         }),
+        // new webpack.ProvidePlugin({
+        //     $: 'jquery',
+        //     jQuery: 'jquery'
+        //   })
     ],
     
     devServer: {
