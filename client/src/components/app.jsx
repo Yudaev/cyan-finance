@@ -6,7 +6,6 @@ import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/nova-dark/theme.css';
 import 'primeicons/primeicons.css';
 import styles from './app.scss';
-import './app.css';
 
 const cx = classnames.bind(styles);
 
