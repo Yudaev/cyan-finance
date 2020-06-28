@@ -9,7 +9,9 @@ $elemPadding: 1.5em 1em;
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1.02em;
+    min-height: 100%;
 
+     :global {
         .profile-header {
             padding: $elemPadding;
             border-bottom: 1px solid black;
@@ -23,21 +25,47 @@ $elemPadding: 1.5em 1em;
             height: 5em;
         }
 
-        .profile-social-links {
-            border-bottom: 1px solid black;
-            i {
-                padding: 0.5em 0.5em;
+        
+        .profile-footer {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+
+            &__social-links {
+                border-bottom: 1px solid black;
+        
+                i {
+                    padding: 0.5em 0.5em;
+                    font-size: 2em;
+                }
+                    
+                .pi-google {
+                    color: red;
+                }
+        
+                .pi-android {
+                    color: greenyellow;
+                }
+        
+                .pi-facebook {
+                    color: blue;
+                }
+        
+                .pi-twitter {
+                    color: turquoise;
+                }
             }
-        }
-    
-        .footer {
-            padding: 2em 1em;
             
-            a {
-                text-decoration: underline;
-                color: black;
+            &__exit {
+                padding: 2em 1em;
+
+                a {
+                    text-decoration: underline;
+                    color: black;
+                }
             }
         }
+     }
   }
   
   .content {
