@@ -1,0 +1,8 @@
+{
+  "port": 8000,
+  "mongoHost": "localhost",
+  "mongoPort": 27001,
+  "mongoDB": "dbName",
+  "tokenSecret": "SecretPhrase",
+  "saltRounds": 5
+}
