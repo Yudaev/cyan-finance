@@ -7,6 +7,8 @@ import 'primereact/resources/themes/nova-dark/theme.css';
 import 'primeicons/primeicons.css';
 import styles from './app.scss';
 
+import ProfilePage from './ProfilePage/ProfilePage.jsx';
+
 const cx = classnames.bind(styles);
 
 export class App extends Component {
@@ -17,14 +19,16 @@ export class App extends Component {
       {name: 'settings'},
       {name: 'daily'},
       {name: 'history'},
+      {name: 'profilePage'}
     ],
     page: 1,
   }
 
   drawPanels = (dataValue) => {
-    if(dataValue.name === 'settings') return <p>window 1</p>;
+    if(dataValue.name === 'settings') return <p>window1</p>
     else if (dataValue.name === 'daily') return <p>window 2</p>;
     else if (dataValue.name === 'history') return <p>window 3</p>;
+    else if (dataValue.name === 'profilePage') return <ProfilePage />;
   }
 
   render() {
