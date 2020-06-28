@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames/bind';   
 
-import 'primereact/resources/primereact.min.css';
-import 'primereact/resources/themes/nova-dark/theme.css';
-import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
 import styles from './ProfilePage.css';
 
@@ -13,7 +10,7 @@ export default class Test extends Component {
     render() {
         return(
             <div
-                className={cx('container content')}>
+                className={cx("container", "content")}>
                     <div
                         className={cx("profile-header")}>
                             <i className={cx("pi pi-user")}></i>
