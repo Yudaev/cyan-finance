@@ -8,6 +8,8 @@ import 'primeicons/primeicons.css';
 import styles from './app.scss';
 import './app.css';
 
+import ProfilePage from './ProfilePage/ProfilePage.jsx';
+
 const cx = classnames.bind(styles);
 
 export class App extends Component {
@@ -23,7 +25,7 @@ export class App extends Component {
   }
 
   drawPanels = (dataValue) => {
-    if(dataValue.name === 'settings') return <p>window 1</p>;
+    if(dataValue.name === 'settings') return <ProfilePage />;
     else if (dataValue.name === 'daily') return <p>window 2</p>;
     else if (dataValue.name === 'history') return <p>window 3</p>;
   }
