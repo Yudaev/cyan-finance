@@ -39,20 +39,22 @@ $elemPadding: 1.5em 1em;
                     font-size: 2em;
                 }
                     
-                .pi-google {
-                    color: red;
-                }
+                :global {
+                    .pi-google {
+                        color: red;
+                    }
         
-                .pi-android {
-                    color: greenyellow;
-                }
+                    .pi-android {
+                        color: greenyellow;
+                    }
         
-                .pi-facebook {
-                    color: blue;
-                }
+                    .pi-facebook {
+                        color: blue;
+                    }
         
-                .pi-twitter {
-                    color: turquoise;
+                    .pi-twitter {
+                        color: turquoise;
+                    }
                 }
          
             
