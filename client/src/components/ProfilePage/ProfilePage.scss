@@ -11,22 +11,22 @@ $elemPadding: 1.5em 1em;
     font-size: 1.02em;
     min-height: 100%;
 
-     :global {
-        .profile-header {
+  
+        .header {
             padding: $elemPadding;
             border-bottom: 1px solid black;
         }
 
-        .profile-settings {
+        .settings {
             padding: $elemPadding;
         }
 
-        .profile-body {
+        .body {
             height: 5em;
         }
 
         
-        .profile-footer {
+        .footer {
             position: absolute;
             width: 100%;
             bottom: 0;
@@ -54,7 +54,7 @@ $elemPadding: 1.5em 1em;
                 .pi-twitter {
                     color: turquoise;
                 }
-            }
+         
             
             &__exit {
                 padding: 2em 1em;
