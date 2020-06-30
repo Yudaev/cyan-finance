@@ -3,18 +3,15 @@ $elemPadding: 1.5em 1em;
 * {
     font-family: 'Roboto', sans-serif;
   }
-
   
   .container {
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1.02em;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-     
 
-  
         .header {
             padding: $elemPadding;
             border-bottom: 1px solid black;
@@ -30,7 +27,6 @@ $elemPadding: 1.5em 1em;
             flex: 1 0 auto;
         }
 
-        
         .footer {
             flex: 0 0 auto;
 
@@ -46,23 +42,23 @@ $elemPadding: 1.5em 1em;
                     .pi-google {
                         color: red;
                     }
-        
+            
                     .pi-android {
                         color: greenyellow;
                     }
-        
+            
                     .pi-facebook {
                         color: blue;
                     }
-        
+            
                     .pi-twitter {
                         color: turquoise;
                     }
                 }
-         
+            }
             
             &__exit {
-                padding: 2em 1em;
+                padding-top: 2em;
 
                 a {
                     text-decoration: underline;
@@ -71,9 +67,10 @@ $elemPadding: 1.5em 1em;
             }
         }
      }
-  }
+  
   
   .content {
     text-align: center;
   }
+    
     
