@@ -9,6 +9,10 @@ $elemPadding: 1.5em 1em;
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1.02em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+     
 
   
         .header {
@@ -21,14 +25,14 @@ $elemPadding: 1.5em 1em;
         }
 
         .body {
-            height: 20em;
+            width: auto;
+            box-sizing: border-box;
+            flex: 1 0 auto;
         }
 
         
         .footer {
-            position: absolute;
-            width: 100%;
-            bottom: 0;
+            flex: 0 0 auto;
 
             &__social-links {
                 border-bottom: 1px solid black;
