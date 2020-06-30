@@ -1,0 +1,60 @@
+.container {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    .goBackButton {
+        margin: 3em 0em 0em 1.5em;
+        text-align: left;
+    }
+
+    .body {
+        align-content: center;
+        padding: 1em 0em;
+        margin: auto;
+        width: 75%;
+        
+        .inputBlock {
+            padding: 0.75em 0em;
+            .input {
+                width: 100%;
+            }
+        }
+
+        .selectBlock {
+            .dropDown {
+                width: 100%;
+                text-align: left;
+                padding: 0.5em 0em;
+                margin: 1em 0em;
+            }
+    
+            .selectButton {
+                width: 100%;
+    
+                :global .p-button {
+                    width: 50%;
+                    border: 1px solid black;
+                }
+            }
+        }
+
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 3.5em 0em;
+
+        :global .p-button-success {
+            padding: 0.1em 1.65em;
+        }
+    }
+}
+
+.content {
+    text-align: center;
+}

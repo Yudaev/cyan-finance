@@ -1,0 +1,150 @@
+ 
+ .container {
+    height: 100vh;
+    margin: 0;
+
+     .cardList {
+        text-align: left;
+        width: 85%;
+        margin: auto;
+        height: 90vh;
+
+        .cardBack {
+            background: linear-gradient(0deg, green, #ffff);
+            padding: 1px;
+            border-radius: 0.8em;
+            margin: 0.8em 0em;
+        }
+
+        .altCardBack {
+            background: linear-gradient(0deg, red, #ffff);
+            padding: 1px;
+            border-radius: 0.8em;
+            margin: 0.8em 0em;
+        }
+
+        .altCard {
+            background: linear-gradient(0deg, rgb(245, 194, 193), #ffff);
+            border-radius: 0.7em;
+            display: flex;
+            padding: 1em 0em 1em 0.7em;
+
+            .leftSide {
+                flex-direction: column;
+                align-self: center;
+                width: 100%;
+ 
+                 .title {
+                     font-size: 16px;
+                     font-weight: bold;
+                     margin: 0;
+                 }
+ 
+                 .date {
+                     font-size: 12px;
+                     font-weight: lighter;
+                     padding-top: 0.7em;
+ 
+                     .regular {
+                         opacity: 0.5;
+                         padding-left: 0.7em;
+                     }
+                 }
+ 
+            }
+ 
+             .rightSide {
+                 display: flex;
+                 flex-direction: row;
+                 align-self: center;
+                 min-width: 30%;
+                 justify-content: space-between;
+                 font-size: 17px;
+ 
+                 .amount {
+                     align-self: center;
+                 }
+     
+                 i {
+                     align-self: center;
+                 }
+             }
+        }
+
+        .card {
+            background: linear-gradient(0deg, rgb(205, 227, 202), #ffff);
+            border-radius: 0.7em;
+            display: flex;
+            padding: 1em 0em 1em 0.7em;
+
+           .leftSide {
+               flex-direction: column;
+               align-self: center;
+               width: 100%;
+
+                .title {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin: 0;
+                }
+
+                .date {
+                    font-size: 12px;
+                    font-weight: lighter;
+                    padding-top: 0.7em;
+
+                    .regular {
+                        opacity: 0.5;
+                        padding-left: 0.7em;
+                    }
+                }
+
+           }
+
+            .rightSide {
+                display: flex;
+                flex-direction: row;
+                align-self: center;
+                min-width: 30%;
+                justify-content: space-between;
+                font-size: 17px;
+
+                .amount {
+                    align-self: center;
+                }
+    
+                i {
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    .button {
+        z-index: 1;
+        position: absolute;
+        bottom: 10;
+        left: 27.8;
+        width: 85%;
+        padding: 1px;
+        border-radius: 0.8em;
+        background: linear-gradient(0deg, black, #ffff);
+        margin: auto;
+
+        :global .p-button-secondary {
+            width: 100%;
+            padding: 0.5em 0em;
+            border-radius: 0.7em;
+            background: linear-gradient(0deg, rgb(241, 241, 241), #ffff);
+        }
+    }
+
+    
+
+ }
+
+.content {
+    text-align: center;
+}
+    
+    
