@@ -15,7 +15,8 @@ class Popup extends Component {
         state = {
             regularity: null,
             type: null,
-            category: null
+            category: null,
+            openPopUp: this.props.openPopUp
         }
 
         regularity = [
@@ -42,7 +43,11 @@ class Popup extends Component {
         return(
             <div className={cx("container", "content")}>
                 <div className={cx("goBackButton")}>
-                    <i className="pi pi-arrow-left" />
+                    <Button 
+                        className="p-button-raised p-button-secondary" 
+                        label={<i className="pi pi-arrow-left" />} 
+                        onClick={(e) => this.props.handlePopUp(e)}  
+                    />
                 </div>
                 <div className={cx("body")}>
                     <div className={cx("inputBlock")}>
@@ -69,26 +74,34 @@ class Popup extends Component {
                             placeholder="Выберите регулярность"
                             value={this.state.regularity} 
                             options={this.regularity}
-                            onChange={(e) => this.setState({ regularity: e.value})}  
+                            onChange={(e) => this.setState({ regularity: e.value })}  
                         />
                         <SelectButton
                             className={cx("selectButton")}
                             value={this.state.type}
                             options={this.types}
-                            onChange={(e) => this.setState({ type: e.value})}  
+                            onChange={(e) => this.setState({ type: e.value })}  
                         />
                         <Dropdown
                             className={cx("dropDown")}
                             placeholder="Категория"
                             value={this.state.category} 
                             options={this.categories}
-                            onChange={(e) => this.setState({ category: e.value})}  
+                            onChange={(e) => this.setState({ category: e.value })}  
                         />
                     </div>
                 </div>
                 <div className={cx("footer")}>
-                    <Button label="УДАЛИТЬ" className="p-button-danger" />
-                    <Button label="OK" className="p-button-success" />
+                    <Button 
+                        label="УДАЛИТЬ" 
+                        className="p-button-danger"
+                        onClick={() => this.props.handlePopUp()}  
+                    />
+                    <Button 
+                        label="OK" 
+                        className="p-button-success" 
+                        onClick={() => this.props.handlePopUp()} 
+                    />
                 </div>
             </div>
         )

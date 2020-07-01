@@ -1,0 +1,23 @@
+.card {
+    :global {
+        .p-card-title,
+        .p-card-subtitle {
+            width: 80%;
+        }
+        
+        .p-card-content {
+            float: right;
+            position: relative;
+            bottom: 40;
+            font-size: 20px;
+        }    
+    }
+
+    .greenCard {
+        border-left: 4px solid green;
+    }
+
+    .redCard {
+        border-left: 4px solid red;
+    }
+}
