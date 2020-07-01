@@ -82,7 +82,7 @@ export default class Test extends Component {
                                 числа
                             </label>
                         </div>
-                        <InputTextarea className={cx("inputItem")} placeholder="Описание" />
+                        <InputTextarea className={cx("inputItem")} placeholder="Описание" autoResize={true}/>
                     </div>
                     <div className={cx("formFooter")}>
                         <div className={cx("btnWrapper")}>
