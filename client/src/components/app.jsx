@@ -1,29 +1,48 @@
-import styles from './app.scss';
+import React, {Component}  from 'react';
+import { Carousel } from "primereact/carousel";
+import classnames from 'classnames/bind';
+
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/nova-dark/theme.css';
 import 'primeicons/primeicons.css';
-import classnames from 'classnames/bind';
-import React from 'react';
-import { Button } from "primereact/button";
+import styles from './app.scss';
+
+import PageIncExp from './PageIncExp/PageIncExp.jsx';
 
 const cx = classnames.bind(styles);
 
-export const App = ({
-  test
-}) => (
-  <div className={cx('container')}>
-    <h1 style={{ textAlign: 'center' }}>Cyan Finance</h1>
-    <div className={cx('content')}>
-      <Button label={test}></Button>
-      <Button label="Primary" icon="pi pi-check" />
-      <Button label="Secondary" className={cx('p-button-secondary')} />
-      <Button label="Success" className="p-button p-button-success" />
-      <Button label="Info" className="p-button-info" />
-      <Button label="Warning" className="p-button-warning" />
-      <Button label="Danger" className="p-button-danger" />
+export class App extends Component {
 
-    </div>
-  </div>
-);
+  state = {
+    text: window.innerHeight,
+    data: [
+      {name: 'settings'},
+      {name: 'daily'},
+      {name: 'history'},
+      {name: 'pageIncExp'}
+    ],
+    page: 1,
+  }
+
+  drawPanels = (dataValue) => {
+    if(dataValue.name === 'settings') return <p>window1</p>
+    else if (dataValue.name === 'daily') return <p>window 2</p>;
+    else if (dataValue.name === 'history') return <p>window 3</p>;
+    else if (dataValue.name === 'pageIncExp') return <PageIncExp />;
+  }
+
+  render() {
+    return(
+      <div className={cx('container')}>
+          <Carousel
+            value={this.state.data}
+            page={this.state.page}
+            onPageChange={(e) => this.setState({page: e.page})}
+            itemTemplate={this.drawPanels}
+          />
+      </div>
+    )
+  }
+}
 
 export default App;
