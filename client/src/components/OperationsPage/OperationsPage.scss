@@ -5,6 +5,7 @@ $elemPadding: 1.5em 1em;
   }
   
   .container {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1em;
@@ -40,9 +41,9 @@ $elemPadding: 1.5em 1em;
         }
 
         .upBtnWrapper {
-            position: fixed;
+            position: absolute;
             bottom: 20px;
-            right: -2950px;
+            right: 20px;
             z-index: 5;
         }
 
