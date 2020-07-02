@@ -12,32 +12,42 @@ $elemPadding: 1.5em 1em;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: $elemPadding;
 
         .header {
-            // text-align: left;
             display: flex;
             justify-content: space-between;
             align-content: flex-start;
-            padding: 1.5em 1em 1em 1em;
-            margin-bottom: 5px;
+            margin-bottom: 20px;
 
             .incomeWrapper,
             .expensesWrapper {
                 display: flex;
                 flex-direction: column;
                 justify-content: start;
+                align-items: center;
+
+                .mark {
+                    color: #888;
+                    font-size: .8em;
+                }
             }
 
             .monthPicker {
-                min-width: 120px;
+                min-width: 100px;
                 border: none;
                 text-align: center;
-            }
-        }
 
-        .body {
-            // border: 1px solid black;
-            padding: $elemPadding;
+                :global {
+                    .p-dropdown-label {
+                        font-weight: 600;
+                    }
+
+                    .pi-chevron-down {
+                        font-size: .8em;
+                    }
+                } 
+            }
         }
 
         .upBtnWrapper {
@@ -45,58 +55,5 @@ $elemPadding: 1.5em 1em;
             bottom: 20px;
             right: 20px;
             z-index: 5;
-        }
-
-        .editOperationForm {
-            flex: 1 0 auto;
-            display: flex;
-            flex-direction: column;
-
-            .formBody {
-                flex: 1 0 auto;
-                display: flex;
-                flex-direction: column;
-                padding: $elemPadding;
-
-                .inputItem {
-                    margin-bottom: 1em;
-
-                    button {
-                        height: 33px;
-                    }
-                }
-
-                .checkboxWrapper {
-                    margin-bottom: 1em;
-
-                    .checkboxLabel {
-                        margin-left: 1em;
-
-                        .regularity {
-                            text-decoration: underline;
-                        }
-
-                        .regularDate {
-                            color: #a84e4e;
-                        }
-                    }
-                }
-            }
-
-            .formFooter {
-                flex: 0 0 auto;
-                padding: $elemPadding;
-            }
-
-            .btnWrapper {
-                margin-bottom: 1em;
-                display: flex;
-                justify-content: center;
-
-                .editPageBtn {
-                    margin: auto 20px;
-                    min-width: 120px;
-                }
-            }
         }
      }

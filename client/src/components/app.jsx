@@ -23,6 +23,7 @@ export class App extends Component {
     text: window.innerHeight,
     data: [
       {name: 'settings'},
+      {name: 'operationsPage'},
       {name: 'daily'},
       {name: 'history'},
       {name: 'profilePage'},
@@ -30,8 +31,7 @@ export class App extends Component {
       {name: 'profilePage'},
       {name: 'pageInputMail'},
       {name: 'pageRecovery'},
-      {name: 'pageIncExp'}
-      {name: 'operationsPage'}
+      {name: 'pageIncExp'},
     ],
     page: 1,
   }

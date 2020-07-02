@@ -2,11 +2,14 @@
   font-family: 'Roboto', sans-serif;
 
   .container {
-    // border: 1px solid black;
+    margin-bottom: 10px;
 
     .header {
       h2 {
         margin-left: 5px;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+        color: #888;
       }
     }
   }
