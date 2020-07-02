@@ -2,11 +2,11 @@ $elemPadding: 1.5em 1em;
 
 * {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
   }
   
   .container {
     max-width: 1200px;
-    margin: 0 auto;
     font-size: 1.02em;
     min-height: 100vh;
     display: flex;
@@ -18,7 +18,10 @@ $elemPadding: 1.5em 1em;
         }
 
         .settings {
-            padding: $elemPadding;
+
+            p {
+                padding: $elemPadding;
+            }
         }
 
         .body {
@@ -58,7 +61,7 @@ $elemPadding: 1.5em 1em;
             }
             
             &__exit {
-                padding-top: 2em;
+                padding: 2em;
 
                 a {
                     text-decoration: underline;

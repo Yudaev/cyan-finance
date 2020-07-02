@@ -31,6 +31,10 @@ $elemPadding: 1.5em 1em;
 
                 .inputItem {
                     margin-bottom: 1em;
+
+                    button {
+                        height: 33px;
+                    }
                 }
 
                 .checkboxWrapper {
@@ -67,4 +71,3 @@ $elemPadding: 1.5em 1em;
             }
         }
      }
-
