@@ -8,9 +8,12 @@ import 'primeicons/primeicons.css';
 import styles from './app.scss';
 
 import ProfilePage from './ProfilePage/ProfilePage.jsx';
+
 import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
 import PageInputMail from './PageInputMail/PageInputMail.jsx';
 import PageRecovery from './PageRecovery/PageRecovery.jsx';
+import OperationsPage from './OperationsPage/OperationsPage.jsx';
+
 
 const cx = classnames.bind(styles);
 
@@ -28,6 +31,7 @@ export class App extends Component {
       {name: 'pageInputMail'},
       {name: 'pageRecovery'},
       {name: 'pageIncExp'}
+      {name: 'operationsPage'}
     ],
     page: 1,
   }
@@ -40,6 +44,7 @@ export class App extends Component {
     else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
     else if (dataValue.name === 'pageInputMail') return <PageInputMail />;
     else if (dataValue.name === 'pageRecovery') return <PageRecovery />;
+    else if (dataValue.name === 'operationsPage') return <OperationsPage />;
   }
 
   render() {

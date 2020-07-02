@@ -1,0 +1,26 @@
+* {
+  font-family: 'Roboto', sans-serif;
+
+  .container {
+    margin: 5px;
+    // border: 1px solid black;
+    padding-left: 50px;
+    min-height: 50px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    background: url(./icon.png) no-repeat 10px center/30px;
+
+    :global {
+      .p-card-body,
+      .p-card-content {
+        width: 100%;
+      }
+
+      .p-card-content {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
