@@ -26,9 +26,8 @@ export class App extends Component {
 
   drawPanels = (dataValue) => {
     if(dataValue.name === 'settings') return <p>window1</p>
-    else if (dataValue.name === 'daily') return <p>window 2</p>;
+    else if (dataValue.name === 'daily') return <PageIncExp />;
     else if (dataValue.name === 'history') return <p>window 3</p>;
-    else if (dataValue.name === 'pageIncExp') return <PageIncExp />;
   }
 
   render() {

@@ -10,18 +10,18 @@ const cx = classnames.bind(styles);
 
 export default class Test extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            valueNum: null,
-            valueBut: null,
-            selectedCategory: null,
-            filteredCategories: null
-        };  
-        
-        this.filterCategories = this.filterCategories.bind(this);
-        this.categoriesTemplate = this.categoriesTemplate.bind(this);
+    // constructor(props) {
+    //     super(props);
+    //     this.filterCategories = this.filterCategories.bind(this);
+    //     this.categoriesTemplate = this.categoriesTemplate.bind(this);
+    //
+    // };
 
+    state = {
+        valueNum: null,
+        valueBut: null,
+        selectedCategory: null,
+        filteredCategories: null
     };
 
     buttonsTemplate(option) {
@@ -34,7 +34,7 @@ export default class Test extends Component {
         this.categories = ['Автомобиль', 'Дети', 'Еда', 'Работа', 'Развлечения'];
     };
 
-    filterCategories(event) {
+    filterCategories = (event) => {
         setTimeout(() => {
             let results;
 
@@ -51,7 +51,7 @@ export default class Test extends Component {
         }, 250);
     };
 
-    categoriesTemplate(categories) {
+    categoriesTemplate = (categories) => {
         return (
             <div style={{ fontSize: '16px' }}>{ categories }</div>  
         );

@@ -62,7 +62,15 @@ $elemPadding: 1.5em 1em;
             width: 142px;
             height: 35px;
             padding: 10px 1.2em 0 1.2em;
+            outline: 1px solid #c8c8c8;
         }
+        //.incexp-body-button-temp:first-child {
+        //    outline: 1px solid #c8c8c8;
+        //}
+    }
+
+    .incexp-body-button:first-child {
+        border-right: 1px solid #c8c8c8;
     }
 }
 
