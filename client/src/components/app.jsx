@@ -9,6 +9,7 @@ import styles from './app.scss';
 
 import ProfilePage from './ProfilePage/ProfilePage.jsx';
 import SettingsPage from './SettingsPage/SettingsPage.jsx';
+import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
 
 const cx = classnames.bind(styles);
 
@@ -20,7 +21,8 @@ export class App extends Component {
       {name: 'settings'},
       {name: 'daily'},
       {name: 'history'},
-      {name: 'profilePage'}
+      {name: 'profilePage'},
+      {name: 'editOperationPage'}
     ],
     page: 1,
   }
@@ -30,6 +32,7 @@ export class App extends Component {
     else if (dataValue.name === 'daily') return <p>window 2</p>;
     else if (dataValue.name === 'history') return <p>window 3</p>;
     else if (dataValue.name === 'profilePage') return <ProfilePage />;
+    else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
   }
 
   render() {
