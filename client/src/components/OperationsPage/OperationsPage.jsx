@@ -3,6 +3,7 @@ import classnames from 'classnames/bind';
 
 import { Button } from 'primereact/button';
 import {Dropdown} from 'primereact/dropdown';
+import { Calendar } from 'primereact/calendar';
 import styles from './OperationsPage.scss';
 
 import OperationsPageDateBlock from './OperationPageDateBlock/OperationPageDateBlock.jsx';
@@ -10,26 +11,11 @@ import EditOperationPage from '../EditOperationPage/EditOperationPage';
 
 const cx = classnames.bind(styles);
 
-const months = [
-    {label: "Январь", value: "0"},
-    {label: "Февраль", value: "1"},
-    {label: "Март", value: "2"},
-    {label: "Апрель", value: "3"},
-    {label: "Май", value: "4"},
-    {label: "Июнь", value: "5"},
-    {label: "Июль", value: "6"},
-    {label: "Август", value: "7"},
-    {label: "Сентябрь", value: "8"},
-    {label: "Октябрь", value: "9"},
-    {label: "Ноябрь", value: "10"},
-    {label: "Декабрь", value: "11"},
-]
-
 export default class OperationsPage extends Component {
     state = {
         incomeAmount: 21200,
         expensesAmount: 17300,
-        month: new Date().getMonth() + '',
+        date: new Date(),
         openPopup: false
     }
 
@@ -55,13 +41,16 @@ export default class OperationsPage extends Component {
                         <span className={cx("mark")}>доход</span>
                     </div>
                     <div className="monthWrapper">
-                        <Dropdown 
-                            className={cx("monthPicker")} 
-                            inputStyle={{minWidth: "100px"}} 
-                            value={this.state.month} 
-                            options={months} 
-                            onChange={(e) => {this.setState({month: e.value})}}
-                        />
+                    <Calendar 
+                        className={cx("monthPicker")}
+                        inputStyle={{minWidth: "100px"}} 
+                        value={this.state.date} 
+                        onChange={(e) => this.setState({ date: e.value })} 
+                        view="month" 
+                        dateFormat="mm/yy" 
+                        yearNavigator={true} 
+                        yearRange="2020:2030" 
+                    />
                     </div>
                     <div className={cx("expensesWrapper")}>
                         <span className={cx("expensesAmount")}>{`${this.state.expensesAmount} р.`}</span>
