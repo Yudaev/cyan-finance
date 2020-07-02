@@ -7,7 +7,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 import { Button } from 'primereact/button';
 
 import Card from './Cards/Card.jsx';
-import EditOperationPage from './EditOperationPage/EditOperationPage.jsx '
+import EditOperationPage from '../EditOperationPage/EditOperationPage.jsx'
 
 const cx = classnames.bind(styles);
 
