@@ -35,6 +35,7 @@ class SettingsPage extends Component {
                 </div>
                 <ScrollPanel className={cx("cardList")}>
                     <Card handlePopUp={this.handlePopUp} />
+                    <Card handlePopUp={this.handlePopUp} />
                 </ScrollPanel>
                         <Button label="ДОБАВИТЬ ЗАПИСЬ" className="p-button-raised p-button-secondary" />
             </div>   
