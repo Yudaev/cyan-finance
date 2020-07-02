@@ -7,7 +7,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 import { Button } from 'primereact/button';
 
 import Card from './Cards/Card.jsx';
-import PopupSettings from './PopupSettings/PopupSettings.jsx';
+import EditOperationPage from './EditOperationPage/EditOperationPage.jsx '
 
 const cx = classnames.bind(styles);
 
@@ -31,7 +31,7 @@ class SettingsPage extends Component {
         return ( 
             <div className={cx("container", "content")}>
                 <div className={show}>
-                    <PopupSettings openPopUp={this.state.openPopUp} handlePopUp={this.handlePopUp} />
+                    <EditOperationPage openPopUp={this.state.openPopUp} handlePopUp={this.handlePopUp} />
                 </div>
                 <ScrollPanel className={cx("cardList")}>
                     <Card handlePopUp={this.handlePopUp} />
