@@ -11,7 +11,7 @@ $elemPadding: 1.5em 1em;
     min-height: 100%;
 
     .recovery-header {
-        padding-top: 8.5em;        
+        padding-top: 11em;        
     }
 
     .recovery-header-main-text {
@@ -30,14 +30,14 @@ $elemPadding: 1.5em 1em;
     }
 
     .recovery-body-input {
-        padding: 2.2em 1em;
+        padding: 1em 0;
         display: flex;
         justify-content: center;
         align-items: center;  
     }
 
     .recovery-body-button {
-        padding: $elemPadding;
+        padding-top: 2em;
     }
 }
 

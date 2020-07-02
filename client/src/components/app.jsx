@@ -9,6 +9,8 @@ import styles from './app.scss';
 
 import ProfilePage from './ProfilePage/ProfilePage.jsx';
 import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
+import PageInputMail from './PageInputMail/PageInputMail.jsx';
+import PageRecovery from './PageRecovery/PageRecovery.jsx';
 
 const cx = classnames.bind(styles);
 
@@ -21,7 +23,11 @@ export class App extends Component {
       {name: 'daily'},
       {name: 'history'},
       {name: 'profilePage'},
-      {name: 'editOperationPage'}
+      {name: 'editOperationPage'},
+      {name: 'profilePage'},
+      {name: 'pageInputMail'},
+      {name: 'pageRecovery'},
+      {name: 'pageIncExp'}
     ],
     page: 1,
   }
@@ -32,6 +38,8 @@ export class App extends Component {
     else if (dataValue.name === 'history') return <p>window 3</p>;
     else if (dataValue.name === 'profilePage') return <ProfilePage />;
     else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
+    else if (dataValue.name === 'pageInputMail') return <PageInputMail />;
+    else if (dataValue.name === 'pageRecovery') return <PageRecovery />;
   }
 
   render() {
