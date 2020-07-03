@@ -1,38 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 * {
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  font-size: 1.02em;
-
-  :global {
-    button.p-carousel-prev,
-    button.p-carousel-next,
-    .p-carousel-dot-item {
-      display: none;
-    }
-
-    div.p-carousel-content {
-      padding: 0;
-    }
-
-    div.p-carousel-container {
-      padding: 0;
-    }
-
-    .p-carousel-items-container .p-grid {
-      margin: 0;
-    }
-
-    .p-carousel-items-container .p-col-12 {
-      padding: 0;
-    }
+:global {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1.02em;
   }
 }
 
-.content {
-  text-align: center;
-}

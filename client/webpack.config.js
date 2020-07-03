@@ -79,7 +79,15 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: 'src',
+    historyApiFallback: true,
     port: 7000,
-    proxy: {}
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:8000/',
+        pathRewrite: { '/api/': '' },
+        secure: false,
+        changeOrigin: true,
+      }
+    }
   }
 };

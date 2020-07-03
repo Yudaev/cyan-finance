@@ -19,6 +19,10 @@ $elemPadding: 1.5em 1em;
 
         .settings {
             padding: $elemPadding;
+
+            .p {
+              margin-bottom: 10px;
+            }
         }
 
         .body {

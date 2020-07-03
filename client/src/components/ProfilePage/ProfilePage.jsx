@@ -8,15 +8,14 @@ const cx = classnames.bind(styles);
 
 export default class Test extends Component {
     render() {
+        const { logout, user: { email } } = this.props;
         return(
             <div className={cx("container", "content")}>
                     <div className={cx("header")}>
                             <i className={cx("pi pi-user")}></i>
                     </div>
                         <div className={cx("settings")}>
-                                <p className="settings__p">
-                                    user@mail.ru
-                                </p>
+                                <p className={cx("p")}>{email}</p>
                                 <Button label="Change password" className="p-button-raised p-button-secondary" />
                         </div>
                         <div className={cx("body")}>
@@ -31,7 +30,12 @@ export default class Test extends Component {
                                     <i className="pi pi-android"></i>
                             </div>
                             <div className={cx("footer__exit")}>
-                                <a href="#">Выход</a>
+                                <a href='#logout' onClick={e => {
+                                  e.preventDefault();
+                                  logout();
+                                }}>
+                                  Выход
+                                </a>
                             </div>
                         </div>
             </div>

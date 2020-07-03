@@ -1,0 +1,25 @@
+.carousel {
+  :global {
+    button.p-carousel-prev,
+    button.p-carousel-next,
+    .p-carousel-dot-item {
+      display: none;
+    }
+
+    div.p-carousel-content {
+      padding: 0;
+    }
+
+    div.p-carousel-container {
+      padding: 0;
+    }
+
+    .p-carousel-items-container .p-grid {
+      margin: 0;
+    }
+
+    .p-carousel-items-container .p-col-12 {
+      padding: 0;
+    }
+  }
+}

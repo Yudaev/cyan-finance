@@ -3,24 +3,27 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const pick = require('lodash/pick');
 const { tokenSecret } = require('../config');
-
 const User = require('../models/user');
 
 router.post('/', async (req, res) => {
   const { email, password, password2 } = req.body;
 
   if (!email || !password || !password2) {
-    return res.status(401).json({ message: 'Incorrect email or password.' });
+    return res.status(400).json({ message: 'Incorrect email or password' });
+  }
+
+  if (!(/.+@.+\..+/i).test(email)) {
+    return res.status(400).json({ message: 'Incorrect email' });
   }
 
   if (password !== password2) {
-    return res.status(401).json({ message: 'Passwords does not match' });
+    return res.status(400).json({ message: 'Passwords does not match' });
   }
 
   try {
     const user = await User.findOne({email});
     if (user) {
-      return res.status(401).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'User already exists' });
     }
   } catch (error) {
     res.status(500).json({ error });

@@ -1,60 +1,58 @@
-import React, {Component}  from 'react';
-import { Carousel } from "primereact/carousel";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classnames from 'classnames/bind';
-
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/nova-dark/theme.css';
+import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import styles from './app.scss';
-
-import ProfilePage from './ProfilePage/ProfilePage.jsx';
-import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
-import PageInputMail from './PageInputMail/PageInputMail.jsx';
-import PageRecovery from './PageRecovery/PageRecovery.jsx';
-
-import PageIncExp from './PageIncExp/PageIncExp.jsx';
+import MainPage from "./MainPage/MainPage";
+import RegAuthPage from "../connectors/RegAuthPage";
+import ProfilePage from "../connectors/ProfilePage";
 
 const cx = classnames.bind(styles);
 
-export class App extends Component {
-
-  state = {
-    text: window.innerHeight,
-    data: [
-      {name: 'settings'},
-      {name: 'pageIncExp'},
-      {name: 'history'},
-      {name: 'profilePage'},
-      {name: 'editOperationPage'},
-      {name: 'profilePage'},
-      {name: 'pageInputMail'},
-      {name: 'pageRecovery'},
-    ],
-    page: 1,
-  }
-
-  drawPanels = (dataValue) => {
-    if(dataValue.name === 'settings') return <p>window1</p>
-    else if (dataValue.name === 'pageIncExp') return <PageIncExp />;
-    else if (dataValue.name === 'history') return <p>window 3</p>;
-    else if (dataValue.name === 'profilePage') return <ProfilePage />;
-    else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
-    else if (dataValue.name === 'pageInputMail') return <PageInputMail />;
-    else if (dataValue.name === 'pageRecovery') return <PageRecovery />;
-  }
-
-  render() {
-    return(
+export const App = ({ isAuth, logout }) => {
+  return (
+    <Router>
+      {isAuth && (
+        <header>
+          <div className="p-grid p-nogutter p-justify-around p-my-2">
+            <NavLink to='/' exact>Main</NavLink>
+            <NavLink to='/statistics'>Stats</NavLink>
+            <NavLink to='/profile'>Profile</NavLink>
+            <a href='#logout' onClick={e => {
+              e.preventDefault();
+              logout();
+            }}>
+              Logout
+            </a>
+          </div>
+        </header>
+      )}
       <div className={cx('container')}>
-          <Carousel
-            value={this.state.data}
-            page={this.state.page}
-            onPageChange={(e) => this.setState({page: e.page})}
-            itemTemplate={this.drawPanels}
-          />
+        <Switch>
+          <Route path='/profile'>
+            {!isAuth && (<Redirect to='/' />)}
+            <ProfilePage />
+          </Route>
+          <Route path='/statistics'>
+            {!isAuth && (<Redirect to='/' />)}
+            <div>Статистика</div>
+          </Route>
+          <Route path='/'>
+            {isAuth
+              ? (
+                <MainPage/>
+              ) : (
+                <RegAuthPage/>
+              )}
+          </Route>
+        </Switch>
       </div>
-    )
-  }
+    </Router>
+  )
 }
 
 export default App;

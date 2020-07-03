@@ -1,17 +1,15 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTestText } from "../selectors/app";
-import { App } from "../components/app";
-import { getIsAuth } from "../selectors/user";
+import { getUser } from "../selectors/user";
 import { logout } from "../actions/user";
+import ProfilePage from "../components/ProfilePage/ProfilePage";
 
 const mapStateToProps = (store) => ({
-  isAuth: getIsAuth(store),
-  test: getTestText(store),
+  user: getUser(store),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout: () => logout()
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
