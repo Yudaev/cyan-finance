@@ -35,7 +35,7 @@ export default class Test extends Component {
                         </span>
                     </div>
                     <div className={cx("recovery-body-button")}>
-                        <Button label="Confirm" className="p-button p-button-success" style={{ width: '16em' }}/>
+                        <Button label="Confirm" className="p-button" style={{ width: '16em' }}/>
                     </div>
                 </div>
             </div>

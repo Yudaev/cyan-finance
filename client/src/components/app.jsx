@@ -9,6 +9,11 @@ import styles from './app.scss';
 
 import ProfilePage from './ProfilePage/ProfilePage.jsx';
 import SettingsPage from './SettingsPage/SettingsPage.jsx';
+import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
+import PageInputMail from './PageInputMail/PageInputMail.jsx';
+import PageRecovery from './PageRecovery/PageRecovery.jsx';
+
+import PageIncExp from './PageIncExp/PageIncExp.jsx';
 
 const cx = classnames.bind(styles);
 
@@ -18,18 +23,25 @@ export class App extends Component {
     text: window.innerHeight,
     data: [
       {name: 'settings'},
-      {name: 'daily'},
+      {name: 'pageIncExp'},
       {name: 'history'},
-      {name: 'profilePage'}
+      {name: 'profilePage'},
+      {name: 'editOperationPage'},
+      {name: 'profilePage'},
+      {name: 'pageInputMail'},
+      {name: 'pageRecovery'},
     ],
     page: 1,
   }
 
   drawPanels = (dataValue) => {
     if(dataValue.name === 'settings') return <SettingsPage />;
-    else if (dataValue.name === 'daily') return <p>window 2</p>;
+    else if (dataValue.name === 'pageIncExp') return <PageIncExp />;
     else if (dataValue.name === 'history') return <p>window 3</p>;
     else if (dataValue.name === 'profilePage') return <ProfilePage />;
+    else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
+    else if (dataValue.name === 'pageInputMail') return <PageInputMail />;
+    else if (dataValue.name === 'pageRecovery') return <PageRecovery />;
   }
 
   render() {
