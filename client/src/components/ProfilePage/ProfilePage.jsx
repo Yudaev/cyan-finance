@@ -20,7 +20,6 @@ export default class Test extends Component {
                                 <Button label="Change password" className="p-button-raised p-button-secondary" />
                         </div>
                         <div className={cx("body")}>
-
                         </div>  
                         <div className={cx("footer")}>
                             <div className={cx("footer__social-links")}>

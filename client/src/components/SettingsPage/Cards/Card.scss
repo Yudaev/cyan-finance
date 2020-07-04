@@ -1,0 +1,32 @@
+   :global {
+
+        .p-card {
+            margin: 1em auto;
+            width: 95%;
+        }
+        
+        .p-card-subtitle {
+            font-weight: normal;
+        }
+
+        .p-card-content {
+            float: right;
+            right: -10;
+            position: relative;
+            bottom: 40;
+            font-size: 20px;
+
+            i {
+                margin-left: 0.2em;
+                color: #c8c8c8;
+            }
+        }    
+    }
+
+    .greenCard {
+        border-left: 4px solid green;
+    }
+
+    .redCard {
+        border-left: 4px solid red;
+    }
