@@ -12,7 +12,7 @@ import SettingsPage from './SettingsPage/SettingsPage.jsx';
 import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
 import PageInputMail from './PageInputMail/PageInputMail.jsx';
 import PageRecovery from './PageRecovery/PageRecovery.jsx';
-
+import OperationsPage from './OperationsPage/OperationsPage.jsx';
 import PageIncExp from './PageIncExp/PageIncExp.jsx';
 
 const cx = classnames.bind(styles);
@@ -24,7 +24,7 @@ export class App extends Component {
     data: [
       {name: 'settings'},
       {name: 'pageIncExp'},
-      {name: 'history'},
+      {name: 'operationsPage'},
       {name: 'profilePage'},
       {name: 'editOperationPage'},
       {name: 'profilePage'},
@@ -37,7 +37,7 @@ export class App extends Component {
   drawPanels = (dataValue) => {
     if(dataValue.name === 'settings') return <SettingsPage />;
     else if (dataValue.name === 'pageIncExp') return <PageIncExp />;
-    else if (dataValue.name === 'history') return <p>window 3</p>;
+    else if (dataValue.name === 'operationsPage') return <OperationsPage />;
     else if (dataValue.name === 'profilePage') return <ProfilePage />;
     else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
     else if (dataValue.name === 'pageInputMail') return <PageInputMail />;

@@ -46,7 +46,7 @@ export default class Test extends Component {
         return(
             <div className={cx("container", "content")}>
                 <div className={cx("backIconWrapper")}>
-                    <Button className="p-button-raised p-button-secondary" icon="pi pi-arrow-left" onClick={e =>e.preventDefault()} />
+                    <Button className="p-button-raised p-button-secondary" icon="pi pi-arrow-left" onClick={this.props.togglePopup} />
                 </div>
                 <form className={cx("editOperationForm")}>
                     <div className={cx("formBody")}>
