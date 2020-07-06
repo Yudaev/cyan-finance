@@ -30,6 +30,16 @@ export default class OperationsPage extends Component {
 
     render() {
         let popup = this.state.openPopup ? (<EditOperationPage togglePopup={ this.togglePopup } />) : null;
+        let calendarSettings = {
+            firstDayOfWeek: 1,
+            dayNames: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
+            dayNamesShort: ["Пн", "Вт", "Ср", "Ч", "Пт", "Сб", "Вс"],
+            dayNamesMin: ["Пн", "Вт", "Ср", "Ч", "Пт", "Сб", "Вс"],
+            monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            monthNamesShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+            clear: 'Limpiar',
+        };
+
         return(
             <div className={cx("container", "content")}>
                 <div className = {cx("popupWrapper")}>
@@ -41,15 +51,16 @@ export default class OperationsPage extends Component {
                         <span className={cx("mark")}>доход</span>
                     </div>
                     <div className="monthWrapper">
-                    <Calendar 
+                    <Calendar
+                        locale={calendarSettings}
                         className={cx("monthPicker")}
                         inputStyle={{minWidth: "100px"}} 
                         value={this.state.date} 
                         onChange={(e) => this.setState({ date: e.value })} 
-                        view="month" 
-                        dateFormat="mm/yy" 
-                        yearNavigator={true} 
-                        yearRange="2020:2030" 
+                        view="month"
+                        dateFormat="MM yy"
+                        yearNavigator={true}
+                        yearRange="2020:2030"
                     />
                     </div>
                     <div className={cx("expensesWrapper")}>
@@ -62,7 +73,7 @@ export default class OperationsPage extends Component {
                     <OperationsPageDateBlock date = '30-06-2020' togglePopup={ this.togglePopup } />
                     <OperationsPageDateBlock date = '29-06-2020' togglePopup={ this.togglePopup } />
                 </div>
-                <div className={cx("upBtnWrapper")}>
+                <div className={cx("upBtnWrapper")} style={{display: 'none'}}>
                     <Button icon="pi pi-arrow-up" className="p-button-secondary" />
                 </div>
             </div>
