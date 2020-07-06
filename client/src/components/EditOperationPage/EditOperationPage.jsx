@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {InputNumber} from 'primereact/inputnumber';
 import {Dropdown} from 'primereact/dropdown';
+import { AutoComplete } from 'primereact/autocomplete';
 import { Calendar } from 'primereact/calendar';
 import {Checkbox} from 'primereact/checkbox';
 import {InputTextarea} from 'primereact/inputtextarea';
@@ -12,25 +13,40 @@ import styles from './EditOperationPage.scss';
 
 const cx = classnames.bind(styles);
 
-const categories = [
-    {label: 'Связь', value: 'comm'},
-    {label: 'Продукты', value: 'food'},
-    {label: 'Транспорт', value: 'transport'},
-    {label: 'Отдых', value: 'rest'},
-    {label: 'Кафе', value: 'cafe'}
-];
-
 export default class Test extends Component {
     state = {
         checked: true,
-        category: '',
+        categories: [
+            {label: 'Связь', value: 'comm'},
+            {label: 'Продукты', value: 'food'},
+            {label: 'Транспорт', value: 'transport'},
+            {label: 'Отдых', value: 'rest'},
+            {label: 'Кафе', value: 'cafe'}
+        ],
+        filteredCategories: null,
+        category: null,
         amount: null
     }
+
+    filterCategory = (event) => {
+        let results;
+        if (!event.query) {
+            results = [...this.state.categories];
+        } else {
+            results = this.state.categories.filter(cat => {
+                return (cat.label.toLowerCase().indexOf(event.query.toLowerCase()) > -1)
+            });
+        }
+        this.setState({
+            filteredCategories: results
+        });
+    }
+
     render() {
         return(
             <div className={cx("container", "content")}>
                 <div className={cx("backIconWrapper")}>
-                    <Button className="p-button-raised p-button-secondary" icon="pi pi-arrow-left" onClick={e =>e.preventDefault()} />
+                    <Button className="p-button-raised p-button-secondary" icon="pi pi-arrow-left" onClick={this.props.togglePopup} />
                 </div>
                 <form className={cx("editOperationForm")}>
                     <div className={cx("formBody")}>
@@ -55,12 +71,18 @@ export default class Test extends Component {
                                 onClick={e =>e.preventDefault()} 
                             />
                         </div>
-                        <Dropdown 
-                            className={cx("inputItem")} 
-                            value={this.state.category}
-                            options={categories}
-                            onChange={e => {this.setState({category: e.value})}}
-                            placeholder="Выберите категорию" 
+                        <AutoComplete 
+                            className={cx("inputItem", "someClass")}
+                            id="categoryInput"
+                            value={this.state.category} 
+                            onChange={(e) => this.setState({category: e.value})}
+                            suggestions={this.state.filteredCategories} 
+                            completeMethod = {this.filterCategory}
+                            dropdown={true}
+                            placeholder="Выберте категорию"
+                            inputStyle={ {width: "calc(100% - 32.98px)", borderTopRightRadius: "0", borderBottomRightRadius: "0", borderRight: "none"} } 
+                            buttonStyle={ {height: "20px"} }
+                            field="label"
                         />
                         <Calendar 
                             className={cx("inputItem")} 
@@ -70,7 +92,7 @@ export default class Test extends Component {
                             inputStyle={ {width: "calc(100% - 2.357em)"} } 
                         />
                         <div className={cx("checkboxWrapper")}>
-                            <Checkbox 
+                            <Checkbox
                                 inputId="regularTrue" 
                                 checked={this.state.checked} 
                                 onChange={e => this.setState({checked: e.checked})} 
