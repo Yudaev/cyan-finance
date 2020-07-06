@@ -27,7 +27,6 @@ export class App extends Component {
       {name: 'operationsPage'},
       {name: 'profilePage'},
       {name: 'editOperationPage'},
-      {name: 'profilePage'},
       {name: 'pageInputMail'},
       {name: 'pageRecovery'},
     ],
