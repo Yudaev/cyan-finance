@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "chart.js": "^2.7.1",
     "moment": "^2.27.0",
     "primeicons": "^4.0.0",
     "primereact": "^4.2.2",

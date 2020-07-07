@@ -7,6 +7,7 @@ import 'primereact/resources/themes/nova-dark/theme.css';
 import 'primeicons/primeicons.css';
 import styles from './app.scss';
 
+import StatisticsPage from './StatisticsPage/StatisticsPage.jsx'
 import ProfilePage from './ProfilePage/ProfilePage.jsx';
 import SettingsPage from './SettingsPage/SettingsPage.jsx';
 import EditOperationPage from './EditOperationPage/EditOperationPage.jsx';
@@ -24,6 +25,7 @@ export class App extends Component {
     data: [
       {name: 'settings'},
       {name: 'pageIncExp'},
+      {name: 'statistics'},
       {name: 'history'},
       {name: 'profilePage'},
       {name: 'editOperationPage'},
@@ -37,6 +39,7 @@ export class App extends Component {
   drawPanels = (dataValue) => {
     if(dataValue.name === 'settings') return <SettingsPage />;
     else if (dataValue.name === 'pageIncExp') return <PageIncExp />;
+    else if (dataValue.name === 'statistics') return <StatisticsPage />;
     else if (dataValue.name === 'history') return <p>window 3</p>;
     else if (dataValue.name === 'profilePage') return <ProfilePage />;
     else if (dataValue.name === 'editOperationPage') return <EditOperationPage />;
