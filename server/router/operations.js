@@ -23,9 +23,9 @@ router.use('/', async (req, res, next) => {
 });
 
 router.get('/', async (req, res) => {
-  const { _id: userId } = req.user;
+  const { user } = req;
   try {
-    const operations = await Operation.find({ userId }, { userId: 0 }).lean();
+    const operations = await Operation.find({ user }, { user: 0 }).lean();
     res.status(200).json(operations);
   } catch (error) {
     res.status(500).json({ error });
@@ -33,40 +33,54 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { _id: userId } = req.user;
-  const operation = new Operation({ ...req.body, userId });
+  const { user } = req;
+  const operation = new Operation({ ...req.body, user });
 
   try {
-    await operation.save();
-    await res.status(200).json(omit(operation, 'userId'));
+    const savedOperation = await operation.save();
+    await res.status(200).json(omit(savedOperation.toObject(), 'user'));
   } catch (error) {
     res.status(500).json({ error });
   }
 });
 
 router.put('/:id', async (req, res) => {
-  const { _id: userId } = req.user;
+  const { user } = req;
   try {
     const operation = await Operation.findOneAndUpdate(
-      { userId, _id: req.params.id },
+      { user, _id: req.params.id },
       req.body,
       { new: true }
     ).lean();
 
-    await res.json(omit(operation, 'userId'));
+    await res.json(omit(operation, 'user'));
   } catch (error) {
     res.status(500).json({ error });
   }
 });
 
 router.delete('/:id', async (req, res) => {
-  const { _id: userId } = req.user;
+  const { user } = req;
   try {
-    const operation = await Operation.findOneAndRemove({ userId, _id: req.params.id });
-    res.status(200).json(omit(operation, 'userId'));
+    const operation = await Operation.findOneAndUpdate(
+      { user, _id: req.params.id },
+      { deletedDate: Date.now() },
+      { new: true }
+    );
+    res.status(200).json(omit(operation.toObject(), 'user'));
   } catch (error) {
     res.status(500).json({ error });
   }
 });
+
+// router.delete('/:id', async (req, res) => {
+//   const { user } = req;
+//   try {
+//     const operation = await Operation.findOneAndRemove({ user, _id: req.params.id });
+//     res.status(200).json(omit(operation.toObject(), 'user'));
+//   } catch (error) {
+//     res.status(500).json({ error });
+//   }
+// });
 
 module.exports = router;

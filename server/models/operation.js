@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('../models/user');
 
 const operationSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
+  user: {
+    type: mongoose.ObjectId,
+    ref: User,
     required: true,
     index: true,
   },
@@ -24,11 +26,7 @@ const operationSchema = new Schema({
     index: true,
   },
   date: {
-    type: String, // 28.05.2020; 28/05/2020
-    validate: {
-      validator: (date) => /(\d{1,2})\D(\d{1,2})\D(\d{4})/.test(date),
-      message: props => `${props.value} is not a valid date`,
-    },
+    type: Date,
     required: true,
   },
   repetitive: {
@@ -41,15 +39,9 @@ const operationSchema = new Schema({
   description: {
     type: String,
   },
-}, {timestamps: {}});
-
-operationSchema.pre('save', function (next) {
-  if (this.isModified('date')) {
-    const [full, day, month, year] = this.date.match(/(\d{1,2})\D(\d{1,2})\D(\d{4})/);
-    this.date = new Date (year, month - 1, day);
+  deletedDate: {
+    type: Date,
   }
-  next();
-});
-
+}, {timestamps: {}});
 
 module.exports = mongoose.model('Operation', operationSchema, 'operations');
