@@ -8,6 +8,7 @@ const { mongoHost, mongoPort, mongoDB, port } = require('./config.js');
 const router = require('./router/');
 
 mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 mongoose.connect(`mongodb://${mongoHost}:${mongoPort}/${mongoDB}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
