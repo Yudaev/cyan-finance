@@ -7,6 +7,7 @@ import { ProgressBar } from 'primereact/progressbar'
 import { Calendar } from 'primereact/calendar'
 import { Chart } from 'primereact/chart'
 import { Button } from 'primereact/button'
+import { Dropdown } from 'primereact/dropdown'
 
 
 const cx = classnames.bind(styles)
@@ -15,212 +16,441 @@ class StatisticsPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            regularityValue: 'Ежемесячно',
-            activeCategory: {
-                name: 'Доход',
-                value: 37555
-            },
-            names: [                         
-                {
-                    index: Date.now(),
-                    name: 'Авто',
-                    value: 133300
-
-                },
-                {
-                    index: Date.now(),
-                    name: 'Кредит',
-                    value: 22220
-                },
-                {
-                    index: Date.now(),
-                    name: 'ЖКХ',
-                    value: 3000
-                },
-                {
-                    index: Date.now(),
-                    name: 'Аренда',
-                    value: 50000
-                },
-                {
-                    index: Date.now(),
-                    name: 'Работа',
-                    value: 12000
-                },
-            ],
+            intervalValue: 'день',
+            calendarValue: null,
+            minDate: null,
+            maxDate: null,
+            // labels: this.getLabels(),
             datasets: [{
-                    data: [133300, 22220, 3000, 50000, 12000],
-                    backgroundColor: [              
-                        "#FF6384",                  
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#C14242",
-                        "#7FBF3F",
-                    ]
-                }],
-            types: {
-                baseValue: {
-                    name: 'Баланс',
-                    value: 100000,
-                },
-                categories: [
-                    {
-                        name: 'Расход',
-                        value: 25664
-                    },
-                    {
-                        name: 'Доход',
-                        value: 37555
-                    },
-                    {
-                        regularityArray: [
-                            {label: 'День', value: 'День'},   
-                            {label: 'Месяц', value: 'Месяц'},
-                            {label: 'Год', value: 'Год'},
-                        ]
-                    }
+                data: [33900, 110221, 46466],
+                backgroundColor: [              
+                    '#FF6384',                  
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#C14242',
+                    '#7FBF3F',
                 ],
+                incBackgroundColor: [
+                    '#3FBFBF',
+                    '#7A0DE7',
+                    '#E70DE7',
+                    '#864707',
+                    '#7247bc'
+                ]
+            }],
+            intervalArray: [
+                {label: 'День', value: 'день'},   
+                {label: 'Месяц', value: 'месяц'},
+                {label: 'Год', value: 'год'},
+                {label: 'Все время', value: 'все время'},
+                {label: 'Интервал', value: 'интервал'},
+            ],
+            baseValue: {
+                name: 'Баланс',
+                value: 100000
             },
+            categories: [
+                {
+                    name: 'Расход',
+                    value: function() {
+                        let sum = 0
+                            for (let i = 0; i < this.list.length; i++) {
+                                sum += this.list[i].value()
+                            }
+                        return sum 
+                    },
+                    list: [
+                    {
+                        index: Date.now(),
+                        title: 'Авто',
+                        value: function() {
+                            let sum = 0;
+                                for (let i = 0; i < this.transactions.length; i++) {
+                                    sum += this.transactions[i].value
+                                }
+                            return sum
+                        },
+                        transactions: [
+                            {
+                                date: null,
+                                value: 33333
+                            },
+                            {
+                                date: null,
+                                value: 567
+                            },
+                        ]
+                    },
+                    {
+                        index: Date.now(),
+                        title: 'Кредит',
+                        value: function() {
+                            let sum = 0;
+                                for (let i = 0; i < this.transactions.length; i++) {
+                                    sum += this.transactions[i].value
+                                }
+                            return sum
+                        },
+                        transactions: [
+                            {
+                                date: null,
+                                value: 86786
+                            },
+                            {
+                                date: null,
+                                value: 23435
+                            },
+                        ]
+                    },
+                    {
+                        index: Date.now(),
+                        title: 'Развлечения',
+                        value: function() {
+                            let sum = 0;
+                                for (let i = 0; i < this.transactions.length; i++) {
+                                    sum += this.transactions[i].value
+                                }
+                            return sum
+                        },
+                        transactions: [
+                            {
+                               date: null,
+                               value: 23133
+                            },
+                            {
+                                date: null,
+                                value: 23333
+                            },
+                            ]
+                        }
+                    ],
+                },
+                {
+                    name: 'Доход',
+                    value: function () {
+                        let sum = 0
+                            for (let i = 0; i < this.list.length; i++) {
+                                sum += this.list[i].value()
+                            }
+                        return sum 
+                    },
+                    list: [                         
+                        {
+                            index: Date.now(),
+                            title: 'ЖКХ',
+                            value: function() {
+                                let sum = 0;
+                                    for (let i = 0; i < this.transactions.length; i++) {
+                                        sum += this.transactions[i].value
+                                    }
+                                return sum
+                            },
+                            transactions: [
+                                {
+                                    date: null,
+                                    value: 23333
+                                },
+                                {
+                                    date: null,
+                                    value: 23333
+                                },
+                            ]
+                        },
+                        {
+                            index: Date.now(),
+                            title: 'Аренда',
+                            value: function() {
+                                let sum = 0;
+                                    for (let i = 0; i < this.transactions.length; i++) {
+                                        sum += this.transactions[i].value
+                                    }
+                                return sum
+                            },
+                            transactions: [
+                                {
+                                    date: null,
+                                    value: 23333
+                                },
+                                {
+                                    date: null,
+                                    value: 23333
+                                },
+                            ]
+                        },
+                        {
+                            index: Date.now(),
+                            title: 'Работа',
+                            value: function() {
+                                let sum = 0;
+                                    for (let i = 0; i < this.transactions.length; i++) {
+                                        sum += this.transactions[i].value
+                                    }
+                                return sum
+                            },
+                            transactions: [
+                                {
+                                    date: null,
+                                    value: 2312
+                                },
+                                {
+                                    date: null,
+                                    value: 3456
+                                },
+                            ]
+                        },
+                    ],
+                },
+            ],    
+        
             rest: {
                 name: 'Остаток',
                 value: function(b, d) {
                     return b - d
                 }
             },
-            income: {
-                name: 'Суммарно',
-                value: function(b, d) {
-                    return b + d
-                }
-            }
-        } 
-    }
-
-    pickInterval = (e) => {
-        this.setState({ regularityValue: e.value })
-    }
-
-    switchCategory = (e) => {
-        if (e.target.id == '1') {
-            this.setState({ activeCategory: this.state.types.categories[0] })
         }
-        if (e.target.id == '2') {
-            this.setState({ activeCategory: this.state.types.categories[1] })
+    }
+
+    // getLabels = () => {
+    //     setTimeout(() => {
+    //         let labelsArr = Object.keys(this.state.categories[0]?.list).map(
+    //             key => {
+    //                 return this.state.categories[0]?.list[key].title
+    //             }
+    //         )
+    //         console.log(labelsArr)
+    //         return labelsArr
+    //     }, 100);
+    // }
+
+    // getDataForChart = () => {
+    //     setTimeout(() => {
+    //         let data = Object.keys(this.state.categories[0]?.list).map(
+    //             key => {
+    //                 return this.state.categories[0].list[key].value()
+    //             }
+    //         )
+    //         console.log(data)
+    //         return data
+    //     }, 100);
+    // }
+
+    switchCalendars = () => {
+
+        let today = new Date()
+
+        if (this.state.intervalValue === 'день') {
+            return <Calendar
+                        inputStyle={{
+                            border: 'none',
+                            backgroundColor: '#ffffff'
+                        }}
+                        placeholder={`${today.getDate()}`}
+                        monthNavigator
+                        yearNavigator
+                        yearRange='2010:2030'
+                        value={this.state.calendarValue} 
+                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                    />
+        }
+
+        if (this.state.intervalValue === 'месяц') {
+            return <Calendar
+                        inputStyle={{
+                            border: 'none',
+                            backgroundColor: '#ffffff'
+                        }}
+                        placeholder={`${today.getMonth()}`}
+                        view='month'
+                        dateFormat='mm/yy'
+                        monthNavigator
+                        yearNavigator
+                        yearRange='2010:2030'
+                        value={this.state.calendarValue}
+                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                    />
+        }
+
+        if (this.state.intervalValue === 'год') {
+            return <Calendar
+                        inputStyle={{
+                            border: 'none',
+                            backgroundColor: '#ffffff',
+                        }}
+                        placeholder={`${today.getFullYear()}`}
+                        dateFormat='yy'
+                        yearNavigator
+                        yearRange='2010:2030'
+                        view="month"
+                        value={this.state.calendarValue} 
+                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                    />
+        }
+
+        if (this.state.intervalValue === 'все время') {
+            return null
+        }
+    
+        if (this.state.intervalValue === 'интервал') {
+            return <Calendar
+                        inputStyle={{
+                            border: 'none',
+                            backgroundColor: '#ffffff'
+                        }}
+                        selectionMode='range'
+                        placeholder='Выберите интервал...'
+                        minDate={this.state.minDate}
+                        maxDate={this.state.maxDate}
+                        readOnlyInput
+                        dateFormat='d/mm/y'
+                        value={this.state.calendarValue}
+                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                    />
         }
     }
 
     render() {
-        let bars = [] 
-        Object.keys(this.state.names).forEach(            
+        let spendBars = []
+        Object.keys(this.state.categories[0]?.list).forEach(            
             key => {
-                bars.push(
-                    <div key={key} className={cx('progress-bars')}>
-                        <div className={cx("pb-title")}>
-                            <p>{this.state.names[key].name}</p>
+                spendBars.push(
+                    <div key={key} className={cx('progress-bar')}>
+                        <div className={cx('pb-title')}>
+                            <p>{this.state.categories[0]?.list[key].title}</p>
                         </div>
-                        <div className={cx("pb-bar")}>
+                        <div className={cx('pb-bar')}>
                             <ProgressBar
-                                id={ this.state.names[key].name }
-                                value={ this.state.names[key].value }
-                                unit=" р."
-                                mode="determinate"
+                                id={ this.state.categories[0]?.list[key].title}
+                                value={ this.state.categories[0]?.list[key].value() }
+                                unit=' р.'
+                                mode='determinate'
                                 className={cx(`bar`)}
                                 showValue={false}
-                                maxValue={this.state.types.baseValue.value}
-                                color={this.state.datasets[0].backgroundColor[key]}
+                                maxValue={this.state.baseValue.value}
+                                color={this.state.datasets[0]?.backgroundColor[key]}
                             />
                         </div>
-                        <div className={cx("pb-value")}>
-                            <p>{this.state.names[key].value}&nbsp;р.</p>
+                        <div className={cx('pb-value', 'spend')}>
+                            <p>{this.state.categories[0]?.list[key].value()}&nbsp;р.</p>
                         </div>
                     </div>
                 )
             }
         )
 
-        let switchValues = this.state.activeCategory === this.state.types.categories[0] ? 
-            this.state.rest.value(this.state.types.baseValue.value, this.state.activeCategory.value) :
-            this.state.income.value(this.state.types.baseValue.value, this.state.activeCategory.value)
+        let incomeBars = []
+        Object.keys(this.state.categories[1]?.list).forEach(            
+            key => {
+                incomeBars.push(
+                    <div key={key} className={cx('progress-bar')}>
+                        <div className={cx('pb-title')}>
+                            <p>{this.state.categories[1]?.list[key].title}</p>
+                        </div>
+                        <div className={cx('pb-bar')}>
+                            <ProgressBar
+                                id={ this.state.categories[1]?.list[key].title}
+                                value={ this.state.categories[1]?.list[key].value() }
+                                unit=' р.'
+                                mode='determinate'
+                                className={cx(`bar`)}
+                                showValue={false}
+                                maxValue={this.state.baseValue.value}
+                                color={this.state.datasets[0]?.incBackgroundColor[key]}
+                            />
+                        </div>
+                        <div className={cx('pb-value', 'income')}>
+                            <p>{this.state.categories[1]?.list[key].value()}&nbsp;р.</p>
+                        </div>
+                    </div>
+                )
+            }
+        )
 
-        let switchLabels = this.state.activeCategory === this.state.types.categories[0] ? 
-            this.state.rest.name : this.state.income.name
-
+        // this.getDataForChart()
 
         return(
-            <div className={cx('content')}>
                 <div className={cx('body')}>
                     <div className={cx('control-panel')}>
                         <div className={cx('controls')}>
-                            <button
-                                id="1"
-                                className={cx('control-button-spend')} 
-                                onClick={ (e) => { this.switchCategory(e) } }
-                            >
-                                    {this.state.types.categories[0].name}
-                            </button>
-                            <button
-                                id="2"
-                                className={cx('control-button-income')} 
-                                onClick={ (e) => { this.switchCategory(e) }  }
-                            >
-                                {this.state.types.categories[1].name}
-                            </button>
-                                <Calendar
-                                    view="month"
-                                    monthNavigator
-                                    onChange={ (evt) => this.pickInterval(evt)}
-                                    placeholder="Месяц"
-                                    className={cx('calendar')}>
-                                </Calendar>
+                            <Dropdown
+                                className={cx('dropdown')}
+                                value={`Показать за ` + this.state.intervalValue}
+                                onChange={ (e) => { this.setState({ intervalValue: e.value }) }}
+                                placeholder={'Показать за ' + this.state.intervalValue}
+                                options={this.state.intervalArray}
+                            />
+                            <div className={cx('calendar')}>
+                                {this.switchCalendars()}
+                            </div>
                         </div>
                     </div>
                     <div className={cx('preview')}>
                         <div className={cx('title')} key={Date.now()} >
-                                <div className={cx('title-bars')}>
-                                    <span className='label' >{this.state.types.baseValue.name}</span>
+                                <div className={cx('title-bar')}>
+                                    <div className={cx('label')}>
+                                        <span>{this.state.baseValue.name}</span>
+                                    </div>
                                         <ProgressBar
-                                            value={this.state.types.baseValue.value}
-                                            id={this.state.types.baseValue.name}
-                                            unit=" р."
+                                            value={this.state.rest.value(this.state.categories[1].value(), this.state.categories[0].value())}
+                                            id={this.state.baseValue.name}
                                             className={cx('ttl-bar')}
-                                            maxValue={this.state.types.baseValue.value}
-                                            color='rgb(210,210,210'
+                                            maxValue={this.state.baseValue.value}
+                                            showValue={false}
                                         />
+                                    <div className={cx('value')}>
+                                        <span>{this.state.rest.value(this.state.categories[1].value(), this.state.categories[0].value())} p.</span>
+                                    </div>
                                 </div>
-                                <div className={cx('title-bars')}>
-                                    <span className='label'>{this.state.activeCategory.name}</span>
+
+                                <div className={cx('title-bar')}>
+                                    <div className={cx('label')}> 
+                                        <span>{this.state.categories[1].name}</span>
+                                    </div>
                                         <ProgressBar
-                                            id={this.state.activeCategory.name}
-                                            value={this.state.activeCategory.value}
-                                            unit=" р."
+                                            id={this.state.categories[1].name}
+                                            value={this.state.categories[1].value()}
                                             className={cx('ttl-bar')}
-                                            maxValue={this.state.types.baseValue.value}
+                                            maxValue={this.state.baseValue.value}
+                                            color={'#34A835'}
+                                            showValue={false}
                                         />
+                                    <div className={cx('value')}>
+                                        <span>{this.state.categories[1].value()} p.</span>
+                                    </div>
                                 </div>
-                                
-                                <div className={cx('title-bars')}>
-                                    <span className='label'>{switchLabels}</span>
+
+                                <div className={cx('title-bar')}>
+                                    <div className={cx('label')}>
+                                        <span>{this.state.categories[0].name}</span>
+                                    </div>
                                         <ProgressBar
-                                            value={switchValues}
-                                            id={this.state.rest.name}
-                                            unit=" р."
+                                            value={this.state.categories[0].value()}
+                                            id={this.state.categories[0].name}
                                             className={cx('ttl-bar')}
-                                            maxValue={this.state.types.baseValue.value}
-                                            color={ this.state.datasets[0].backgroundColor[2] }
+                                            maxValue={this.state.baseValue.value}
+                                            color={ '#e91224' }
+                                            showValue={false}
                                         />
+                                    <div className={cx('value')}>
+                                        <span>{this.state.categories[0].value()} p.</span>
+                                    </div>
                                 </div>
                         </div>
                     </div>
+                    {/* <Tree
+                        value={this.state.nodes()} 
+                        nodeTemplate={this.nodeTemplate}
+                    /> */}
                     <div className={cx('chart')}>
-                        <Chart type="doughnut" data={this.state} />
+                        <Chart type='doughnut' data={this.state}/>
                     </div>
-                        {bars}
+                        {incomeBars}
+                        {spendBars}
                     <div className={cx('footer-button')}>
-                        <Button label="Выгрузить статистику" className="p-button-raised p-button-secondary" />
+                        <Button label='Выгрузить статистику' className='p-button-raised p-button-secondary' />
                     </div>
                 </div>
-            </div>
-        )
+            )
     }
 }
 

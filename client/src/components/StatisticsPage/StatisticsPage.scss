@@ -1,22 +1,24 @@
-* {
-    margin: 0
-}
-
-.content {
-    text-align: center;
-}
-
     .body {
         height: 100vh;
         display: flex;
         flex-direction: column;
 
         .control-panel {
-    
+            margin: 1em 0em;
                 .controls {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-evenly;
+                    margin-left: 2em;
+                    width: 90%;
+                    height: 2.5em;
+                    
+
+                    .dropdown {
+                        border: none;
+                    }
+
+                    .calendar {
+                        text-align: right;
+                        float: right;
+                    }
     
                     .control-button-spend,
                     .control-button-income {
@@ -36,33 +38,50 @@
         
         .preview {
             .title {
-                .title-bars {
-                    padding: 1em;
+                .title-bar {
+                    padding: 0.5em;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+
+                    .label {
+                        width: 25%
+                    }
+
                     .ttl-bar {
                         text-align: center;
                         float: right;
-                        width: 75%;
+                        width: 55%;
+                        height: 9;
                         border-radius: 1em;
+                    }
+
+                    .value {
+                        width: 25%
                     }
                 }
             }
         }
 
         .chart {
-            margin: 2em 0em;
+            margin: 1.75em 0em;
         }
 
-        .progress-bars {
+        .progress-bar {
             display: flex;
             padding: 0.5em;
+            align-items: center;
+            text-align: center;
 
             .pb-title {
                 width: 25%;
             }
 
             .pb-bar {
-                width: 100%;
+                width: 55%;
+
                 .bar {
+                    height: 9;
                     border-radius: 1em;
                 }
             }
@@ -71,14 +90,21 @@
                 width: 25%;
             }
 
-            &:nth-last-child(2) {
-                flex: 1 0 auto;
+            .spend {
+                color: #e91224; 
+            }
+
+            .income {
+                color: #34A835;
             }
         }
 
         .footer-button {
-            flex: 0 0 auto;
-            padding: 1.5em;
+            position: absolute;
+            padding: 2em;
+            bottom: 15;  
+            text-align: center;
+            width: 100%;
         }
     }
 
