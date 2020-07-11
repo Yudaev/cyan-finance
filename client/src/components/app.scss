@@ -8,6 +8,14 @@ html, body {
   font-family: 'Roboto', sans-serif;
 }
 
+.menu a {
+  display: block;
+  width: 20%;
+  text-align: center;
+  padding: 1rem 0 1rem 0;
+  color: #000;
+}
+
 :global {
   .container {
     max-width: 1200px;
