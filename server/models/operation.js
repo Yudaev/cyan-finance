@@ -21,20 +21,22 @@ const operationSchema = new Schema({
     enum: ['income', 'expense'],
     required: true,
   },
-  categoryId: {
-    type: Schema.Types.ObjectId,
+  category: {
+    type: mongoose.ObjectId,
     index: true,
   },
   date: {
     type: Date,
-    required: true,
+    default: new Date(),
   },
   repetitive: {
     type: Boolean,
+    default: false,
     index: true,
   },
   repetitiveDay: {
     type: Number,
+    default: 1,
   },
   description: {
     type: String,

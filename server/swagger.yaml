@@ -1,0 +1,102 @@
+tags:
+  - name: operations
+    description: Работа с операциями
+components:
+  securitySchemes: {
+    bearerAuth: {
+      type: 'http',
+      scheme: 'bearer',
+      description: 'Pass {token} to Value input',
+      bearerFormat: 'JWT',
+    }
+  }
+  schemas:
+    Operation:
+      type: object
+      title: Operation
+      required:
+        - value
+        - type
+      exapmle:
+        _id: '123123'
+        title: 'Заголовок'
+      properties:
+        _id:
+          description: 'id операции, генерируется автоматически'
+          type: string
+        title:
+          type: string
+          description: 'Заголовок операции'
+        description:
+          type: string
+          description: 'Описание операции'
+        value:
+          description: 'Сумма (всегда положительная)'
+          type: number
+        type:
+          type: string
+          enum:
+            - income
+            - expense
+          description: 'Тип операции (income - доход, expense - расход)'
+        category:
+          description: 'id категории'
+          type: string
+        date:
+          type: string
+          format: date-time
+          description: 'Дата списания'
+          default: 'Текущее время'
+        repetitive:
+          type: boolean
+          description: 'Флаг повторяемости операции'
+          default: false
+        repetitiveDay:
+          type: number
+          description: 'День для повторения операции'
+          default: 1
+        deletedDate:
+          type: string
+          format: date-time
+          description: 'Дата удаления операции'
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'Дата редактирования операции'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Дата создания операции'
+  requestBodies:
+    Operation:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            title: Operation
+            required:
+              - value
+              - type
+            properties:
+              value:
+                type: number
+              type:
+                type: string
+                enum:
+                  - income
+                  - expense
+              title:
+                type: string
+              description:
+                type: string
+              category:
+                type: string
+              date:
+                type: string
+                format: date-time
+              repetitive:
+                type: boolean
+              repetitiveDay:
+                type: number
+paths: {}
