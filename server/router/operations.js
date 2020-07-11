@@ -22,6 +22,28 @@ router.use('/', async (req, res, next) => {
   }
 });
 
+/**
+ * @swagger
+ *
+ * /operations/:
+ *   get:
+ *     security:
+ *      - bearerAuth: []
+ *     tags:
+ *       - operations
+ *     summary: Возвращает список операций
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Массив с операциями
+ *         content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Operation'
+ */
 router.get('/', async (req, res) => {
   const { user } = req;
   try {
@@ -32,6 +54,28 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+/**
+ * @swagger
+ * /operations/:
+ *   post:
+ *     security:
+ *      - bearerAuth: []
+ *     tags:
+ *       - operations
+ *     summary: Добавление операции
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *      $ref: '#/components/requestBodies/Operation'
+ *     responses:
+ *       200:
+ *         description: Возвращает добавленную операцию
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Operation'
+ */
 router.post('/', async (req, res) => {
   const { user } = req;
   const operation = new Operation({ ...req.body, user });
@@ -44,6 +88,35 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+/**
+ * @swagger
+ * /operations/{id}:
+ *   put:
+ *     security:
+ *      - bearerAuth: []
+ *     tags:
+ *      - operations
+ *     summary: Изменение операции по ID
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *      - name: id
+ *        description: _id операции
+ *        in: path
+ *        schema:
+ *          type: string
+ *          required: true
+ *     requestBody:
+ *      $ref: '#/components/requestBodies/Operation'
+ *     responses:
+ *       200:
+ *         description: Возвращает измененную операцию
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Operation'
+ */
 router.put('/:id', async (req, res) => {
   const { user } = req;
   try {
@@ -59,6 +132,32 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /operations/{id}:
+ *   delete:
+ *     security:
+ *       - bearerAuth: []
+ *     tags:
+ *      - operations
+ *     summary: Удаление операции по ID
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *      - name: id
+ *        description: _id операции
+ *        in: path
+ *        schema:
+ *          type: string
+ *          required: true
+ *     responses:
+ *       200:
+ *         description: Возвращает удаленную операцию
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Operation'
+ */
 router.delete('/:id', async (req, res) => {
   const { user } = req;
   try {
