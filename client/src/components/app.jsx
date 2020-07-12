@@ -15,11 +15,17 @@ import SettingsPage from "./SettingsPage/SettingsPage";
 const cx = classnames.bind(styles);
 
 export const App = ({ isAuth, logout }) => {
+  const headerClass = classnames(
+      'p-grid',
+      'p-nogutter',
+      'p-justify-around',
+      cx('menu')
+  )
   return (
     <Router>
       {isAuth && (
           <header>
-            <div className={cx('p-grid', 'p-nogutter', 'p-justify-around', 'menu')}>
+            <div className={headerClass}>
               <NavLink to='/statistics'><i className="pi pi-chart-bar"></i></NavLink>
               <NavLink to='/history'><i className="pi pi-clock"></i></NavLink>
               <NavLink to='/' exact><i className="pi pi-plus-circle"></i></NavLink>
