@@ -1,3 +1,9 @@
+/*
+ * В данном компоненте реализован пример вывода карусели,
+ * сейчас комонент не используется, однако решил его
+ * оставить как пример реализации.
+ */
+
 import React, {Component}  from 'react';
 import { Carousel } from "primereact/carousel";
 import classnames from 'classnames/bind';

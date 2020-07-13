@@ -11,6 +11,7 @@ import RegAuthPage from "../connectors/RegAuthPage";
 import ProfilePage from "../connectors/ProfilePage";
 import OperationsPage from "./OperationsPage/OperationsPage";
 import SettingsPage from "./SettingsPage/SettingsPage";
+import PageIncExp from "./PageIncExp/PageIncExp";
 
 const cx = classnames.bind(styles);
 
@@ -55,7 +56,7 @@ export const App = ({ isAuth, logout }) => {
           <Route path='/'>
             {isAuth
               ? (
-                <MainPage/>
+                <PageIncExp />
               ) : (
                 <RegAuthPage/>
               )}
