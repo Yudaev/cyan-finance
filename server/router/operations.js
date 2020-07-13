@@ -36,17 +36,28 @@ router.use('/', async (req, res, next) => {
  *       - application/json
  *     parameters:
  *      - name: pageSize
- *        description: Количество возвращаемых записей (по умолчанию 30). 0 - Получить все записи.
+ *        description: |
+ *          ##### Количество возвращаемых записей
+ *            *0* - Получить все записи.
  *        in: query
  *        schema:
  *          type: number
  *          default: 30
  *      - name: page
- *        description: Номер страницы. По умолчанию 1.
+ *        description: Номер страницы.
  *        in: query
  *        schema:
  *          type: number
  *          default: 1
+ *      - name: filter
+ *        description: |
+ *          ##### Фильтрование списка, пример: repetitive,expense
+ *            * *repetitive*    - только повторяющиеся операции.
+ *            * *expense*       - только расходы (конфликтует с income).
+ *            * *income*        - только доходы (конфликтует с expense).
+ *        in: query
+ *        schema:
+ *          type: string
  *     responses:
  *       200:
  *         description: Массив с операциями
@@ -58,13 +69,28 @@ router.use('/', async (req, res, next) => {
  *                $ref: '#/components/schemas/Operation'
  */
 router.get('/', async (req, res) => {
-  const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 30;
-  const page = parseInt(req.query.page);
-  const { user } = req;
+  let pageSize = req.query.pageSize || 30;
+  pageSize = parseInt(pageSize);
+  let page = parseInt(req.query.page);
+  const filterArray = req.query.filter
+    ? String(req.query.filter).split(',').map(item => item.trim())
+    : [] ;
+
+  const filter = { user: req.user };
+  if (filterArray.includes('repetitive')) {
+    filter.repetitive = true;
+    pageSize = 0;
+    page = 1;
+  }
+  if (filterArray.includes('income')) {
+    filter.type = 'income';
+  } else if (filterArray.includes('expense')) {
+    filter.type = 'expense';
+  }
 
   try {
     const operations = await Operation.find(
-      { user },
+      filter,
       { user: 0 },
       {
         limit: pageSize,
