@@ -34,6 +34,19 @@ router.use('/', async (req, res, next) => {
  *     summary: Возвращает список операций
  *     produces:
  *       - application/json
+ *     parameters:
+ *      - name: pageSize
+ *        description: Количество возвращаемых записей (по умолчанию 30). 0 - Получить все записи.
+ *        in: query
+ *        schema:
+ *          type: number
+ *          default: 30
+ *      - name: page
+ *        description: Номер страницы. По умолчанию 1.
+ *        in: query
+ *        schema:
+ *          type: number
+ *          default: 1
  *     responses:
  *       200:
  *         description: Массив с операциями
@@ -45,9 +58,19 @@ router.use('/', async (req, res, next) => {
  *                $ref: '#/components/schemas/Operation'
  */
 router.get('/', async (req, res) => {
+  const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 30;
+  const page = parseInt(req.query.page);
   const { user } = req;
+
   try {
-    const operations = await Operation.find({ user }, { user: 0 }).lean();
+    const operations = await Operation.find(
+      { user },
+      { user: 0 },
+      {
+        limit: pageSize,
+        skip: page > 0 ? pageSize * (page-1) : 0,
+      }
+    ).lean();
     res.status(200).json(operations);
   } catch (error) {
     res.status(500).json({ error });
