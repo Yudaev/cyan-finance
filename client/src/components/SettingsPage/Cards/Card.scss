@@ -13,8 +13,8 @@
         .p-card-content {
             float: right;
             position: relative;
-            right: -10;
-            bottom: 40;
+            right: -10px;
+            bottom: 40px;
             font-size: 20px;
             
             i {
@@ -29,6 +29,6 @@
     }
 
     .redCard {
-        border-left: 4px solid #007AD9;
+        border-left: 4px solid #d90026;
     }
 }

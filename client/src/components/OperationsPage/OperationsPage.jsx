@@ -16,7 +16,8 @@ export default class OperationsPage extends Component {
         incomeAmount: 21200,
         expensesAmount: 17300,
         date: new Date(),
-        openPopup: false
+        openPopup: false,
+        groups: [],
     }
 
     togglePopup = () => {
@@ -29,6 +30,12 @@ export default class OperationsPage extends Component {
     }
 
     render() {
+        const groupsMap = this.props.groups;
+        const groupsArray = [];
+        // неожидал что Map нельзя нормально проитерировать в реакте
+        // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
+        groupsMap.forEach((items, date) => groupsArray.push({ date, items }));
+
         let popup = this.state.openPopup ? (<EditOperationPage togglePopup={ this.togglePopup } />) : null;
         let calendarSettings = {
             firstDayOfWeek: 1,
@@ -69,9 +76,9 @@ export default class OperationsPage extends Component {
                     </div>
                 </div>
                 <div className={cx("body")}>
-                    <OperationsPageDateBlock date = '01-07-2020' togglePopup={ this.togglePopup } />
-                    <OperationsPageDateBlock date = '30-06-2020' togglePopup={ this.togglePopup } />
-                    <OperationsPageDateBlock date = '29-06-2020' togglePopup={ this.togglePopup } />
+                    {groupsArray.map(({date, items}, key)=> (
+                      <OperationsPageDateBlock key={key} date={date} items={items} togglePopup={ this.togglePopup } />
+                    ))}
                 </div>
                 <div className={cx("upBtnWrapper")} style={{display: 'none'}}>
                     <Button icon="pi pi-arrow-up" className="p-button-secondary" />

@@ -7,25 +7,17 @@ import Cart from '../../SettingsPage/Cards/Card.jsx';
 const cx = classnames.bind(styles);
 
 export default class OperationPageDateBlock extends React.Component {
-  state = {
-    date: ''
-  }
-
-  componentDidMount() {
-    let { date } = this.props;
-    this.setState({
-      date
-    })
-  }
-
   render() {
+    const { date, items, togglePopup } = this.props;
     return (
       <div className={cx("container")}>
         <div className={cx("header")}>
-          <h2>{ this.state.date }</h2>
+          <h2>{ date }</h2>
         </div>
-            <Cart handlePopUp={ this.props.togglePopup } />
-            <Cart handlePopUp={ this.props.togglePopup } />
+
+        {items && items.map((item, key) => (
+          <Cart key={key} {...item} handlePopUp={ togglePopup } />
+        ))}
       </div>
     )
   }
