@@ -20,24 +20,6 @@ class StatisticsPage extends React.Component {
             calendarValue: null,
             minDate: null,
             maxDate: null,
-            // labels: this.getLabels(),
-            datasets: [{
-                data: [33900, 110221, 46466],
-                backgroundColor: [              
-                    '#FF6384',                  
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#C14242',
-                    '#7FBF3F',
-                ],
-                incBackgroundColor: [
-                    '#3FBFBF',
-                    '#7A0DE7',
-                    '#E70DE7',
-                    '#864707',
-                    '#7247bc'
-                ]
-            }],
             intervalArray: [
                 {label: 'День', value: 'день'},   
                 {label: 'Месяц', value: 'месяц'},
@@ -211,33 +193,42 @@ class StatisticsPage extends React.Component {
         }
     }
 
-    // getLabels = () => {
-    //     setTimeout(() => {
-    //         let labelsArr = Object.keys(this.state.categories[0]?.list).map(
-    //             key => {
-    //                 return this.state.categories[0]?.list[key].title
-    //             }
-    //         )
-    //         console.log(labelsArr)
-    //         return labelsArr
-    //     }, 100);
-    // }
+    getLabels = () => {
+        let labelsArr = Object.keys(this.state.categories[0]?.list).map(
+            key => {
+                return this.state.categories[0]?.list[key].title
+            }
+        )
+        return labelsArr
+    }
 
-    // getDataForChart = () => {
-    //     setTimeout(() => {
-    //         let data = Object.keys(this.state.categories[0]?.list).map(
-    //             key => {
-    //                 return this.state.categories[0].list[key].value()
-    //             }
-    //         )
-    //         console.log(data)
-    //         return data
-    //     }, 100);
-    // }
+    makeChart = () => {
+        let data = {
+            labels: this.getLabels(),
+            datasets: [{
+              data: this.getDataForChart(),
+              backgroundColor: [ '#FF6384', '#36A2EB', '#FFCE56', '#C14242', '#7FBF3F' ],
+              incBackgroundColor: [ '#3FBFBF', '#7A0DE7', '#E70DE7', '#864707', '#7247bc' ]
+            }]
+        }
+        return data
+    }
+
+    getDataForChart = () => {
+        let data = Object.keys(this.state.categories[0]?.list).map(
+            key => {
+                return this.state.categories[0].list[key].value()
+            }
+        )
+        return data
+    }
 
     switchCalendars = () => {
 
-        let today = new Date()
+        let today = new Date()  
+
+        const optionsDay = { weekday: 'long', day: 'numeric', month: 'long' }
+        const optionsMonth = {year: 'numeric', month: 'long'}
 
         if (this.state.intervalValue === 'день') {
             return <Calendar
@@ -245,12 +236,13 @@ class StatisticsPage extends React.Component {
                             border: 'none',
                             backgroundColor: '#ffffff'
                         }}
-                        placeholder={`${today.getDate()}`}
+                        placeholder={`${Intl.DateTimeFormat('ru-RU', optionsDay).format(today)}`}
                         monthNavigator
                         yearNavigator
                         yearRange='2010:2030'
-                        value={this.state.calendarValue} 
-                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                        dateFormat={`${Intl.DateTimeFormat('ru-RU', optionsDay).format(this.state.calendarValue)}`}
+                        value={this.state.calendarValue}
+                        onSelect={e => this.setState({calendarValue: e.value})}
                     />
         }
 
@@ -260,14 +252,14 @@ class StatisticsPage extends React.Component {
                             border: 'none',
                             backgroundColor: '#ffffff'
                         }}
-                        placeholder={`${today.getMonth()}`}
+                        placeholder={`${Intl.DateTimeFormat('ru-RU', optionsMonth).format(today)}`}
                         view='month'
-                        dateFormat='mm/yy'
-                        monthNavigator
+                        monthNavigator                        
                         yearNavigator
                         yearRange='2010:2030'
                         value={this.state.calendarValue}
-                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                        dateFormat={`${Intl.DateTimeFormat('ru-RU', optionsMonth).format(this.state.calendarValue)}`}
+                        onSelect={(e) => this.setState({calendarValue: e.value})} 
                     />
         }
 
@@ -277,13 +269,13 @@ class StatisticsPage extends React.Component {
                             border: 'none',
                             backgroundColor: '#ffffff',
                         }}
-                        placeholder={`${today.getFullYear()}`}
+                        placeholder={`${today.getFullYear()} г.`}
                         dateFormat='yy'
                         yearNavigator
                         yearRange='2010:2030'
-                        view="month"
-                        value={this.state.calendarValue} 
-                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                        className={cx('year')}
+                        value={`${this.state.calendarValue} г.`}
+                        onSelect={(e) => this.setState({calendarValue: e.value})} 
                     />
         }
 
@@ -320,14 +312,12 @@ class StatisticsPage extends React.Component {
                         </div>
                         <div className={cx('pb-bar')}>
                             <ProgressBar
-                                id={ this.state.categories[0]?.list[key].title}
-                                value={ this.state.categories[0]?.list[key].value() }
+                                id={`${key}`}
+                                value={ this.state.categories[0]?.list[key].value() / this.state.categories[1].value() * 100 }
                                 unit=' р.'
                                 mode='determinate'
                                 className={cx(`bar`)}
                                 showValue={false}
-                                maxValue={this.state.baseValue.value}
-                                color={this.state.datasets[0]?.backgroundColor[key]}
                             />
                         </div>
                         <div className={cx('pb-value', 'spend')}>
@@ -348,14 +338,12 @@ class StatisticsPage extends React.Component {
                         </div>
                         <div className={cx('pb-bar')}>
                             <ProgressBar
-                                id={ this.state.categories[1]?.list[key].title}
-                                value={ this.state.categories[1]?.list[key].value() }
+                                id={`${key}`}
+                                value={ this.state.categories[1]?.list[key].value() / this.state.categories[1].value() * 100 }
                                 unit=' р.'
                                 mode='determinate'
                                 className={cx(`bar`)}
                                 showValue={false}
-                                maxValue={this.state.baseValue.value}
-                                color={this.state.datasets[0]?.incBackgroundColor[key]}
                             />
                         </div>
                         <div className={cx('pb-value', 'income')}>
@@ -365,8 +353,6 @@ class StatisticsPage extends React.Component {
                 )
             }
         )
-
-        // this.getDataForChart()
 
         return(
                 <div className={cx('body')}>
@@ -392,9 +378,8 @@ class StatisticsPage extends React.Component {
                                     </div>
                                         <ProgressBar
                                             value={this.state.rest.value(this.state.categories[1].value(), this.state.categories[0].value())}
-                                            id={this.state.baseValue.name}
+                                            id={`${11}`}
                                             className={cx('ttl-bar')}
-                                            maxValue={this.state.baseValue.value}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
@@ -407,11 +392,9 @@ class StatisticsPage extends React.Component {
                                         <span>{this.state.categories[1].name}</span>
                                     </div>
                                         <ProgressBar
-                                            id={this.state.categories[1].name}
+                                            id={`${12}`}
                                             value={this.state.categories[1].value()}
                                             className={cx('ttl-bar')}
-                                            maxValue={this.state.baseValue.value}
-                                            color={'#34A835'}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
@@ -425,10 +408,8 @@ class StatisticsPage extends React.Component {
                                     </div>
                                         <ProgressBar
                                             value={this.state.categories[0].value()}
-                                            id={this.state.categories[0].name}
+                                            id={`${13}`}
                                             className={cx('ttl-bar')}
-                                            maxValue={this.state.baseValue.value}
-                                            color={ '#e91224' }
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
@@ -437,12 +418,8 @@ class StatisticsPage extends React.Component {
                                 </div>
                         </div>
                     </div>
-                    {/* <Tree
-                        value={this.state.nodes()} 
-                        nodeTemplate={this.nodeTemplate}
-                    /> */}
                     <div className={cx('chart')}>
-                        <Chart type='doughnut' data={this.state}/>
+                        <Chart type='doughnut' data={this.makeChart()}/>
                     </div>
                         {incomeBars}
                         {spendBars}
