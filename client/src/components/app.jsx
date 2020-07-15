@@ -9,9 +9,9 @@ import styles from './app.scss';
 import MainPage from "./MainPage/MainPage";
 import RegAuthPage from "../connectors/RegAuthPage";
 import ProfilePage from "../connectors/ProfilePage";
-import OperationsPage from "./OperationsPage/OperationsPage";
 import SettingsPage from "./SettingsPage/SettingsPage";
 import PageIncExp from "./PageIncExp/PageIncExp";
+import OperationsPage from "../connectors/OperationsPage";
 
 const cx = classnames.bind(styles);
 
