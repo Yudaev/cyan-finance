@@ -2,6 +2,7 @@ import {
   init,
 } from '../actions/app';
 import { logout, reset as resetUser } from "../actions/user";
+import { loadOperations } from "../actions/operations";
 
 
 export default store => next => async action => {
@@ -10,7 +11,7 @@ export default store => next => async action => {
 
   switch(action.type) {
     case init.toString():
-      console.log('init app middleware');
+      store.dispatch(loadOperations({ pageSize: 0 }));
       break;
     case logout.toString():
       store.dispatch(resetUser());

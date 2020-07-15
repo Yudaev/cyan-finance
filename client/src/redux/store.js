@@ -4,6 +4,7 @@ import { persistStore } from 'redux-persist';
 import { routerMiddleware } from 'connected-react-router';
 import appMiddleware from "../middlewares/app";
 import userMiddleware from "../middlewares/user";
+import operationsMiddleware from "../middlewares/operations";
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -15,6 +16,7 @@ export const initStore = (preloadedState = undefined) => {
       routerMiddleware(history),
       appMiddleware,
       userMiddleware,
+      operationsMiddleware,
     ))
   );
 
