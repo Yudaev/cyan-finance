@@ -1,5 +1,6 @@
 import appReducer from './app';
 import userReducer from './user';
+import operationsReducer from './operations';
 import { combineReducers } from 'redux';
 import {connectRouter} from "connected-react-router";
 import {createBrowserHistory} from "history";
@@ -17,6 +18,7 @@ const userPersistConfig = {
 const reducer = combineReducers({
   app: appReducer,
   user: persistReducer(userPersistConfig, userReducer),
+  operations: operationsReducer,
   router: connectRouter(history),
 });
 
