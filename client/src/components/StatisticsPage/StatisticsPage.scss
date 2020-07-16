@@ -29,23 +29,17 @@
                             .p-datepicker-year {
                                 padding: 0em 0.5em;
                             }
-                        }
 
-                        .year {
-                            :global {
+                            .year {
+                               border: none;
+                               box-shadow: none;
+                               padding: 0em 4em;
 
-                                .p-datepicker-calendar-container {
-                                    display: none;
-                                }
-
-                                .p-monthpicker {
-                                    display: none;
-                                }
-
-                                .p-datepicker-month {
-                                    display: none;
-                                }
+                               :global .p-dropdown-trigger {
+                                   display: none;
+                               }
                             }
+
                         }
                        
                     }

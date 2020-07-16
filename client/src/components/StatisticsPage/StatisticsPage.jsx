@@ -17,7 +17,7 @@ class StatisticsPage extends React.Component {
         super(props);
         this.state = { 
             intervalValue: 'день',
-            calendarValue: null,
+            calendarValue: new Date(),
             minDate: null,
             maxDate: null,
             intervalArray: [
@@ -27,6 +27,7 @@ class StatisticsPage extends React.Component {
                 {label: 'Все время', value: 'все время'},
                 {label: 'Интервал', value: 'интервал'},
             ],
+            year: 2020,
             baseValue: {
                 name: 'Баланс',
                 value: 100000
@@ -225,10 +226,15 @@ class StatisticsPage extends React.Component {
 
     switchCalendars = () => {
 
-        let today = new Date()  
-
-        const optionsDay = { weekday: 'long', day: 'numeric', month: 'long' }
-        const optionsMonth = {year: 'numeric', month: 'long'}
+        let calendarSettings = {
+            firstDayOfWeek: 1,
+            dayNames: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
+            dayNamesShort: ["Пн", "Вт", "Ср", "Ч", "Пт", "Сб", "Вс"],
+            dayNamesMin: ["Пн", "Вт", "Ср", "Ч", "Пт", "Сб", "Вс"],
+            monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            monthNamesShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+            clear: 'Limpiar',
+        };
 
         if (this.state.intervalValue === 'день') {
             return <Calendar
@@ -236,11 +242,12 @@ class StatisticsPage extends React.Component {
                             border: 'none',
                             backgroundColor: '#ffffff'
                         }}
-                        placeholder={`${Intl.DateTimeFormat('ru-RU', optionsDay).format(today)}`}
+                        placeholder={`${this.state.calendarValue}`}
                         monthNavigator
                         yearNavigator
+                        locale={calendarSettings}
                         yearRange='2010:2030'
-                        dateFormat={`${Intl.DateTimeFormat('ru-RU', optionsDay).format(this.state.calendarValue)}`}
+                        dateFormat='dd MM yy'
                         value={this.state.calendarValue}
                         onSelect={e => this.setState({calendarValue: e.value})}
                     />
@@ -252,30 +259,31 @@ class StatisticsPage extends React.Component {
                             border: 'none',
                             backgroundColor: '#ffffff'
                         }}
-                        placeholder={`${Intl.DateTimeFormat('ru-RU', optionsMonth).format(today)}`}
+                        placeholder={`${this.state.calendarValue}`}
                         view='month'
                         monthNavigator                        
                         yearNavigator
+                        locale={calendarSettings}
                         yearRange='2010:2030'
                         value={this.state.calendarValue}
-                        dateFormat={`${Intl.DateTimeFormat('ru-RU', optionsMonth).format(this.state.calendarValue)}`}
+                        dateFormat='MM yy'
                         onSelect={(e) => this.setState({calendarValue: e.value})} 
                     />
         }
 
         if (this.state.intervalValue === 'год') {
-            return <Calendar
-                        inputStyle={{
-                            border: 'none',
-                            backgroundColor: '#ffffff',
-                        }}
-                        placeholder={`${today.getFullYear()} г.`}
-                        dateFormat='yy'
-                        yearNavigator
-                        yearRange='2010:2030'
+            
+            let years = [
+                {label: 2020, value: 2020},
+                {label: 2021, value: 2021}
+            ]
+
+            return <Dropdown
+                        placeholder={`${this.state.year}`}
+                        value={this.state.year}
+                        options={years}
                         className={cx('year')}
-                        value={`${this.state.calendarValue} г.`}
-                        onSelect={(e) => this.setState({calendarValue: e.value})} 
+                        onChange={e => this.setState({ year: e.value })}
                     />
         }
 
@@ -287,14 +295,16 @@ class StatisticsPage extends React.Component {
             return <Calendar
                         inputStyle={{
                             border: 'none',
-                            backgroundColor: '#ffffff'
+                            backgroundColor: '#ffffff',
+                            width: '150%'
                         }}
                         selectionMode='range'
                         placeholder='Выберите интервал...'
                         minDate={this.state.minDate}
                         maxDate={this.state.maxDate}
                         readOnlyInput
-                        dateFormat='d/mm/y'
+                        locale={calendarSettings}
+                        dateFormat='d MM y'
                         value={this.state.calendarValue}
                         onChange={(e) => this.setState({calendarValue: e.value})} 
                     />
