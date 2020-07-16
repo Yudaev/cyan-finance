@@ -90,6 +90,18 @@
                         border-radius: 1em;
                     }
 
+                    .incomes {
+                        :global .p-progressbar-value {
+                            background-color: #34A835;
+                        }
+                    }
+
+                    .expense {
+                        :global .p-progressbar-value {
+                            background-color: #e91224;
+                        }
+                    }
+
                     .value {
                         width: 20%
                     }
@@ -118,6 +130,66 @@
                 .bar {
                     height: 9;
                     border-radius: 1em;
+                }
+            }
+
+            .cyan {
+                :global .p-progressbar-value {
+                    background-color: #3FBFBF;
+                }
+            }
+
+            .lilac {
+                :global .p-progressbar-value {
+                    background-color: #7A0DE7;
+                }
+            }
+
+            .pink {
+                :global .p-progressbar-value {
+                    background-color: #E70DE7;
+                }
+            }
+
+            .brown {
+                :global .p-progressbar-value {
+                    background-color: #864707;
+                }
+            }
+            
+            .violet {
+                :global .p-progressbar-value {
+                    background-color: #7247bc;
+                }
+            }
+
+            .pinkRed {
+                :global .p-progressbar-value {
+                    background-color: #FF6384;
+                }
+            }
+
+            .blue {
+                :global .p-progressbar-value {
+                    background-color: #36A2EB;
+                }
+            }
+
+            .yellow {
+                :global .p-progressbar-value {
+                    background-color: #FFCE56;
+                }
+            }
+
+            .red {
+                :global .p-progressbar-value {
+                    background-color: #C14242;
+                }
+            }
+
+            .yellowGreen {
+                :global .p-progressbar-value {
+                    background-color: #7FBF3F;
                 }
             }
 

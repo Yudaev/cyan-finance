@@ -302,6 +302,10 @@ class StatisticsPage extends React.Component {
     }
 
     render() {
+
+        let incomeColorClasses = ['cyan', 'lilac', 'pink', 'brown', 'violet']
+        let spendColorClasses = ['pinkRed', 'blue', 'yellow', 'red', 'yellowGreen']
+
         let spendBars = []
         Object.keys(this.state.categories[0]?.list).forEach(            
             key => {
@@ -316,7 +320,7 @@ class StatisticsPage extends React.Component {
                                 value={ this.state.categories[0]?.list[key].value() / this.state.categories[1].value() * 100 }
                                 unit=' р.'
                                 mode='determinate'
-                                className={cx(`bar`)}
+                                className={cx('bar', spendColorClasses[key])}
                                 showValue={false}
                             />
                         </div>
@@ -342,7 +346,7 @@ class StatisticsPage extends React.Component {
                                 value={ this.state.categories[1]?.list[key].value() / this.state.categories[1].value() * 100 }
                                 unit=' р.'
                                 mode='determinate'
-                                className={cx(`bar`)}
+                                className={cx('bar', incomeColorClasses[key])}
                                 showValue={false}
                             />
                         </div>
@@ -394,7 +398,7 @@ class StatisticsPage extends React.Component {
                                         <ProgressBar
                                             id={`${12}`}
                                             value={this.state.categories[1].value()}
-                                            className={cx('ttl-bar')}
+                                            className={cx('ttl-bar', 'incomes')}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
@@ -409,7 +413,7 @@ class StatisticsPage extends React.Component {
                                         <ProgressBar
                                             value={this.state.categories[0].value()}
                                             id={`${13}`}
-                                            className={cx('ttl-bar')}
+                                            className={cx('ttl-bar', 'expense')}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
