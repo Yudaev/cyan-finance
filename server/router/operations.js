@@ -99,7 +99,7 @@ router.get('/', async (req, res) => {
     ).lean();
     res.status(200).json(operations);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 });
 
@@ -133,7 +133,7 @@ router.post('/', async (req, res) => {
     const savedOperation = await operation.save();
     await res.status(200).json(omit(savedOperation.toObject(), 'user'));
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 });
 
@@ -177,7 +177,7 @@ router.put('/:id', async (req, res) => {
 
     await res.json(omit(operation, 'user'));
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 });
 
@@ -217,7 +217,7 @@ router.delete('/:id', async (req, res) => {
     );
     res.status(200).json(omit(operation.toObject(), 'user'));
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 });
 
@@ -227,7 +227,7 @@ router.delete('/:id', async (req, res) => {
 //     const operation = await Operation.findOneAndRemove({ user, _id: req.params.id });
 //     res.status(200).json(omit(operation.toObject(), 'user'));
 //   } catch (error) {
-//     res.status(500).json({ error });
+//     res.status(500).json(error);
 //   }
 // });
 

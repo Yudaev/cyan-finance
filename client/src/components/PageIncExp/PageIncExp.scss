@@ -53,24 +53,42 @@ $elemPadding: 1.5em 1em;
         padding-top: 1em;
         display: flex;
         justify-content: center;
-        align-items: center;  
+        align-items: center;
+
+        &.category {
+            :global .p-inputtext {
+                border-radius: 3px 0 0 3px;
+                border-right: 0
+            }
+            :global .p-button {
+                border-radius: 0 3px 3px 0;
+            }
+        }
     }
 
     .incexp-body-button {
         padding: $elemPadding;
-        .incexp-body-button-temp {
-            width: 142px;
-            height: 35px;
-            padding: 10px 1.2em 0 1.2em;
-            outline: 1px solid #c8c8c8;
-        }
-        //.incexp-body-button-temp:first-child {
-        //    outline: 1px solid #c8c8c8;
-        //}
-    }
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    .incexp-body-button:first-child {
-        border-right: 1px solid #c8c8c8;
+        .buttons-container {
+            width: 288px;
+            border: 1px solid #c8c8c8;
+            border-radius: 3px;
+        }
+
+        button {
+            width: 50%;
+            height: 35px;
+
+            font-weight: bold;
+            border-radius: 0;
+
+            &:first-child {
+                border-right: 1px solid #c8c8c8;
+            }
+        }
     }
 }
 

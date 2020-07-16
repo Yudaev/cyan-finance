@@ -10,7 +10,7 @@ import MainPage from "./MainPage/MainPage";
 import RegAuthPage from "../connectors/RegAuthPage";
 import ProfilePage from "../connectors/ProfilePage";
 import SettingsPage from "./SettingsPage/SettingsPage";
-import PageIncExp from "./PageIncExp/PageIncExp";
+import PageIncExp from "../connectors/PageIncExp";
 import OperationsPage from "../connectors/OperationsPage";
 
 const cx = classnames.bind(styles);

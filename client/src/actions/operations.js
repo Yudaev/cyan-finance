@@ -5,9 +5,17 @@ export const {
   requestOperations,
   successOperations,
   failureOperations,
+  addItem,
+  requestItem,
+  successItem,
+  failureItem,
 } = createActions({
   LOAD_OPERATIONS: options => options,
   REQUEST_OPERATIONS: () => ({}),
   SUCCESS_OPERATIONS: items => ({items}),
   FAILURE_OPERATIONS: error => error,
+  ADD_ITEM: item => item,
+  REQUEST_ITEM: () => ({}),
+  SUCCESS_ITEM: item => item,
+  FAILURE_ITEM: error => error,
 }, { prefix: 'operations' });

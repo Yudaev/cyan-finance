@@ -11,13 +11,14 @@ export default ({ type, repetitive, value, title, handlePopUp }) => {
 
     return(
         <div className={cx("card")} onClick={handlePopUp}>
-            <Card
-              title={title}
-              subTitle={`${typeText} ${repetitive ? '(Ежемесячно)' : ''}` }
-              className={typeOf}
-            >
+            <Card className={typeOf}>
+              <div className={cx('left')}>
+                {title && <div className={cx('title')}>{title}</div>}
+                <div className={cx('description')}>{`${typeText} ${repetitive ? '(Ежемесячно)' : ''}` }</div>
+              </div>
+              <div className={cx('right')}>
                 {value} p.
-                <i className="pi pi-ellipsis-v" />
+              </div>
             </Card> 
         </div> 
     )
