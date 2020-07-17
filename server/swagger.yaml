@@ -1,6 +1,8 @@
 tags:
   - name: operations
     description: Работа с операциями
+  - name: categories
+    description: Работа с категориями
 components:
   securitySchemes: {
     bearerAuth: {
@@ -67,6 +69,33 @@ components:
           type: string
           format: date-time
           description: 'Дата создания операции'
+    Category:
+      type: object
+      title: Category
+      required:
+        - title
+      exapmle:
+        _id: '123'
+        title: 'Название категории'
+      properties:
+        _id:
+          description: 'id категории, генерируется автоматически'
+          type: string
+        title:
+          type: string
+          description: 'Название категории'
+        deletedDate:
+          type: string
+          format: date-time
+          description: 'Дата удаления категории'
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'Дата редактирования категории'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Дата создания категории'
   requestBodies:
     Operation:
       required: true
@@ -99,4 +128,16 @@ components:
                 type: boolean
               repetitiveDay:
                 type: number
+    Category:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            title: Operation
+            required:
+              - title
+            properties:
+              title:
+                type: string
 paths: {}
