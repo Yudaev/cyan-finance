@@ -33,3 +33,18 @@ export const getGroupsByDate = createSelector(
     return groups;
   }
 );
+
+export const getAllTimeStats = createSelector(
+  getOperationList,
+  items => {
+    const types = {
+      income: 0,
+      expense: 0,
+    };
+    items.forEach(item => {
+      if (item.type === 'income') types.income += Number(item.value);
+      if (item.type === 'expense') types.expense += Number(item.value);
+    });
+    return types;
+  }
+);

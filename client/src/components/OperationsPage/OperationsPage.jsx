@@ -13,8 +13,6 @@ const cx = classnames.bind(styles);
 
 export default class OperationsPage extends Component {
     state = {
-        incomeAmount: 21200,
-        expensesAmount: 17300,
         date: new Date(),
         openPopup: false,
         groups: [],
@@ -54,7 +52,7 @@ export default class OperationsPage extends Component {
                 </div>
                 <div className={cx("header")}>
                     <div className={cx("incomeWrapper")}>
-                        <span className={cx("incomeAmount")}>{`${this.state.incomeAmount} р.`}</span>
+                        <span className={cx("incomeAmount")}>{`${this.props.types.income} р.`}</span>
                         <span className={cx("mark")}>доход</span>
                     </div>
                     <div className="monthWrapper">
@@ -71,7 +69,7 @@ export default class OperationsPage extends Component {
                     />
                     </div>
                     <div className={cx("expensesWrapper")}>
-                        <span className={cx("expensesAmount")}>{`${this.state.expensesAmount} р.`}</span>
+                        <span className={cx("expensesAmount")}>{`${this.props.types.expense} р.`}</span>
                         <span className={cx("mark")}>расход</span>
                     </div>
                 </div>
