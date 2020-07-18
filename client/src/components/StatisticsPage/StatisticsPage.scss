@@ -1,0 +1,212 @@
+    .body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+
+        .control-panel {
+            margin: 1em 0em;
+                .controls {
+                    margin-left: 0.5em;
+                    height: 2.5em;
+                    
+
+                    .dropdown {
+                        border: none;
+                        box-shadow: none;
+                    }
+
+                    .calendar {
+                        text-align: right;
+                        float: right;
+                        padding-right: 1.8em;
+                        
+                        :global {
+
+                            .p-inputtext {
+                                box-shadow: none;
+                            }
+    
+                            .p-datepicker-year {
+                                padding: 0em 0.5em;
+                            }
+
+                            .year {
+                               border: none;
+                               box-shadow: none;
+                               padding: 0em 4em;
+
+                               :global .p-dropdown-trigger {
+                                   display: none;
+                               }
+                            }
+
+                        }
+                       
+                    }
+
+                    &:hover {
+                        border: none;
+                    }
+    
+                    .control-button-spend,
+                    .control-button-income {
+                        border: none;
+                        background: #ffffff;
+                        opacity: 0.5;
+
+                        &:hover {
+                            cursor: pointer;
+                            font-weight: 700;
+                            opacity: 1;
+                            border-bottom: 2px solid black;
+                        }
+                    }
+                }
+            }
+        
+        .preview {
+            .title {
+                .title-bar {
+                    padding: 0.5em;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+
+                    .label {
+                        width: 25%
+                    }
+
+                    .ttl-bar {
+                        text-align: center;
+                        float: right;
+                        width: 60%;
+                        height: 9;
+                        border-radius: 1em;
+                    }
+
+                    .incomes {
+                        :global .p-progressbar-value {
+                            background-color: #34A835;
+                        }
+                    }
+
+                    .expense {
+                        :global .p-progressbar-value {
+                            background-color: #e91224;
+                        }
+                    }
+
+                    .value {
+                        width: 20%
+                    }
+                }
+            }
+        }
+
+        .chart {
+            margin: 1.75em 0em;
+        }
+
+        .progress-bar {
+            display: flex;
+            padding: 0.5em;
+            align-items: center;
+            text-align: center;
+
+            .pb-title {
+                width: 25%;
+            }
+
+            .pb-bar {
+                padding-left: 0.5em;
+                width: 60%;
+
+                .bar {
+                    height: 9;
+                    border-radius: 1em;
+                }
+            }
+
+            .cyan {
+                :global .p-progressbar-value {
+                    background-color: #3FBFBF;
+                }
+            }
+
+            .lilac {
+                :global .p-progressbar-value {
+                    background-color: #7A0DE7;
+                }
+            }
+
+            .pink {
+                :global .p-progressbar-value {
+                    background-color: #E70DE7;
+                }
+            }
+
+            .brown {
+                :global .p-progressbar-value {
+                    background-color: #864707;
+                }
+            }
+            
+            .violet {
+                :global .p-progressbar-value {
+                    background-color: #7247bc;
+                }
+            }
+
+            .pinkRed {
+                :global .p-progressbar-value {
+                    background-color: #FF6384;
+                }
+            }
+
+            .blue {
+                :global .p-progressbar-value {
+                    background-color: #36A2EB;
+                }
+            }
+
+            .yellow {
+                :global .p-progressbar-value {
+                    background-color: #FFCE56;
+                }
+            }
+
+            .red {
+                :global .p-progressbar-value {
+                    background-color: #C14242;
+                }
+            }
+
+            .yellowGreen {
+                :global .p-progressbar-value {
+                    background-color: #7FBF3F;
+                }
+            }
+
+            .pb-value {
+                width: 20%;
+            }
+
+            .spend {
+                color: #e91224; 
+            }
+
+            .income {
+                color: #34A835;
+            }
+        }
+
+        .footer-button {
+            position: absolute;
+            padding: 2em;
+            bottom: 15;  
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    
