@@ -12,7 +12,7 @@
     .left {
         flex-grow: 1;
     }
-    .title {
+    .category {
         font-weight: 700;
         margin-bottom: .5em;
         font-size: 1.5em;
@@ -21,6 +21,24 @@
     .description {
 
     }
+
+    .type,
+    .repetitive,
+    .title {
+        display: inline-block;
+        margin-right: 4px;
+    }
+
+    .type {
+        font-style: italic;
+    }
+
+    .repetitive {
+        font-style: italic;
+    }
+
+    .title {}
+
 
     .right {
         font-size: 20px;

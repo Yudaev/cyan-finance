@@ -86,7 +86,8 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   const { user, body } = req;
-  const item = new Category({ ...pick(body, 'title'), user });
+  const title = body.title && body.title.trim() || null;
+  const item = new Category({ title, user });
 
   try {
     const savedItem = await item.save();

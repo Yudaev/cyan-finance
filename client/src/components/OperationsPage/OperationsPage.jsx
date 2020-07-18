@@ -30,7 +30,7 @@ export default class OperationsPage extends Component {
     }
 
     render() {
-        const groupsMap = this.props.groups;
+        const {groups: groupsMap, categories } = this.props;
         const groupsArray = [];
         // неожидал что Map нельзя нормально проитерировать в реакте
         // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
@@ -77,7 +77,13 @@ export default class OperationsPage extends Component {
                 </div>
                 <div className={cx("body")}>
                     {groupsArray.map(({date, items}, key)=> (
-                      <OperationsPageDateBlock key={key} date={date} items={items} togglePopup={ this.togglePopup } />
+                      <OperationsPageDateBlock
+                        key={key}
+                        date={date}
+                        items={items}
+                        togglePopup={ this.togglePopup }
+                        categories={categories}
+                      />
                     ))}
                 </div>
                 <div className={cx("upBtnWrapper")} style={{display: 'none'}}>

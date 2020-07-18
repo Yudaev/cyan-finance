@@ -11,7 +11,8 @@ export default class PageIncExp extends Component {
   state = {
     valueNum: null,
     selectedCategory: null,
-    filteredCategories: null
+    filteredCategories: null,
+    categories: this.props.categories || [],
   };
 
   onButtonClick (type) {
@@ -28,23 +29,22 @@ export default class PageIncExp extends Component {
     }
   }
 
-  componentDidMount () {
-    this.categories = [
-      { title: 'Автомобиль', _id: 1 },
-      { title: 'Дети', _id: 2 },
-      { title: 'Еда', _id: 3 },
-      { title: 'Работа', _id: 4 },
-      { title: 'Развлечения', _id: 5 },
-    ];
+  componentDidUpdate (prevProps) {
+    const { categories } = this.props;
+    if (categories !== prevProps.categories) {
+      this.setState({
+        categories
+      })
+    }
   };
 
   filterCategories = (event) => {
       let results;
 
       if (event.query.length === 0) {
-          results = [...this.categories];
+          results = [...this.state.categories];
       } else {
-          results = this.categories.filter((category) => {
+          results = this.state.categories.filter((category) => {
               return category.title.toLowerCase().startsWith(event.query.toLowerCase());
           });
       }
@@ -102,9 +102,9 @@ export default class PageIncExp extends Component {
               itemTemplate={this.categoriesTemplate}
               onChange={(e) => {
                   if(typeof e.value === 'string') {
-                      const category = this.categories.find(
+                      const category = this.state.categories.find(
                         category => category.title.toLowerCase() === e.value.toLowerCase()
-                      ) || { title: e.value, _id: null };
+                      ) || { title: e.value };
                       this.setState({ selectedCategory: category })
                   } else {
                       this.setState({ selectedCategory: e.value });

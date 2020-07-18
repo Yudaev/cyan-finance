@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const omit = require('lodash/omit');
+const pick = require('lodash/pick');
 const { tokenSecret } = require('../config');
 
 const Operation = require('../models/operation');
+const Category = require('../models/category');
 
 router.use('/', async (req, res, next) => {
   if (!req.headers.authorization) {
@@ -126,8 +128,23 @@ router.get('/', async (req, res) => {
  *              $ref: '#/components/schemas/Operation'
  */
 router.post('/', async (req, res) => {
-  const { user } = req;
-  const operation = new Operation({ ...req.body, user });
+  const { user, body } = req;
+  const categoryReq = body.category || {};
+  const category = await Category.findOne({_id: categoryReq._id, user }) || null;
+
+  const operation = new Operation({
+    ...pick(body, [
+      'value',
+      'type',
+      'title',
+      'description',
+      'date',
+      'repetitive',
+      'repetitiveDay',
+    ]),
+    category,
+    user
+  });
 
   try {
     const savedOperation = await operation.save();
