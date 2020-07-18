@@ -1,11 +1,12 @@
 import {handleActions} from 'redux-actions';
 
-import { failureOperations, successOperations } from "../actions/operations";
+import { failureItem, failureOperations, successItem, successOperations } from "../actions/operations";
 
 
 const initialState = {
   items: [],
   loadOperationsError: '',
+  itemError: '',
 };
 
 export default handleActions({
@@ -20,6 +21,19 @@ export default handleActions({
     return {
       ...store,
       loadOperationsError: payload,
+    }
+  },
+  [successItem]: (store, { payload }) => {
+    return {
+      ...store,
+      items: [ ...store.items, payload],
+      itemError: null,
+    }
+  },
+  [failureItem]: (store, { payload }) => {
+    return {
+      ...store,
+      itemError: payload,
     }
   },
 }, initialState);
