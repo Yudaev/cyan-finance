@@ -12,6 +12,7 @@ import ProfilePage from "../connectors/ProfilePage";
 import SettingsPage from "./SettingsPage/SettingsPage";
 import PageIncExp from "./PageIncExp/PageIncExp";
 import OperationsPage from "../connectors/OperationsPage";
+import StatisticsPage from "./StatisticsPage/StatisticsPage";
 
 const cx = classnames.bind(styles);
 
@@ -39,7 +40,7 @@ export const App = ({ isAuth, logout }) => {
         <Switch>
           <Route path='/statistics'>
             {!isAuth && (<Redirect to='/' />)}
-            <div>Статистика</div>
+            <StatisticsPage />
           </Route>
           <Route path='/history'>
             {!isAuth && (<Redirect to='/' />)}
