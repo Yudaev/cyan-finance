@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const pick = require('lodash/pick');
 const { tokenSecret } = require('../config');
 const User = require('../models/user');
+const Category = require('../models/category');
+const { initialCategories } = require('../constants');
 
 router.post('/', async (req, res) => {
   const { email, password, password2 } = req.body;
@@ -36,6 +38,12 @@ router.post('/', async (req, res) => {
 
   try {
     await newUser.save();
+
+    await initialCategories.forEach(({ title }) => {
+      const newCategory = new Category({ title, user: newUser });
+      newCategory.save();
+    });
+
     const userInfo = pick(newUser, ['_id', 'email']);
     res.status(200).json({
       token: jwt.sign(userInfo, tokenSecret),
