@@ -5,6 +5,7 @@ import { routerMiddleware } from 'connected-react-router';
 import appMiddleware from "../middlewares/app";
 import userMiddleware from "../middlewares/user";
 import operationsMiddleware from "../middlewares/operations";
+import categoriesMiddleware from "../middlewares/categories";
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -17,6 +18,7 @@ export const initStore = (preloadedState = undefined) => {
       appMiddleware,
       userMiddleware,
       operationsMiddleware,
+      categoriesMiddleware,
     ))
   );
 
