@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const User = require('../models/user');
+const Category = require('../models/category');
 
 const operationSchema = new Schema({
   user: {
@@ -23,6 +24,7 @@ const operationSchema = new Schema({
   },
   category: {
     type: mongoose.ObjectId,
+    ref: Category,
     index: true,
   },
   date: {
