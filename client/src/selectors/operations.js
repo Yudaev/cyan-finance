@@ -6,6 +6,7 @@ import dayjsRU from 'dayjs/locale/ru';
 dayjs.locale(dayjsRU);
 
 const selectOperations = state => state.operations || {};
+const selectDate = state => state.operations|| {};
 
 export const getOperationList = createSelector(
   selectOperations,
@@ -34,17 +35,31 @@ export const getGroupsByDate = createSelector(
   }
 );
 
-export const getAllTimeStats = createSelector(
-  getOperationList,
-  items => {
-    const types = {
+export const getDate = createSelector(
+  selectDate,
+  propOr({}, 'date'),
+);
+
+export const getMonth = createSelector(
+  getDate,
+  date => { 
+    const currentMonth = dayjs(date).month();
+    return currentMonth;
+  },
+);
+
+export const getValuesByMonth = createSelector(
+  [getMonth, getOperationList],
+  (currentMonth, items) => {
+    const stats = {
       income: 0,
       expense: 0,
     };
     items.forEach(item => {
-      if (item.type === 'income') types.income += Number(item.value);
-      if (item.type === 'expense') types.expense += Number(item.value);
+      const itemMonth = dayjs(item.date).month(); 
+      if (item.type === 'income' && itemMonth == currentMonth) stats.income += Number(item.value);
+      if (item.type === 'expense' && itemMonth == currentMonth) stats.expense += Number(item.value);
     });
-    return types;
+    return stats;
   }
 );

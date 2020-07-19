@@ -27,8 +27,13 @@ export default class OperationsPage extends Component {
         });
     }
 
+    onChangeDate = (date) => {
+        this.setState({ date: date })
+    }
+
     render() {
         const {groups: groupsMap, categories } = this.props;
+        const { onChangeDate } = this.props;
         const groupsArray = [];
         // неожидал что Map нельзя нормально проитерировать в реакте
         // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
@@ -52,7 +57,7 @@ export default class OperationsPage extends Component {
                 </div>
                 <div className={cx("header")}>
                     <div className={cx("incomeWrapper")}>
-                        <span className={cx("incomeAmount")}>{`${this.props.types.income} р.`}</span>
+                        <span className={cx("incomeAmount")}>{`${this.props.stats.income} р.`}</span>
                         <span className={cx("mark")}>доход</span>
                     </div>
                     <div className="monthWrapper">
@@ -61,7 +66,7 @@ export default class OperationsPage extends Component {
                         className={cx("monthPicker")}
                         inputStyle={{minWidth: "100px"}} 
                         value={this.state.date} 
-                        onChange={(e) => this.setState({ date: e.value })} 
+                        onSelect={(e) => onChangeDate(e.value)}
                         view="month"
                         dateFormat="MM yy"
                         yearNavigator={true}
@@ -69,7 +74,7 @@ export default class OperationsPage extends Component {
                     />
                     </div>
                     <div className={cx("expensesWrapper")}>
-                        <span className={cx("expensesAmount")}>{`${this.props.types.expense} р.`}</span>
+                        <span className={cx("expensesAmount")}>{`${this.props.stats.expense} р.`}</span>
                         <span className={cx("mark")}>расход</span>
                     </div>
                 </div>
