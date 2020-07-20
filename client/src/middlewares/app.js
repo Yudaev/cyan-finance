@@ -1,9 +1,9 @@
 import {
-  init,
+  init
 } from '../actions/app';
-import { logout, reset as resetUser } from "../actions/user";
-import { loadOperations } from "../actions/operations";
-import { loadList as loadCategories } from "../actions/categories";
+import { logout, reset as resetUser, successAuth, successReg } from "../actions/user";
+import { loadOperations, clearOperationsData } from "../actions/operations";
+import { loadList as loadCategories, clearCategoriesData } from "../actions/categories";
 
 
 export default store => next => async action => {
@@ -17,6 +17,13 @@ export default store => next => async action => {
       break;
     case logout.toString():
       store.dispatch(resetUser());
+      store.dispatch(clearOperationsData());
+      store.dispatch(clearCategoriesData());
+      break;
+    case successReg.toString():
+    case successAuth.toString():
+      store.dispatch(loadOperations({ pageSize: 0 }));
+      store.dispatch(loadCategories());
       break;
     default:
       break;

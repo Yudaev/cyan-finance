@@ -1,6 +1,6 @@
 import {handleActions} from 'redux-actions';
 
-import { failureItem, failureList, successItem, successList } from "../actions/categories";
+import { failureItem, failureList, successItem, successList, clearCategoriesData } from "../actions/categories";
 
 const initialState = {
   items: [],
@@ -35,4 +35,10 @@ export default handleActions({
       itemError: payload,
     }
   },
+  [clearCategoriesData]: (store) => {
+    return {
+      ...store,
+      ...initialState
+    }
+  }
 }, initialState);

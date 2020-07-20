@@ -9,7 +9,7 @@ import {
   successReg,
   failureReg, clearAuthError, clearRegError,
 } from '../actions/user';
-
+import { loadData } from '../actions/app'
 
 export default store => next => async action => {
   next(action);
