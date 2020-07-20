@@ -27,16 +27,10 @@ export default class OperationsPage extends Component {
         });
     }
 
-    onChangeDate = (date) => {
-        this.setState({ date: date })
-    }
-
     render() {
         const {groups: groupsMap, categories } = this.props;
         const { onChangeDate } = this.props;
         const groupsArray = [];
-        // неожидал что Map нельзя нормально проитерировать в реакте
-        // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
         groupsMap.forEach((items, date) => groupsArray.push({ date, items }));
 
         let popup = this.state.openPopup ? (<EditOperationPage togglePopup={ this.togglePopup } />) : null;
