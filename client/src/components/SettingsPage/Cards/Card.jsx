@@ -5,12 +5,19 @@ import styles from './Card.scss';
 
 const cx = classnames.bind(styles); 
 
-export default ({ type, repetitive, value, title, handlePopUp, category }) => {
+export default ({ type, repetitive, value, title, handlePopUp, category, _id }) => {
     const typeText = type === 'income' ? 'Доход' : 'Расход';
     let typeOf = type === 'income' ? `${cx("greenCard")}` : `${cx("redCard")}`;
+    let itemData = {
+      id: _id,
+      value: value,
+      type: type,
+      title: title,
+      category: category,
+    }
 
     return(
-        <div className={cx("card")} onClick={handlePopUp}>
+        <div className={cx("card")} onClick={() => handlePopUp(itemData)}>
             <Card className={typeOf}>
               <div className={cx('left')}>
                 {category && <div className={cx('category')}>{category.title}</div>}
