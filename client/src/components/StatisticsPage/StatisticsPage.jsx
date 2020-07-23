@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import classnames from 'classnames/bind'
 
 import styles from './StatisticsPage.scss'
@@ -8,16 +8,15 @@ import { Calendar } from 'primereact/calendar'
 import { Chart } from 'primereact/chart'
 import { Button } from 'primereact/button'
 import { Dropdown } from 'primereact/dropdown'
+import dayjs from 'dayjs';
 
 
 const cx = classnames.bind(styles)
 
-class StatisticsPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            intervalValue: 'день',
-            calendarValue: new Date(),
+export default class StatisticsPage extends Component {
+        state = {
+            calendarValue: null,
+            date: new Date(),
             minDate: null,
             maxDate: null,
             intervalArray: [
@@ -27,11 +26,6 @@ class StatisticsPage extends React.Component {
                 {label: 'Все время', value: 'все время'},
                 {label: 'Интервал', value: 'интервал'},
             ],
-            year: 2020,
-            baseValue: {
-                name: 'Баланс',
-                value: 100000
-            },
             categories: [
                 {
                     name: 'Расход',
@@ -192,7 +186,6 @@ class StatisticsPage extends React.Component {
                 }
             },
         }
-    }
 
     getLabels = () => {
         let labelsArr = Object.keys(this.state.categories[0]?.list).map(
@@ -236,82 +229,94 @@ class StatisticsPage extends React.Component {
             clear: 'Limpiar',
         };
 
-        if (this.state.intervalValue === 'день') {
+        const { onChangeDate, type } = this.props;
+        const { yearNow } = this.props;
+
+        if (type === 'день') {
             return <Calendar
                         inputStyle={{
+                            padding: '.25em 0em 0em 0em',
                             border: 'none',
                             backgroundColor: '#ffffff'
                         }}
-                        placeholder={`${this.state.calendarValue}`}
+                        placeholder={`${this.state.date}`}
                         monthNavigator
                         yearNavigator
                         locale={calendarSettings}
                         yearRange='2010:2030'
                         dateFormat='dd MM yy'
-                        value={this.state.calendarValue}
-                        onSelect={e => this.setState({calendarValue: e.value})}
+                        readOnlyInput
+                        value={this.state.date}
+                        onSelect={e => onChangeDate(e.value)}
                     />
         }
 
-        if (this.state.intervalValue === 'месяц') {
+        if (type === 'месяц') {
             return <Calendar
                         inputStyle={{
                             border: 'none',
-                            backgroundColor: '#ffffff'
+                            backgroundColor: '#ffffff',
+                            padding: '.25em 0em 0em 0em',
                         }}
-                        placeholder={`${this.state.calendarValue}`}
+                        placeholder={`${this.state.date}`}
                         view='month'
                         monthNavigator                        
                         yearNavigator
                         locale={calendarSettings}
                         yearRange='2010:2030'
-                        value={this.state.calendarValue}
+                        readOnlyInput
+                        value={this.state.date}
                         dateFormat='MM yy'
-                        onSelect={(e) => this.setState({calendarValue: e.value})} 
+                        onSelect={e => onChangeDate(e.value)} 
                     />
         }
 
-        if (this.state.intervalValue === 'год') {
+        if (type === 'год') {
             
-            let years = [
-                {label: 2020, value: 2020},
-                {label: 2021, value: 2021}
-            ]
+            const { years } = this.props;
+            const formatYear = dayjs(this.state.year).year();
 
             return <Dropdown
-                        placeholder={`${this.state.year}`}
-                        value={this.state.year}
+                        placeholder={`${formatYear}`}
+                        value={yearNow}
                         options={years}
                         className={cx('year')}
-                        onChange={e => this.setState({ year: e.value })}
+                        onChange={e => onChangeDate(e.value)}
                     />
         }
 
-        if (this.state.intervalValue === 'все время') {
+        if (type === 'все время') {
             return null
         }
     
-        if (this.state.intervalValue === 'интервал') {
+        if (type === 'интервал') {
             return <Calendar
                         inputStyle={{
                             border: 'none',
                             backgroundColor: '#ffffff',
-                            width: '150%'
+                            width: '110%',
+                            padding: '0.25em 0em 0em 0.1em',
                         }}
+                        className={cx('interval')}
                         selectionMode='range'
                         placeholder='Выберите интервал...'
                         minDate={this.state.minDate}
                         maxDate={this.state.maxDate}
-                        readOnlyInput
                         locale={calendarSettings}
-                        dateFormat='d MM y'
-                        value={this.state.calendarValue}
-                        onChange={(e) => this.setState({calendarValue: e.value})} 
+                        dateFormat='d M y'
+                        readOnlyInput
+                        value={yearNow}
+                        onChange={e => onChangeDate(e.value) }
                     />
         }
     }
 
     render() {
+
+        const { stats, onChangeType, type } = this.props;
+
+        // Вытащить прогрессбары в отдельный компонент
+        // Связать компонент прогрессбаров с Tree
 
         let incomeColorClasses = ['cyan', 'lilac', 'pink', 'brown', 'violet']
         let spendColorClasses = ['pinkRed', 'blue', 'yellow', 'red', 'yellowGreen']
@@ -374,9 +379,9 @@ class StatisticsPage extends React.Component {
                         <div className={cx('controls')}>
                             <Dropdown
                                 className={cx('dropdown')}
-                                value={`Показать за ` + this.state.intervalValue}
-                                onChange={ (e) => { this.setState({ intervalValue: e.value }) }}
-                                placeholder={'Показать за ' + this.state.intervalValue}
+                                value={`Показать за ` + type}
+                                onChange={ e => onChangeType(e.value) }
+                                placeholder={'Показать за ' + type}
                                 options={this.state.intervalArray}
                             />
                             <div className={cx('calendar')}>
@@ -388,16 +393,15 @@ class StatisticsPage extends React.Component {
                         <div className={cx('title')} key={Date.now()} >
                                 <div className={cx('title-bar')}>
                                     <div className={cx('label')}>
-                                        <span>{this.state.baseValue.name}</span>
+                                        <span>Баланс</span>
                                     </div>
                                         <ProgressBar
-                                            value={this.state.rest.value(this.state.categories[1].value(), this.state.categories[0].value())}
-                                            id={`${11}`}
+                                            value={this.state.rest.value(stats.income, stats.expense)}
                                             className={cx('ttl-bar')}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
-                                        <span>{this.state.rest.value(this.state.categories[1].value(), this.state.categories[0].value())} p.</span>
+                                        <span>{this.state.rest.value(stats.income, stats.expense)} p.</span>
                                     </div>
                                 </div>
 
@@ -406,13 +410,12 @@ class StatisticsPage extends React.Component {
                                         <span>{this.state.categories[1].name}</span>
                                     </div>
                                         <ProgressBar
-                                            id={`${12}`}
-                                            value={this.state.categories[1].value()}
+                                            value={stats.income}
                                             className={cx('ttl-bar', 'incomes')}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
-                                        <span>{this.state.categories[1].value()} p.</span>
+                                        <span>{stats.income} p.</span>
                                     </div>
                                 </div>
 
@@ -421,13 +424,12 @@ class StatisticsPage extends React.Component {
                                         <span>{this.state.categories[0].name}</span>
                                     </div>
                                         <ProgressBar
-                                            value={this.state.categories[0].value()}
-                                            id={`${13}`}
+                                            value={stats.expense}
                                             className={cx('ttl-bar', 'expense')}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
-                                        <span>{this.state.categories[0].value()} p.</span>
+                                        <span>{stats.expense} p.</span>
                                     </div>
                                 </div>
                         </div>
@@ -444,6 +446,4 @@ class StatisticsPage extends React.Component {
             )
     }
 }
-
-export default StatisticsPage;
 
