@@ -67,4 +67,14 @@
       justify-content: space-around;
     }
   }
+
+  .incexp-body-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 33px);
+    borderTopRightRadius: 0;
+    borderBottomRightRadius: 0;
+    borderRight: none;
+  }
 }

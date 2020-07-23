@@ -16,7 +16,7 @@ export default class OperationPageDateBlock extends React.Component {
         </div>
 
         {items && items.map((item, key) => (
-          <Cart key={key} {...item} category={categories[item.category]} handlePopUp={ togglePopup } />
+          <Cart key={key} {...item} category={categories[item.category]} categories={categories} handlePopUp={ togglePopup } />
         ))}
       </div>
     )

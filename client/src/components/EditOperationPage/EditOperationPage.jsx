@@ -4,7 +4,6 @@ import classnames from 'classnames/bind';
 import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {InputNumber} from 'primereact/inputnumber';
-import {Dropdown} from 'primereact/dropdown';
 import {AutoComplete} from 'primereact/autocomplete';
 import {Calendar} from 'primereact/calendar';
 import {Checkbox} from 'primereact/checkbox';
@@ -16,36 +15,41 @@ const cx = classnames.bind(styles);
 
 export default class EditOperationPage extends Component {
   state = {
-    checked: true,
-    categories: [
-      {label: 'Связь', value: 'comm'},
-      {label: 'Продукты', value: 'food'},
-      {label: 'Транспорт', value: 'transport'},
-      {label: 'Отдых', value: 'rest'},
-      {label: 'Кафе', value: 'cafe'}
-    ],
+    id: this.props.data.id,
+    title: this.props.data.title || undefined,
+    value: this.props.data.value,
+    type: this.props.data.type,
+    selectedCategory: this.props.data.category,
     filteredCategories: null,
-    category: null,
-    amount: null
+    categories: this.props.data.categories || [],
+    date: new Date(this.props.data.date) || undefined,
+    repetitive: this.props.data.repetitive || false,
+    repetitiveDay: this.props.data.repetitiveDay || undefined,
+    description: this.props.data.description || undefined
   }
 
-  filterCategory = (event) => {
+  filterCategories = (event) => {
     let results;
-    if (!event.query) {
+
+    if (event.query.length === 0) {
       results = [...this.state.categories];
     } else {
-      results = this.state.categories.filter(cat => {
-        return (cat.label.toLowerCase().indexOf(event.query.toLowerCase()) > -1)
+      results = this.state.categories.filter((category) => {
+        return category.title.toLowerCase().startsWith(event.query.toLowerCase());
       });
     }
-    this.setState({
-      filteredCategories: results
-    });
-  }
+
+    this.setState({ filteredCategories: results });
+  };
+
+  categoriesTemplate = (category) => {
+    return (
+      <div style={{ fontSize: '16px' }}>{category.title}</div>
+    );
+  };
 
   render() {
-    console.log(this.props.data);
-    let {id, value, type, title, category, repetitive} = this.props.data;
+    console.log(this.state)
     return (
       <div className={cx("container", "content")}>
         <div className={cx("backIconWrapper")}>
@@ -54,64 +58,101 @@ export default class EditOperationPage extends Component {
         </div>
         <form className={cx("editOperationForm")}>
           <div className={cx("formBody")}>
-            <InputText className={cx("inputItem")} placeholder="Название операции"/>
+            <InputText
+              className={cx("inputItem")}
+              placeholder="Название операции"
+              value={this.state.title}
+              onChange={(e) => this.setState({title: e.value})}
+            />
             <InputNumber
               className={cx("inputItem")}
-              value={value}
-              onChange={e => this.setState({amount: e.value})}
+              value={this.state.value}
               placeholder="Сумма"
               mode="currency"
               currency='RUB'
+              onChange={(e) => this.setState({value: e.value})}
             />
             <div className={cx("chkWrapper")}>
               <div className={cx("chkElem")}>
-                <RadioButton value="income" inputId="income" name="type" onChange={(e) => this.setState({value: e.value})} checked={type === 'income'} />
+                <RadioButton
+                  value="income"
+                  inputId="income"
+                  name="type"
+                  onChange={(e) => this.setState({type: e.value})}
+                  checked={this.state.type === 'income'} />
                 <label htmlFor="income" className="p-radiobutton-label">Доход</label>
               </div>
               <div className={cx("chkElem")}>
-                <RadioButton value="expense" inputId="expense" name="type" onChange={(e) => this.setState({value: e.value})} checked={type === 'expense'} />
+                <RadioButton
+                  value="expense"
+                  inputId="expense"
+                  name="type"
+                  onChange={(e) => this.setState({type: e.value})}
+                  checked={this.state.type === 'expense'} />
                 <label htmlFor="expense" className="p-radiobutton-label">Расход</label>
               </div>
             </div>
             <AutoComplete
               className={cx("inputItem", "someClass")}
-              id="categoryInput"
-              value={this.state.category}
+              size={32}
+              value={this.state.selectedCategory && this.state.selectedCategory.title}
               onChange={(e) => this.setState({category: e.value})}
               suggestions={this.state.filteredCategories}
-              completeMethod={this.filterCategory}
+              completeMethod={this.filterCategories}
+              itemTemplate={this.categoriesTemplate}
               dropdown={true}
               placeholder="Выберте категорию"
               inputStyle={{
-                width: "calc(100% - 32.98px)",
+                width: "calc(100% - 33px)",
                 borderTopRightRadius: "0",
                 borderBottomRightRadius: "0",
                 borderRight: "none"
               }}
               buttonStyle={{height: "20px"}}
               field="label"
+              onChange={(e) => {
+                if (typeof e.value === 'string') {
+                  const category = this.state.categories.find(
+                    category => category.title.toLowerCase() === e.value.toLowerCase()
+                  ) || {title: e.value};
+                  this.setState({selectedCategory: category})
+                } else {
+                  this.setState({selectedCategory: e.value});
+                }
+              }
+              }
             />
             <Calendar
               className={cx("inputItem")}
               showIcon={true}
-              dateFormat="dd/mm/yy"
-              placeholder={new Date().toLocaleDateString()}
-              inputStyle={{width: "calc(100% - 2.357em)"}}
+              dateFormat="dd.mm.yy"
+              placeholder={this.state.date.toLocaleString()}
+              value={this.state.date}
+              inputStyle={{width: "calc(100% - 33px)"}}
+              showTime={true}
+              hourFormat="24"
+              onChange={(e) => this.setState({date: e.value})}
             />
             <div className={cx("checkboxWrapper")}>
               <Checkbox
                 inputId="regularTrue"
-                checked={repetitive}
-                onChange={e => this.setState({checked: e.checked})}
+                checked={this.state.repetitive}
+                onChange={e => this.setState({repetitive: e.checked})}
               />
               <label htmlFor="regularTrue" className={cx("checkboxLabel")}>
                 {`Повторять `}
                 <span className={cx("regularity")}>ежемесячно</span>
-                <span className={cx("regularDate")}>{` ${new Date().getDate()} `}</span>
+                <span className={cx("regularDate")}>{` ${this.state.repetitiveDay} `}</span>
                 числа
               </label>
             </div>
-            <InputTextarea className={cx("inputItem")} placeholder="Описание" autoResize={true}/>
+            <InputTextarea
+              className={cx("inputItem")}
+              placeholder="Описание"
+              autoResize={true}
+              value={this.state.description}
+              onChange={(e) => this.setState({description: e.value})}
+            />
           </div>
           <div className={cx("formFooter")}>
             <div className={cx("btnWrapper")}>

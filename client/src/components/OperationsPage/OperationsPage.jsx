@@ -21,8 +21,8 @@ export default class OperationsPage extends Component {
     groups: [],
   }
 
-  togglePopup = ({ id, value, type, title, category, repetitive }) => {
-    console.log(this.props);
+  togglePopup = ({ id, title , value, type, category, date, repetitive, repetitiveDay, description }) => {
+    //console.log(this.props);
 
     this.setState(state => {
       return {
@@ -34,7 +34,11 @@ export default class OperationsPage extends Component {
           type: type,
           title: title,
           category: category,
-          repetitive: repetitive
+          repetitive: repetitive,
+          date: date,
+          repetitiveDay: repetitiveDay,
+          description: description,
+          categories: this.props.categoriesList
         }
       }
     });
@@ -63,8 +67,8 @@ export default class OperationsPage extends Component {
         <div className={cx("popupWrapper")}>
           {popup}
         </div>
-        <div className={cx("header")}>
-          <div className={cx("incomeWrapper")}>
+        <div className={cx("header")} style={{display: this.state.openPopup ? 'none' : null}}>
+          <div className={cx("incomeWrapper")} >
             <span className={cx("incomeAmount")}>{`${this.state.incomeAmount} р.`}</span>
             <span className={cx("mark")}>доход</span>
           </div>
@@ -86,7 +90,7 @@ export default class OperationsPage extends Component {
             <span className={cx("mark")}>расход</span>
           </div>
         </div>
-        <div className={cx("body")}>
+        <div className={cx("body")} style={{display: this.state.openPopup ? 'none' : null}}>
           {groupsArray.map(({date, items}, key) => (
             <OperationsPageDateBlock
               key={key}
