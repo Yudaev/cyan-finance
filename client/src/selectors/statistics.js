@@ -46,7 +46,7 @@ export const getCurrentDatesObject = createSelector(
   getDate,
   date => {
     const currentDates = {
-      day: dayjs(date).day(),
+      day: dayjs(date).date(),
       month: dayjs(date).month(),
       year: dayjs(date).year()
     };
@@ -63,7 +63,7 @@ export const getValuesByType = createSelector(
     };
     items.forEach(item => {
       const itemDates = {
-        day: dayjs(item.date).day(),
+        day: dayjs(item.date).date(),
         month: dayjs(item.date).month(),
         year: dayjs(item.date).year()
       }
@@ -105,6 +105,7 @@ export const getValuesByType = createSelector(
     return stats;
   }
 );
+
 
 
 
