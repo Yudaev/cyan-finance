@@ -1,11 +1,21 @@
 .progress-bar {
   display: flex;
-  padding: 0.7em 0.5em;
+  flex-wrap: wrap;
+  padding: 0.35em 0.3em;
   align-items: baseline;
   text-align: center;
+  width: 100%;
+
+  .pb-icon {
+      :global .pi {
+          padding: .25em;
+          font-size: .8em;
+      }
+  }
 
   .pb-title {
-      width: 20%;
+      padding-right: .25em;
+      width: 18%;
       text-align: left;
 
       p {
@@ -17,8 +27,7 @@
   }
 
   .pb-bar {
-      margin-left: 0.5em;
-      width: 56%;
+      width: 54%;
       display: grid;
 
       .bar {
@@ -26,21 +35,6 @@
         border-radius: 1em;
       }
 
-      .transaction-list {
-        display: flex;
-        flex-direction: column;
-        transition: all 2s linear;
-
-        .transaction {
-            letter-spacing: .07em;
-        }
-      }
-
-      .invisible {
-        transition: all 2s linear;
-        opacity: 0;
-        display: none;
-      }
   }
 
   .cyan {
@@ -104,14 +98,70 @@
   }
 
   .pb-value {
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       padding-left: 0.35em;
       text-align: right;
-      width: 22%;
   }
 
   .pb-value > p {
       overflow: hidden;
       text-overflow: ellipsis;
+  }
+
+  .transaction-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto;
+
+    .transaction {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        letter-spacing: .05em;
+        font-size: 12.5px;
+        transition: opacity 1s ease-in;
+        
+        span {
+            padding: 0em .7em;
+            white-space: nowrap;
+        }
+
+        span:first-child {
+            text-align: right;
+            width: 35%;
+            padding-top: .2em;
+            color: grey;
+            opacity: .6;
+            font-size: 9.5px;
+        }
+
+        span:last-child {
+            width: 40%;
+            text-align: right;
+        }
+
+        div {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
+            span {
+                color: grey;
+                font-style: italic;
+                padding-top: .2em;
+                font-size: 9.5px;
+            }
+        }
+    }
+  }
+
+  .invisible {
+    opacity: 0;
+    display: none;
   }
 
   .expense {

@@ -2,16 +2,14 @@ import { createSelector } from 'reselect'
 import propOr from 'lodash/fp/propOr';
 import dayjs from 'dayjs';
 import dayjsRU from 'dayjs/locale/ru';
+import { uniqWith, isEqual } from 'lodash/fp';
 
-const _ = require('lodash');
 const isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
 
 dayjs.locale(dayjsRU);
 
 const selectOperations = state => state.operations || {};
-const selectDate = state => state.operations || {};
-const selectType = state => state.operations || {};
 
 export const getOperations = createSelector(
   selectOperations,
@@ -19,12 +17,12 @@ export const getOperations = createSelector(
 );
 
 export const getDate = createSelector(
-  selectDate,
+  selectOperations,
   propOr({}, 'date')
 );
 
 export const getTypeSwitch = createSelector(
-  selectType,
+  selectOperations,
   propOr({}, 'type')
 );
 
