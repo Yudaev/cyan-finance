@@ -1,6 +1,8 @@
  .container {
-    height: 100vh;
+    padding-bottom: 20px;
     margin: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
 
     .noPopUp {
         display: none;
@@ -8,12 +10,14 @@
 
      .cardList {
         text-align: left;
-        height: 90vh;
+        height: calc(100vh - 152px);
+        overflow-y: auto;
     }
  }
 
 .content {
     text-align: center;
+    height: calc(100vh - 102px);
 }
     
     

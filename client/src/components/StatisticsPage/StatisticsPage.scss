@@ -1,13 +1,22 @@
     .body {
-        height: 100vh;
         display: flex;
         flex-direction: column;
+        height: calc(100vh - 102px);
+        overflow-y: auto;
 
         .control-panel {
-            margin: 1em 0em;
+            position: fixed;
+            top: 52px;
+            background-color: #fff;
+            z-index: 10;
+            width: 100%;
+            padding-top: 10px;
+
                 .controls {
-                    margin-left: 0.5em;
                     height: 2.5em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                     
 
                     .dropdown {
@@ -17,13 +26,13 @@
 
                     .calendar {
                         text-align: right;
-                        float: right;
-                        padding-right: 1.8em;
+                        padding-right: .8em;
                         
                         :global {
 
                             .p-inputtext {
                                 box-shadow: none;
+                                text-align: right;
                             }
     
                             .p-datepicker-year {
@@ -33,7 +42,7 @@
                             .year {
                                border: none;
                                box-shadow: none;
-                               padding: 0em 4em;
+                               padding: 0em;
 
                                :global .p-dropdown-trigger {
                                    display: none;
@@ -65,6 +74,8 @@
             }
         
         .preview {
+            margin-top: 55px;
+
             .title {
                 .title-bar {
                     padding: 0.5em;
@@ -201,8 +212,8 @@
         }
 
         .footer-button {
-            position: absolute;
-            padding: 2em;
+            // position: absolute;
+            padding: 1em;
             bottom: 15;  
             text-align: center;
             width: 100%;

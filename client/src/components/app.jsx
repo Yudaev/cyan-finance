@@ -26,7 +26,7 @@ export const App = ({ isAuth, logout }) => {
   return (
     <Router>
       {isAuth && (
-        <header>
+        <header className='main-header'>
           <div className={headerClass}>
             <NavLink to='/statistics'><i className="pi pi-chart-bar"></i></NavLink>
             <NavLink to='/history'><i className="pi pi-clock"></i></NavLink>

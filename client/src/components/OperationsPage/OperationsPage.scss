@@ -8,10 +8,10 @@ $elemPadding: 1.5em 1em;
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1em;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: $elemPadding;
+    padding: .5em 1em;
+    height: calc(100vh - 102px);
 
         .header {
             display: flex;
@@ -51,9 +51,13 @@ $elemPadding: 1.5em 1em;
             }
         }
 
+        .body {
+            height: calc(100vh - 145px);
+            overflow-y: auto;
+        }
+
         .upBtnWrapper {
             position: fixed;
-            // bottom: 20px;
             right: -200px;
             z-index: 5;
         }

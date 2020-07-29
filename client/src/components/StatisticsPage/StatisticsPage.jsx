@@ -295,8 +295,7 @@ class StatisticsPage extends React.Component {
             return <Calendar
                         inputStyle={{
                             border: 'none',
-                            backgroundColor: '#ffffff',
-                            width: '150%'
+                            backgroundColor: '#ffffff'
                         }}
                         selectionMode='range'
                         placeholder='Выберите интервал...'
