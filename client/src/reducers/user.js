@@ -1,17 +1,6 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
-import {
-  requestAuth,
-  successAuth,
-  failureAuth,
-  requestReg,
-  successReg,
-  failureReg,
-  reset,
-  clearAuthError,
-  clearRegError,
-} from '../actions/user';
-
+import { requestAuth, successAuth, failureAuth, requestReg, successReg, failureReg, reset, clearAuthError, clearRegError } from '../actions/user';
 
 const initialState = {
   token: null,
@@ -21,61 +10,46 @@ const initialState = {
   regError: null,
 };
 
-export default handleActions({
-  [requestAuth]: (store, action) => {
-    return {
+export default handleActions(
+  {
+    [requestAuth]: (store, action) => ({
       ...store,
-    }
-  },
-  [successAuth]: (store, { payload: user }) => {
-    return {
+    }),
+    [successAuth]: (store, { payload: user }) => ({
       ...store,
       ...user,
       authError: null,
       regError: null,
-    }
-  },
-  [failureAuth]: (store, { payload }) => {
-    return {
+    }),
+    [failureAuth]: (store, { payload }) => ({
       ...store,
       authError: payload,
-    }
-  },
-  [requestReg]: (store, action) => {
-    return {
+    }),
+    [requestReg]: (store, action) => ({
       ...store,
-    }
-  },
-  [successReg]: (store, { payload: user }) => {
-    return {
+    }),
+    [successReg]: (store, { payload: user }) => ({
       ...store,
       ...user,
       authError: null,
       regError: null,
-    }
-  },
-  [failureReg]: (store, { payload }) => {
-    return {
+    }),
+    [failureReg]: (store, { payload }) => ({
       ...store,
       regError: payload,
-    }
-  },
-  [reset]: (store, { payload }) => {
-    return {
+    }),
+    [reset]: (store, { payload }) => ({
       ...store,
       ...initialState,
-    }
-  },
-  [clearAuthError]: (store) => {
-    return {
+    }),
+    [clearAuthError]: (store) => ({
       ...store,
       authError: null,
-    }
-  },
-  [clearRegError]: (store) => {
-    return {
+    }),
+    [clearRegError]: (store) => ({
       ...store,
       regError: null,
-    }
+    }),
   },
-}, initialState);
+  initialState,
+);

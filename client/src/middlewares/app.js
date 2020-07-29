@@ -1,16 +1,13 @@
-import {
-  init
-} from '../actions/app';
-import { logout, reset as resetUser, successAuth, successReg } from "../actions/user";
-import { loadOperations, clearOperationsData } from "../actions/operations";
-import { loadList as loadCategories, clearCategoriesData } from "../actions/categories";
+import { init } from '../actions/app';
+import { logout, reset as resetUser, successAuth, successReg } from '../actions/user';
+import { loadOperations, clearOperationsData } from '../actions/operations';
+import { loadList as loadCategories, clearCategoriesData } from '../actions/categories';
 
-
-export default store => next => async action => {
+export default (store) => (next) => async (action) => {
   next(action);
   const state = store.getState();
 
-  switch(action.type) {
+  switch (action.type) {
     case init.toString():
       store.dispatch(loadOperations({ pageSize: 0 }));
       store.dispatch(loadCategories());
@@ -28,4 +25,4 @@ export default store => next => async action => {
     default:
       break;
   }
-}
+};
