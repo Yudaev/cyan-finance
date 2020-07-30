@@ -4,15 +4,11 @@
 
 node_modules
 
-.DS_STORE
-
-.babelrc
+public
 
 package.json
 
 package-lock.json
-
-webpack.config.js
 
 prettier.config.js
 

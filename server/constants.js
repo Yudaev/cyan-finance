@@ -13,5 +13,5 @@ module.exports = {
     { title: 'Животные' },
     { title: 'Спорт' },
     { title: 'Транспорт' },
-  ]
+  ],
 };
