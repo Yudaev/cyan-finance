@@ -1,6 +1,6 @@
 import {handleActions} from 'redux-actions';
 
-import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate } from "../actions/operations";
+import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate, clearOperationsData } from "../actions/operations";
 
 
 const initialState = {
@@ -41,6 +41,12 @@ export default handleActions({
     return {
       ...store,
       date: payload.date
+    }
+  },
+  [clearOperationsData]: (store) => {
+    return {
+      ...store, 
+      ...initialState
     }
   }
 }, initialState);

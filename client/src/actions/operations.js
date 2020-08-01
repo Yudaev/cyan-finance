@@ -10,6 +10,7 @@ export const {
   successItem,
   failureItem,
   saveHistoryDate,
+  clearOperationsData,
 } = createActions({
   LOAD_OPERATIONS: options => options,
   REQUEST_OPERATIONS: () => ({}),
@@ -20,4 +21,5 @@ export const {
   SUCCESS_ITEM: item => item,
   FAILURE_ITEM: error => error,
   SAVE_HISTORY_DATE: date => ({ date }),
+  CLEAR_OPERATIONS_DATA: () => ({}),
 }, { prefix: 'operations' });

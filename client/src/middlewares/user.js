@@ -10,7 +10,6 @@ import {
   failureReg, clearAuthError, clearRegError,
 } from '../actions/user';
 
-
 export default store => next => async action => {
   next(action);
   const state = store.getState();

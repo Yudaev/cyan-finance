@@ -9,6 +9,7 @@ export const {
   requestItem,
   successItem,
   failureItem,
+  clearCategoriesData,
 } = createActions({
   LOAD_LIST: () => ({}),
   REQUEST_LIST: () => ({}),
@@ -18,4 +19,5 @@ export const {
   REQUEST_ITEM: () => ({}),
   SUCCESS_ITEM: item => item,
   FAILURE_ITEM: error => error,
+  CLEAR_CATEGORIES_DATA: () => ({}),
 }, { prefix: 'categories' });
