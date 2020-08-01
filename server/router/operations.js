@@ -9,15 +9,12 @@ const Operation = require('../models/operation');
 const Category = require('../models/category');
 
 router.use('/', async (req, res, next) => {
-  if (!req.headers.authorization) {
-    return res.status(403).json({ message: 'No token' });
-  } else {
+  if (!req.headers.authorization) return res.status(403).json({ message: 'No token' });
+  else {
     const [type, token] = req.headers.authorization.split(' ');
 
     jwt.verify(token, tokenSecret, (err, payload) => {
-      if (err) {
-        return res.status(403).json({ message: 'Wrong token' });
-      }
+      if (err) return res.status(403).json({ message: 'Wrong token' });
       req.user = payload;
       next();
     });
@@ -75,8 +72,10 @@ router.get('/', async (req, res) => {
   pageSize = parseInt(pageSize);
   let page = parseInt(req.query.page);
   const filterArray = req.query.filter
-    ? String(req.query.filter).split(',').map(item => item.trim())
-    : [] ;
+    ? String(req.query.filter)
+        .split(',')
+        .map((item) => item.trim())
+    : [];
 
   const filter = { user: req.user };
   if (filterArray.includes('repetitive')) {
@@ -84,11 +83,8 @@ router.get('/', async (req, res) => {
     pageSize = 0;
     page = 1;
   }
-  if (filterArray.includes('income')) {
-    filter.type = 'income';
-  } else if (filterArray.includes('expense')) {
-    filter.type = 'expense';
-  }
+  if (filterArray.includes('income')) filter.type = 'income';
+  else if (filterArray.includes('expense')) filter.type = 'expense';
 
   try {
     const operations = await Operation.find(
@@ -96,15 +92,14 @@ router.get('/', async (req, res) => {
       { user: 0 },
       {
         limit: pageSize,
-        skip: page > 0 ? pageSize * (page-1) : 0,
-      }
+        skip: page > 0 ? pageSize * (page - 1) : 0,
+      },
     ).lean();
     res.status(200).json(operations);
   } catch (error) {
     res.status(500).json(error);
   }
 });
-
 
 /**
  * @swagger
@@ -130,20 +125,12 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const { user, body } = req;
   const categoryReq = body.category || {};
-  const category = await Category.findOne({_id: categoryReq._id, user }) || null;
+  const category = (await Category.findOne({ _id: categoryReq._id, user })) || null;
 
   const operation = new Operation({
-    ...pick(body, [
-      'value',
-      'type',
-      'title',
-      'description',
-      'date',
-      'repetitive',
-      'repetitiveDay',
-    ]),
+    ...pick(body, ['value', 'type', 'title', 'description', 'date', 'repetitive', 'repetitiveDay']),
     category,
-    user
+    user,
   });
 
   try {
@@ -153,7 +140,6 @@ router.post('/', async (req, res) => {
     res.status(500).json(error);
   }
 });
-
 
 /**
  * @swagger
@@ -186,11 +172,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { user } = req;
   try {
-    const operation = await Operation.findOneAndUpdate(
-      { user, _id: req.params.id },
-      req.body,
-      { new: true }
-    ).lean();
+    const operation = await Operation.findOneAndUpdate({ user, _id: req.params.id }, req.body, { new: true }).lean();
 
     await res.json(omit(operation, 'user'));
   } catch (error) {
@@ -227,11 +209,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { user } = req;
   try {
-    const operation = await Operation.findOneAndUpdate(
-      { user, _id: req.params.id },
-      { deletedDate: Date.now() },
-      { new: true }
-    );
+    const operation = await Operation.findOneAndUpdate({ user, _id: req.params.id }, { deletedDate: Date.now() }, { new: true });
     res.status(200).json(omit(operation.toObject(), 'user'));
   } catch (error) {
     res.status(500).json(error);

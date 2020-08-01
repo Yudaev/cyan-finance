@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { Password } from "primereact/password";
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Password } from 'primereact/password';
 
-function FormRegistraion ({ onSubmit, error, clearError }) {
+function FormRegistraion({ onSubmit, error, clearError }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
@@ -25,53 +25,38 @@ function FormRegistraion ({ onSubmit, error, clearError }) {
         <div className="p-field">
           <div className="p-inputgroup">
             <span className="p-inputgroup-addon">
-                <i className="pi pi-user"></i>
+              <i className="pi pi-user" />
             </span>
-            <InputText
-              placeholder="Email"
-              name={email}
-              onChange={e=>setEmail(e.target.value)}
-              onFocus={e => clearError()}
-            />
+            <InputText placeholder="Email" name={email} onChange={(e) => setEmail(e.target.value)} onFocus={(e) => clearError()} />
           </div>
         </div>
 
         <div className="p-field">
           <div className="p-inputgroup">
             <span className="p-inputgroup-addon">
-                <i className="pi pi-lock"></i>
+              <i className="pi pi-lock" />
             </span>
-            <Password
-              placeholder="Password"
-              name={password}
-              onChange={e=>setPassword(e.target.value)}
-              onFocus={e => clearError()}
-            />
+            <Password placeholder="Password" name={password} onChange={(e) => setPassword(e.target.value)} onFocus={(e) => clearError()} />
           </div>
         </div>
 
         <div className="p-field">
           <div className="p-inputgroup">
             <span className="p-inputgroup-addon">
-                <i className="pi pi-lock"></i>
+              <i className="pi pi-lock" />
             </span>
             <Password
               placeholder="Repeat password"
               feedback={false}
               name={password2}
-              onChange={e=>setPassword2(e.target.value)}
-              onFocus={e => clearError()}
+              onChange={(e) => setPassword2(e.target.value)}
+              onFocus={() => clearError()}
             />
           </div>
         </div>
 
         <div className="p-field">
-          <Button
-            type="submit"
-            label={error ? error : 'Sign up'}
-            className={error && 'p-button-danger'}
-            disabled={buttonDisabled}
-          />
+          <Button type="submit" label={error || 'Sign up'} className={error && 'p-button-danger'} disabled={buttonDisabled} />
         </div>
       </div>
     </form>

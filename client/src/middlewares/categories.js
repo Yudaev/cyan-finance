@@ -1,21 +1,12 @@
-import {
-  loadList,
-  failureList,
-  requestList,
-  successList,
-  addItem,
-  failureItem,
-  requestItem,
-  successItem,
-} from "../actions/categories";
-import { getAxios } from "../services/axios-singleton";
-import { getToken } from "../selectors/user";
+import { loadList, failureList, requestList, successList, addItem, failureItem, requestItem, successItem } from '../actions/categories';
+import { getAxios } from '../services/axios-singleton';
+import { getToken } from '../selectors/user';
 
-export default store => next => async action => {
+export default (store) => (next) => async (action) => {
   next(action);
   const state = store.getState();
 
-  switch(action.type) {
+  switch (action.type) {
     case loadList.toString():
       store.dispatch(requestList());
       store.dispatch(await fetchList(state, action));
@@ -27,7 +18,7 @@ export default store => next => async action => {
     default:
       break;
   }
-}
+};
 
 export const fetchList = async (state, action) => {
   const token = getToken(state);
@@ -37,7 +28,7 @@ export const fetchList = async (state, action) => {
     const response = await axios.get('/categories');
     return {
       type: successList.toString(),
-      payload: response.data
+      payload: response.data,
     };
   } catch (error) {
     const { data } = error.response || {};
@@ -54,7 +45,7 @@ export const postItem = async (state, action) => {
     const response = await axios.post('/categories', action.payload);
     return {
       type: successItem.toString(),
-      payload: response.data
+      payload: response.data,
     };
   } catch (error) {
     const { data } = error.response || {};

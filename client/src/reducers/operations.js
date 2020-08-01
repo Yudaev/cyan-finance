@@ -1,7 +1,14 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
-import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate, clearOperationsData, saveHistoryType } from "../actions/operations";
-
+import {
+  failureItem,
+  failureOperations,
+  successItem,
+  successOperations,
+  saveHistoryDate,
+  clearOperationsData,
+  saveHistoryType,
+} from '../actions/operations';
 
 const initialState = {
   items: [],
@@ -11,49 +18,38 @@ const initialState = {
   itemError: '',
 };
 
-export default handleActions({
-  [successOperations]: (store, { payload: items }) => {
-    return {
+export default handleActions(
+  {
+    [successOperations]: (store, { payload: items }) => ({
       ...store,
       items,
       loadOperationsError: null,
-    }
-  },
-  [failureOperations]: (store, { payload }) => {
-    return {
+    }),
+    [failureOperations]: (store, { payload }) => ({
       ...store,
       loadOperationsError: payload,
-    }
-  },
-  [successItem]: (store, { payload }) => {
-    return {
+    }),
+    [successItem]: (store, { payload }) => ({
       ...store,
-      items: [ ...store.items, payload],
+      items: [...store.items, payload],
       itemError: null,
-    }
-  },
-  [failureItem]: (store, { payload }) => {
-    return {
+    }),
+    [failureItem]: (store, { payload }) => ({
       ...store,
       itemError: payload,
-    }
-  },
-  [saveHistoryDate]: (store, { payload }) => {
-    return {
+    }),
+    [saveHistoryDate]: (store, { payload }) => ({
       ...store,
-      date: payload.date
-    }
+      date: payload.date,
+    }),
+    [saveHistoryType]: (store, { payload }) => ({
+      ...store,
+      type: payload.type,
+    }),
+    [clearOperationsData]: (store) => ({
+      ...store,
+      ...initialState,
+    }),
   },
-  [saveHistoryType]: (store, { payload }) => {
-    return {
-      ...store, 
-      type: payload.type
-    }
-  },
-  [clearOperationsData]: (store) => {
-    return {
-      ...store, 
-      ...initialState
-    }
-  }
-}, initialState);
+  initialState,
+);

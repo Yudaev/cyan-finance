@@ -1,20 +1,11 @@
-import { getAxios } from "../services/axios-singleton";
-import {
-  auth,
-  requestAuth,
-  successAuth,
-  failureAuth,
-  reg,
-  requestReg,
-  successReg,
-  failureReg, clearAuthError, clearRegError,
-} from '../actions/user';
+import { getAxios } from '../services/axios-singleton';
+import { auth, requestAuth, successAuth, failureAuth, reg, requestReg, successReg, failureReg, clearAuthError, clearRegError } from '../actions/user';
 
-export default store => next => async action => {
+export default (store) => (next) => async (action) => {
   next(action);
   const state = store.getState();
 
-  switch(action.type) {
+  switch (action.type) {
     case auth.toString():
       store.dispatch(requestAuth());
       store.dispatch(clearAuthError());
@@ -28,7 +19,7 @@ export default store => next => async action => {
     default:
       break;
   }
-}
+};
 
 export const authorization = async (state, action) => {
   const { email, password } = action.payload;
@@ -40,7 +31,7 @@ export const authorization = async (state, action) => {
     });
     return {
       type: successAuth.toString(),
-      payload: response.data
+      payload: response.data,
     };
   } catch (error) {
     const { data } = error.response || {};
@@ -59,7 +50,7 @@ export const registration = async (state, action) => {
     });
     return {
       type: successReg.toString(),
-      payload: response.data
+      payload: response.data,
     };
   } catch (error) {
     const { data } = error.response || {};

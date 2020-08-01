@@ -1,8 +1,8 @@
-import {createActions} from 'redux-actions';
+import { createActions } from 'redux-actions';
 
-export const {
-  init,
-} = createActions({
-  INIT: data => data
-}, { prefix: 'app' });
-
+export const { init } = createActions(
+  {
+    INIT: (data) => data,
+  },
+  { prefix: 'app' },
+);

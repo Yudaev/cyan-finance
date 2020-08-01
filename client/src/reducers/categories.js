@@ -1,6 +1,6 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
-import { failureItem, failureList, successItem, successList, clearCategoriesData } from "../actions/categories";
+import { failureItem, failureList, successItem, successList, clearCategoriesData } from '../actions/categories';
 
 const initialState = {
   items: [],
@@ -8,37 +8,30 @@ const initialState = {
   itemError: '',
 };
 
-export default handleActions({
-  [successList]: (store, { payload: items }) => {
-    return {
+export default handleActions(
+  {
+    [successList]: (store, { payload: items }) => ({
       ...store,
       items,
       listError: null,
-    }
-  },
-  [failureList]: (store, { payload }) => {
-    return {
+    }),
+    [failureList]: (store, { payload }) => ({
       ...store,
       listError: payload,
-    }
-  },
-  [successItem]: (store, { payload }) => {
-    return {
+    }),
+    [successItem]: (store, { payload }) => ({
       ...store,
-      items: [ ...store.items, payload],
+      items: [...store.items, payload],
       itemError: null,
-    }
-  },
-  [failureItem]: (store, { payload }) => {
-    return {
+    }),
+    [failureItem]: (store, { payload }) => ({
       ...store,
       itemError: payload,
-    }
-  },
-  [clearCategoriesData]: (store) => {
-    return {
+    }),
+    [clearCategoriesData]: (store) => ({
       ...store,
-      ...initialState
-    }
-  }
-}, initialState);
+      ...initialState,
+    }),
+  },
+  initialState,
+);

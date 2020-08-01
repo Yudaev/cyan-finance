@@ -1,60 +1,60 @@
 $elemPadding: 1.5em 1em;
 
 * {
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    font-size: 1em;
-    min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1em;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: $elemPadding;
+
+  .header {
     display: flex;
-    flex-direction: column;
-    padding: $elemPadding;
+    justify-content: space-between;
+    align-content: flex-start;
+    margin-bottom: 20px;
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-content: flex-start;
-            margin-bottom: 20px;
+    .incomeWrapper,
+    .expensesWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
 
-            .incomeWrapper,
-            .expensesWrapper {
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                align-items: center;
+      .mark {
+        color: #888;
+        font-size: 0.8em;
+      }
+    }
 
-                .mark {
-                    color: #888;
-                    font-size: .8em;
-                }
-            }
+    .monthPicker {
+      min-width: 100px;
+      border: none;
+      text-align: center;
 
-            .monthPicker {
-                min-width: 100px;
-                border: none;
-                text-align: center;
-
-                :global {
-                    .p-inputtext {
-                        font-weight: 600;
-                        text-align: center;
-                        border: none;
-                    }
-
-                    .pi-chevron-down {
-                        font-size: .8em;
-                    }
-                } 
-            }
+      :global {
+        .p-inputtext {
+          font-weight: 600;
+          text-align: center;
+          border: none;
         }
 
-        .upBtnWrapper {
-            position: fixed;
-            // bottom: 20px;
-            right: -200px;
-            z-index: 5;
+        .pi-chevron-down {
+          font-size: 0.8em;
         }
-     }
+      }
+    }
+  }
+
+  .upBtnWrapper {
+    position: fixed;
+    // bottom: 20px;
+    right: -200px;
+    z-index: 5;
+  }
+}

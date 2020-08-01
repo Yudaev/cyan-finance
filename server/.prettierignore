@@ -1,0 +1,11 @@
+node_modules
+
+package.json
+
+package-lock.json
+
+.gitignore
+
+public/
+
+prettier.config.js
