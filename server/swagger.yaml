@@ -1,4 +1,6 @@
 tags:
+  - name: user
+    description: Работа с пользователем
   - name: operations
     description: Работа с операциями
   - name: categories
@@ -13,6 +15,26 @@ components:
     }
   }
   schemas:
+    User:
+      type: object
+      title: User
+      required:
+        - email
+        - password
+      exapmle:
+        _id: '123'
+        email: 'email@email.ru'
+        password: 'password'
+      properties:
+        _id:
+          description: 'id пользователя, генерируется автоматически'
+          type: string
+        email:
+          type: string
+          description: 'Email пользователя'
+        token:
+          type: string
+          description: 'Токен пользователя'
     Operation:
       type: object
       title: Operation
@@ -97,6 +119,35 @@ components:
           format: date-time
           description: 'Дата создания категории'
   requestBodies:
+    User:
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+    UserReg:
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - email
+              - password
+              - password2
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+              password2:
+                type: string
     Operation:
       required: true
       content:
