@@ -1,220 +1,41 @@
-import React, { Component } from 'react'
-import classnames from 'classnames/bind'
+import React from 'react';
+import classnames from 'classnames/bind';
 
-import styles from './StatisticsPage.scss'
+import styles from './StatisticsPage.scss';
 
-import { ProgressBar } from 'primereact/progressbar'
-import { Calendar } from 'primereact/calendar'
-import { Chart } from 'primereact/chart'
-import { Button } from 'primereact/button'
-import { Dropdown } from 'primereact/dropdown'
+import StatisticsPageProgressBars from './StatisticsPageProgressBars/StatisticsPageProgressBars';
+
+import { ProgressBar } from 'primereact/progressbar';
+import { Calendar } from 'primereact/calendar';
+import { Chart } from 'primereact/chart';
+import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
 import dayjs from 'dayjs';
 
+const cx = classnames.bind(styles);
 
-const cx = classnames.bind(styles)
-
-export default class StatisticsPage extends Component {
-        state = {
-            calendarValue: null,
-            date: new Date(),
-            minDate: null,
-            maxDate: null,
-            intervalArray: [
-                {label: 'День', value: 'день'},   
-                {label: 'Месяц', value: 'месяц'},
-                {label: 'Год', value: 'год'},
-                {label: 'Все время', value: 'все время'},
-                {label: 'Интервал', value: 'интервал'},
-            ],
-            categories: [
-                {
-                    name: 'Расход',
-                    value: function() {
-                        let sum = 0
-                            for (let i = 0; i < this.list.length; i++) {
-                                sum += this.list[i].value()
-                            }
-                        return sum 
-                    },
-                    list: [
-                    {
-                        index: Date.now(),
-                        title: 'Авто',
-                        value: function() {
-                            let sum = 0;
-                                for (let i = 0; i < this.transactions.length; i++) {
-                                    sum += this.transactions[i].value
-                                }
-                            return sum
-                        },
-                        transactions: [
-                            {
-                                date: null,
-                                value: 33333
-                            },
-                            {
-                                date: null,
-                                value: 567
-                            },
-                        ]
-                    },
-                    {
-                        index: Date.now(),
-                        title: 'Кредит',
-                        value: function() {
-                            let sum = 0;
-                                for (let i = 0; i < this.transactions.length; i++) {
-                                    sum += this.transactions[i].value
-                                }
-                            return sum
-                        },
-                        transactions: [
-                            {
-                                date: null,
-                                value: 86786
-                            },
-                            {
-                                date: null,
-                                value: 23435
-                            },
-                        ]
-                    },
-                    {
-                        index: Date.now(),
-                        title: 'Развлечения',
-                        value: function() {
-                            let sum = 0;
-                                for (let i = 0; i < this.transactions.length; i++) {
-                                    sum += this.transactions[i].value
-                                }
-                            return sum
-                        },
-                        transactions: [
-                            {
-                               date: null,
-                               value: 23133
-                            },
-                            {
-                                date: null,
-                                value: 23333
-                            },
-                            ]
-                        }
-                    ],
-                },
-                {
-                    name: 'Доход',
-                    value: function () {
-                        let sum = 0
-                            for (let i = 0; i < this.list.length; i++) {
-                                sum += this.list[i].value()
-                            }
-                        return sum 
-                    },
-                    list: [                         
-                        {
-                            index: Date.now(),
-                            title: 'ЖКХ',
-                            value: function() {
-                                let sum = 0;
-                                    for (let i = 0; i < this.transactions.length; i++) {
-                                        sum += this.transactions[i].value
-                                    }
-                                return sum
-                            },
-                            transactions: [
-                                {
-                                    date: null,
-                                    value: 23333
-                                },
-                                {
-                                    date: null,
-                                    value: 23333
-                                },
-                            ]
-                        },
-                        {
-                            index: Date.now(),
-                            title: 'Аренда',
-                            value: function() {
-                                let sum = 0;
-                                    for (let i = 0; i < this.transactions.length; i++) {
-                                        sum += this.transactions[i].value
-                                    }
-                                return sum
-                            },
-                            transactions: [
-                                {
-                                    date: null,
-                                    value: 23333
-                                },
-                                {
-                                    date: null,
-                                    value: 23333
-                                },
-                            ]
-                        },
-                        {
-                            index: Date.now(),
-                            title: 'Работа',
-                            value: function() {
-                                let sum = 0;
-                                    for (let i = 0; i < this.transactions.length; i++) {
-                                        sum += this.transactions[i].value
-                                    }
-                                return sum
-                            },
-                            transactions: [
-                                {
-                                    date: null,
-                                    value: 2312
-                                },
-                                {
-                                    date: null,
-                                    value: 3456
-                                },
-                            ]
-                        },
-                    ],
-                },
-            ],    
-        
-            rest: {
-                name: 'Остаток',
-                value: function(b, d) {
-                    return b - d
-                }
-            },
-        }
-
-    getLabels = () => {
-        let labelsArr = Object.keys(this.state.categories[0]?.list).map(
-            key => {
-                return this.state.categories[0]?.list[key].title
-            }
-        )
-        return labelsArr
+export default class StatisticsPage extends React.Component {
+    state = {
+        date: new Date(),
+        intervalArray: [
+            {label: 'День', value: 'день'},   
+            {label: 'Месяц', value: 'месяц'},
+            {label: 'Год', value: 'год'},
+            {label: 'Все время', value: 'все время'},
+            {label: 'Интервал', value: 'интервал'},
+        ],
     }
 
     makeChart = () => {
         let data = {
-            labels: this.getLabels(),
+            labels: this.createGroups().map(item => { return item.label }),
             datasets: [{
-              data: this.getDataForChart(),
+              data: this.createGroups().map(({children}) => this.categoriesValues(children)),
               backgroundColor: [ '#FF6384', '#36A2EB', '#FFCE56', '#C14242', '#7FBF3F' ],
               incBackgroundColor: [ '#3FBFBF', '#7A0DE7', '#E70DE7', '#864707', '#7247bc' ]
             }]
         }
-        return data
-    }
-
-    getDataForChart = () => {
-        let data = Object.keys(this.state.categories[0]?.list).map(
-            key => {
-                return this.state.categories[0].list[key].value()
-            }
-        )
-        return data
+        return data;
     }
 
     switchCalendars = () => {
@@ -300,8 +121,6 @@ export default class StatisticsPage extends Component {
                         className={cx('interval')}
                         selectionMode='range'
                         placeholder='Выберите интервал...'
-                        minDate={this.state.minDate}
-                        maxDate={this.state.maxDate}
                         locale={calendarSettings}
                         dateFormat='d M y'
                         readOnlyInput
@@ -311,67 +130,32 @@ export default class StatisticsPage extends Component {
         }
     }
 
+    categoriesValues = (item) => {
+        let values = 0;
+        Object.values(item).map(item => values += item.value);
+        return values;
+    }
+
+    createGroups = () => {
+        const { categories, operations } = this.props;
+        const groups = new Map();
+        Object.values(categories).forEach(category => {
+            const operationsId = [];
+            const otherId = [];
+            Object.values(operations).filter(item => { 
+                if (item.category !== null && item.category == category._id) operationsId.push(item);
+                if (item.category == null) otherId.push(item);  
+            });
+            groups.set(category.title, [...operationsId]).set('Прочее', otherId);
+        });
+
+        const groupsArray = [];
+        groups.forEach((children, label) => groupsArray.push({ children, label }));
+        return groupsArray;
+    }
+
     render() {
-
         const { stats, onChangeType, type } = this.props;
-
-        // Вытащить прогрессбары в отдельный компонент
-        // Связать компонент прогрессбаров с Tree
-
-        let incomeColorClasses = ['cyan', 'lilac', 'pink', 'brown', 'violet']
-        let spendColorClasses = ['pinkRed', 'blue', 'yellow', 'red', 'yellowGreen']
-
-        let spendBars = []
-        Object.keys(this.state.categories[0]?.list).forEach(            
-            key => {
-                spendBars.push(
-                    <div key={key} className={cx('progress-bar')}>
-                        <div className={cx('pb-title')}>
-                            <p>{this.state.categories[0]?.list[key].title}</p>
-                        </div>
-                        <div className={cx('pb-bar')}>
-                            <ProgressBar
-                                id={`${key}`}
-                                value={ this.state.categories[0]?.list[key].value() / this.state.categories[1].value() * 100 }
-                                unit=' р.'
-                                mode='determinate'
-                                className={cx('bar', spendColorClasses[key])}
-                                showValue={false}
-                            />
-                        </div>
-                        <div className={cx('pb-value', 'spend')}>
-                            <p>{this.state.categories[0]?.list[key].value()}&nbsp;р.</p>
-                        </div>
-                    </div>
-                )
-            }
-        )
-
-        let incomeBars = []
-        Object.keys(this.state.categories[1]?.list).forEach(            
-            key => {
-                incomeBars.push(
-                    <div key={key} className={cx('progress-bar')}>
-                        <div className={cx('pb-title')}>
-                            <p>{this.state.categories[1]?.list[key].title}</p>
-                        </div>
-                        <div className={cx('pb-bar')}>
-                            <ProgressBar
-                                id={`${key}`}
-                                value={ this.state.categories[1]?.list[key].value() / this.state.categories[1].value() * 100 }
-                                unit=' р.'
-                                mode='determinate'
-                                className={cx('bar', incomeColorClasses[key])}
-                                showValue={false}
-                            />
-                        </div>
-                        <div className={cx('pb-value', 'income')}>
-                            <p>{this.state.categories[1]?.list[key].value()}&nbsp;р.</p>
-                        </div>
-                    </div>
-                )
-            }
-        )
 
         return(
                 <div className={cx('body')}>
@@ -396,18 +180,18 @@ export default class StatisticsPage extends Component {
                                         <span>Баланс</span>
                                     </div>
                                         <ProgressBar
-                                            value={this.state.rest.value(stats.income, stats.expense)}
+                                            value={stats.income - stats.expense}
                                             className={cx('ttl-bar')}
                                             showValue={false}
                                         />
                                     <div className={cx('value')}>
-                                        <span>{this.state.rest.value(stats.income, stats.expense)} p.</span>
+                                        <span>{stats.income - stats.expense} p.</span>
                                     </div>
                                 </div>
 
                                 <div className={cx('title-bar')}>
                                     <div className={cx('label')}> 
-                                        <span>{this.state.categories[1].name}</span>
+                                        <span>Доход</span>
                                     </div>
                                         <ProgressBar
                                             value={stats.income}
@@ -421,7 +205,7 @@ export default class StatisticsPage extends Component {
 
                                 <div className={cx('title-bar')}>
                                     <div className={cx('label')}>
-                                        <span>{this.state.categories[0].name}</span>
+                                        <span>Расход</span>
                                     </div>
                                         <ProgressBar
                                             value={stats.expense}
@@ -437,8 +221,16 @@ export default class StatisticsPage extends Component {
                     <div className={cx('chart')}>
                         <Chart type='doughnut' data={this.makeChart()}/>
                     </div>
-                        {incomeBars}
-                        {spendBars}
+                    {this.createGroups().map(({ children, label }, key) => (
+                        <StatisticsPageProgressBars
+                            income={stats.income}
+                            num={key}
+                            key={key}
+                            label={label}
+                            children={children}
+                            value={this.categoriesValues(children)}
+                        />
+                    ))}
                     <div className={cx('footer-button')}>
                         <Button label='Выгрузить статистику' className='p-button-raised p-button-secondary' />
                     </div>

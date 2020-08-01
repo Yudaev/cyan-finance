@@ -1,5 +1,5 @@
     .body {
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
 
@@ -116,109 +116,10 @@
             margin: 1.75em 0em;
         }
 
-        .progress-bar {
-            display: flex;
-            padding: 0.5em;
-            align-items: baseline;
-            text-align: center;
-
-            .pb-title {
-                width: 20%;
-                text-align: left;
-            }
-
-            .pb-title > p {
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .pb-bar {
-                width: 58%;
-
-                .bar {
-                    height: 9;
-                    border-radius: 1em;
-                }
-            }
-
-            .cyan {
-                :global .p-progressbar-value {
-                    background-color: #3FBFBF;
-                }
-            }
-
-            .lilac {
-                :global .p-progressbar-value {
-                    background-color: #7A0DE7;
-                }
-            }
-
-            .pink {
-                :global .p-progressbar-value {
-                    background-color: #E70DE7;
-                }
-            }
-
-            .brown {
-                :global .p-progressbar-value {
-                    background-color: #864707;
-                }
-            }
-            
-            .violet {
-                :global .p-progressbar-value {
-                    background-color: #7247bc;
-                }
-            }
-
-            .pinkRed {
-                :global .p-progressbar-value {
-                    background-color: #FF6384;
-                }
-            }
-
-            .blue {
-                :global .p-progressbar-value {
-                    background-color: #36A2EB;
-                }
-            }
-
-            .yellow {
-                :global .p-progressbar-value {
-                    background-color: #FFCE56;
-                }
-            }
-
-            .red {
-                :global .p-progressbar-value {
-                    background-color: #C14242;
-                }
-            }
-
-            .yellowGreen {
-                :global .p-progressbar-value {
-                    background-color: #7FBF3F;
-                }
-            }
-
-            .pb-value {
-                padding-left: 0.35em;
-                text-align: right;
-                width: 22%;
-            }
-
-            .pb-value > p {
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .spend {
-                color: #e91224; 
-            }
-
-            .income {
-                color: #34A835;
-            }
+        .tree {
+            width: 100%;
+            padding: 0.5em 0em;
+            border: none;
         }
 
         .footer-button {

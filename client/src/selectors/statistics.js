@@ -2,16 +2,14 @@ import { createSelector } from 'reselect'
 import propOr from 'lodash/fp/propOr';
 import dayjs from 'dayjs';
 import dayjsRU from 'dayjs/locale/ru';
+import { uniqWith, isEqual } from 'lodash/fp';
 
-const _ = require('lodash');
 const isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
 
 dayjs.locale(dayjsRU);
 
 const selectOperations = state => state.operations || {};
-const selectDate = state => state.operations || {};
-const selectType = state => state.operations || {};
 
 export const getOperations = createSelector(
   selectOperations,
@@ -19,12 +17,12 @@ export const getOperations = createSelector(
 );
 
 export const getDate = createSelector(
-  selectDate,
+  selectOperations,
   propOr({}, 'date')
 );
 
 export const getTypeSwitch = createSelector(
-  selectType,
+  selectOperations,
   propOr({}, 'type')
 );
 
@@ -46,7 +44,7 @@ export const getCurrentDatesObject = createSelector(
   getDate,
   date => {
     const currentDates = {
-      day: dayjs(date).day(),
+      day: dayjs(date).date(),
       month: dayjs(date).month(),
       year: dayjs(date).year()
     };
@@ -63,7 +61,7 @@ export const getValuesByType = createSelector(
     };
     items.forEach(item => {
       const itemDates = {
-        day: dayjs(item.date).day(),
+        day: dayjs(item.date).date(),
         month: dayjs(item.date).month(),
         year: dayjs(item.date).year()
       }
@@ -105,6 +103,7 @@ export const getValuesByType = createSelector(
     return stats;
   }
 );
+
 
 
 
