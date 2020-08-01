@@ -43,22 +43,28 @@ export const getDate = createSelector(
 export const getMonth = createSelector(
   getDate,
   date => { 
-    const currentMonth = dayjs(date).month();
-    return currentMonth;
+    const currentDatesObject = {
+      month: dayjs(date).month(),
+      year: dayjs(date).year(),
+    }
+    return currentDatesObject;
   },
 );
 
 export const getValuesByMonth = createSelector(
   [getMonth, getOperationList],
-  (currentMonth, items) => {
+  (currentDatesObject, items) => {
     const stats = {
       income: 0,
       expense: 0,
     };
     items.forEach(item => {
-      const itemMonth = dayjs(item.date).month(); 
-      if (item.type === 'income' && itemMonth == currentMonth) stats.income += Number(item.value);
-      if (item.type === 'expense' && itemMonth == currentMonth) stats.expense += Number(item.value);
+      const itemDatesObject = {
+        month: dayjs(item.date).month(),
+        year: dayjs(item.date).year()
+      }
+      if (item.type === 'income' && JSON.stringify(currentDatesObject) === JSON.stringify(itemDatesObject)) stats.income += Number(item.value);
+      if (item.type === 'expense' && JSON.stringify(currentDatesObject) === JSON.stringify(itemDatesObject)) stats.expense += Number(item.value);
     });
     return stats;
   }

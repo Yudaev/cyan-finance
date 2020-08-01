@@ -1,8 +1,0 @@
-{
-  "port": 8000,
-  "mongoHost": "localhost",
-  "mongoPort": 27017,
-  "mongoDB": "cyan",
-  "tokenSecret": "SecretPhrase",
-  "saltRounds": 5
-}

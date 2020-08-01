@@ -12,7 +12,7 @@ import ProfilePage from "../connectors/ProfilePage";
 import SettingsPage from "./SettingsPage/SettingsPage";
 import PageIncExp from "../connectors/PageIncExp";
 import OperationsPage from "../connectors/OperationsPage";
-import StatisticsPage from "./StatisticsPage/StatisticsPage";
+import StatisticsPage from "../connectors/StatisticsPage";
 
 const cx = classnames.bind(styles);
 

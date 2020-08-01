@@ -16,6 +16,7 @@
                     }
 
                     .calendar {
+                        font-size: 12px;
                         text-align: right;
                         float: right;
                         padding-right: 1.8em;
@@ -25,12 +26,18 @@
                             .p-inputtext {
                                 box-shadow: none;
                             }
+
+                            .p-datepicker {
+                                right: -19px;
+                                left: -190px !important;
+                            }
     
                             .p-datepicker-year {
                                 padding: 0em 0.5em;
                             }
 
                             .year {
+                               font-size: 12px;
                                border: none;
                                box-shadow: none;
                                padding: 0em 4em;
@@ -69,17 +76,18 @@
                 .title-bar {
                     padding: 0.5em;
                     display: flex;
-                    align-items: center;
+                    align-items: baseline;
                     text-align: center;
 
                     .label {
-                        width: 25%
+                        text-align: left;
+                        width: 22%
                     }
 
                     .ttl-bar {
                         text-align: center;
                         float: right;
-                        width: 60%;
+                        width: 56%;
                         height: 9;
                         border-radius: 1em;
                     }
@@ -97,7 +105,8 @@
                     }
 
                     .value {
-                        width: 20%
+                        text-align: right;
+                        width: 22%
                     }
                 }
             }
@@ -110,16 +119,21 @@
         .progress-bar {
             display: flex;
             padding: 0.5em;
-            align-items: center;
+            align-items: baseline;
             text-align: center;
 
             .pb-title {
-                width: 25%;
+                width: 20%;
+                text-align: left;
+            }
+
+            .pb-title > p {
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .pb-bar {
-                padding-left: 0.5em;
-                width: 60%;
+                width: 58%;
 
                 .bar {
                     height: 9;
@@ -188,7 +202,14 @@
             }
 
             .pb-value {
-                width: 20%;
+                padding-left: 0.35em;
+                text-align: right;
+                width: 22%;
+            }
+
+            .pb-value > p {
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .spend {
@@ -201,9 +222,7 @@
         }
 
         .footer-button {
-            position: absolute;
-            padding: 2em;
-            bottom: 15;  
+            padding: 2em; 
             text-align: center;
             width: 100%;
         }
