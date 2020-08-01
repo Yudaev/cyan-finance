@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 
-function FormAuth({ onSubmit, error, clearError }) {
+function FormAuth ({ onSubmit, error, clearError }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -23,29 +23,39 @@ function FormAuth({ onSubmit, error, clearError }) {
         <div className="p-field">
           <div className="p-inputgroup">
             <span className="p-inputgroup-addon">
-              <i className="pi pi-user" />
+                <i className="pi pi-user"></i>
             </span>
-            <InputText placeholder="Email" name={email} onChange={(e) => setEmail(e.target.value)} onFocus={(e) => clearError()} />
+            <InputText
+              placeholder="Email"
+              name={email}
+              onChange={e=>setEmail(e.target.value)}
+              onFocus={e => clearError()}
+            />
           </div>
         </div>
 
         <div className="p-field">
           <div className="p-inputgroup">
             <span className="p-inputgroup-addon">
-              <i className="pi pi-lock" />
+                <i className="pi pi-lock"></i>
             </span>
             <InputText
               placeholder="Password"
               name={password}
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              onFocus={(e) => clearError()}
+              type='password'
+              onChange={e=>setPassword(e.target.value)}
+              onFocus={e => clearError()}
             />
           </div>
         </div>
 
         <div className="p-field">
-          <Button type="submit" label={error || 'Log in'} className={error && 'p-button-danger'} disabled={buttonDisabled} />
+          <Button
+            type="submit"
+            label={error ? error : 'Log in'}
+            className={error && 'p-button-danger'}
+            disabled={buttonDisabled}
+          />
         </div>
       </div>
     </form>

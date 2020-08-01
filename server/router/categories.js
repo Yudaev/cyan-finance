@@ -8,13 +8,15 @@ const { tokenSecret } = require('../config');
 const Category = require('../models/category');
 
 router.use('/', async (req, res, next) => {
-  if (!req.headers.authorization) return res.status(403).json({ message: 'No token' });
-  else {
+  if (!req.headers.authorization) {
+    return res.status(403).json({ message: 'No token' });
+  } else {
     const [type, token] = req.headers.authorization.split(' ');
 
     jwt.verify(token, tokenSecret, (err, payload) => {
-      if (err) return res.status(403).json({ message: 'Wrong token' });
-
+      if (err) {
+        return res.status(403).json({ message: 'Wrong token' });
+      }
       req.user = payload;
       next();
     });
@@ -50,12 +52,16 @@ router.get('/', async (req, res) => {
     deletedDate: '',
   };
   try {
-    const items = await Category.find(filter, { user: 0 }).lean();
+    const items = await Category.find(
+      filter,
+      { user: 0 },
+    ).lean();
     res.status(200).json(items);
   } catch (error) {
     res.status(500).json(error);
   }
 });
+
 
 /**
  * @swagger
@@ -80,7 +86,7 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   const { user, body } = req;
-  const title = (body.title && body.title.trim()) || null;
+  const title = body.title && body.title.trim() || null;
   const item = new Category({ title, user });
 
   try {
@@ -90,6 +96,7 @@ router.post('/', async (req, res) => {
     res.status(500).json(error);
   }
 });
+
 
 /**
  * @swagger
@@ -122,7 +129,11 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { user, body } = req;
   try {
-    const item = await Category.findOneAndUpdate({ user, _id: req.params.id }, pick(body, 'title'), { new: true }).lean();
+    const item = await Category.findOneAndUpdate(
+      { user, _id: req.params.id },
+      pick(body, 'title'),
+      { new: true }
+    ).lean();
 
     await res.json(omit(item, 'user'));
   } catch (error) {
@@ -159,7 +170,11 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { user } = req;
   try {
-    const item = await Category.findOneAndUpdate({ user, _id: req.params.id }, { deletedDate: Date.now() }, { new: true });
+    const item = await Category.findOneAndUpdate(
+      { user, _id: req.params.id },
+      { deletedDate: Date.now() },
+      { new: true }
+    );
     res.status(200).json(omit(item.toObject(), 'user'));
   } catch (error) {
     res.status(500).json(error);

@@ -1,24 +1,29 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.js')],
+  entry: [
+    '@babel/polyfill',
+    path.resolve(__dirname, "src", "index.js"),
+  ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'babel-loader'
       },
       {
         test: /\.(sa|sc)ss$/,
         use: [
-          process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          process.env.NODE_ENV === 'production'
+            ? MiniCssExtractPlugin.loader
+            : 'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -34,7 +39,9 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          process.env.NODE_ENV === 'production'
+            ? MiniCssExtractPlugin.loader
+            : 'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -45,25 +52,29 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader'],
+        use: [
+          'file-loader',
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader'],
+        use: [
+          'file-loader',
+        ],
       },
-    ],
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html'),
+      template: path.resolve(__dirname, "public", "index.html")
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
-    }),
+    })
   ],
   devtool: 'inline-source-map',
   devServer: {
@@ -76,7 +87,7 @@ module.exports = {
         pathRewrite: { '/api/': '' },
         secure: false,
         changeOrigin: true,
-      },
-    },
-  },
+      }
+    }
+  }
 };

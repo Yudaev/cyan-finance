@@ -1,126 +1,132 @@
-.body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  .control-panel {
-    margin: 1em 0em;
-    .controls {
-      margin-left: 0.5em;
-      height: 2.5em;
-
-      .dropdown {
-        border: none;
-        box-shadow: none;
-      }
-
-      .calendar {
-        font-size: 12px;
-        text-align: right;
-        float: right;
-        padding-right: 1.8em;
-
-        :global {
-          .p-inputtext {
-            box-shadow: none;
-          }
-
-          .p-datepicker {
-            right: -19px;
-            left: -190px !important;
-          }
-
-          .p-datepicker-year {
-            padding: 0em 0.5em;
-          }
-
-          .year {
-            font-size: 12px;
-            border: none;
-            box-shadow: none;
-            padding: 0em 4em;
-
-            :global .p-dropdown-trigger {
-              display: none;
-            }
-          }
-        }
-      }
-
-      &:hover {
-        border: none;
-      }
-
-      .control-button-spend,
-      .control-button-income {
-        border: none;
-        background: #ffffff;
-        opacity: 0.5;
-
-        &:hover {
-          cursor: pointer;
-          font-weight: 700;
-          opacity: 1;
-          border-bottom: 2px solid black;
-        }
-      }
-    }
-  }
-
-  .preview {
-    .title {
-      .title-bar {
-        padding: 0.5em;
+    .body {
+        min-height: 100vh;
         display: flex;
-        align-items: baseline;
-        text-align: center;
+        flex-direction: column;
 
-        .label {
-          text-align: left;
-          width: 22%;
+        .control-panel {
+            margin: 1em 0em;
+                .controls {
+                    margin-left: 0.5em;
+                    height: 2.5em;
+                    
+
+                    .dropdown {
+                        border: none;
+                        box-shadow: none;
+                    }
+
+                    .calendar {
+                        font-size: 12px;
+                        text-align: right;
+                        float: right;
+                        padding-right: 1.8em;
+                        
+                        :global {
+
+                            .p-inputtext {
+                                box-shadow: none;
+                            }
+
+                            .p-datepicker {
+                                right: -19px;
+                                left: -190px !important;
+                            }
+    
+                            .p-datepicker-year {
+                                padding: 0em 0.5em;
+                            }
+
+                            .year {
+                               font-size: 12px;
+                               border: none;
+                               box-shadow: none;
+                               padding: 0em 4em;
+
+                               :global .p-dropdown-trigger {
+                                   display: none;
+                               }
+                            }
+
+                        }
+                       
+                    }
+
+                    &:hover {
+                        border: none;
+                    }
+    
+                    .control-button-spend,
+                    .control-button-income {
+                        border: none;
+                        background: #ffffff;
+                        opacity: 0.5;
+
+                        &:hover {
+                            cursor: pointer;
+                            font-weight: 700;
+                            opacity: 1;
+                            border-bottom: 2px solid black;
+                        }
+                    }
+                }
+            }
+        
+        .preview {
+            .title {
+                .title-bar {
+                    padding: 0.5em;
+                    display: flex;
+                    align-items: baseline;
+                    text-align: center;
+
+                    .label {
+                        text-align: left;
+                        width: 22%
+                    }
+
+                    .ttl-bar {
+                        text-align: center;
+                        float: right;
+                        width: 56%;
+                        height: 9;
+                        border-radius: 1em;
+                    }
+
+                    .incomes {
+                        :global .p-progressbar-value {
+                            background-color: #34A835;
+                        }
+                    }
+
+                    .expense {
+                        :global .p-progressbar-value {
+                            background-color: #e91224;
+                        }
+                    }
+
+                    .value {
+                        text-align: right;
+                        width: 22%
+                    }
+                }
+            }
         }
 
-        .ttl-bar {
-          text-align: center;
-          float: right;
-          width: 56%;
-          height: 9;
-          border-radius: 1em;
+        .chart {
+            margin: 1.75em 0em;
         }
 
-        .incomes {
-          :global .p-progressbar-value {
-            background-color: #34a835;
-          }
+        .tree {
+            width: 100%;
+            padding: 0.5em 0em;
+            border: none;
         }
 
-        .expense {
-          :global .p-progressbar-value {
-            background-color: #e91224;
-          }
+        .footer-button {
+            padding: 2em; 
+            text-align: center;
+            width: 100%;
         }
-
-        .value {
-          text-align: right;
-          width: 22%;
-        }
-      }
     }
-  }
 
-  .chart {
-    margin: 1.75em 0em;
-  }
-
-  .tree {
-    width: 100%;
-    padding: 0.5em 0em;
-    border: none;
-  }
-
-  .footer-button {
-    padding: 2em;
-    text-align: center;
-    width: 100%;
-  }
-}
+    

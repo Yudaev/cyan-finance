@@ -1,4 +1,4 @@
-import { createActions } from 'redux-actions';
+import {createActions} from 'redux-actions';
 
 export const {
   loadOperations,
@@ -12,19 +12,16 @@ export const {
   saveHistoryDate,
   saveHistoryType,
   clearOperationsData,
-} = createActions(
-  {
-    LOAD_OPERATIONS: (options) => options,
-    REQUEST_OPERATIONS: () => ({}),
-    SUCCESS_OPERATIONS: (items) => ({ items }),
-    FAILURE_OPERATIONS: (error) => error,
-    ADD_ITEM: (item) => item,
-    REQUEST_ITEM: () => ({}),
-    SUCCESS_ITEM: (item) => item,
-    FAILURE_ITEM: (error) => error,
-    SAVE_HISTORY_DATE: (date) => ({ date }),
-    SAVE_HISTORY_TYPE: (type) => ({ type }),
-    CLEAR_OPERATIONS_DATA: () => ({}),
-  },
-  { prefix: 'operations' },
-);
+} = createActions({
+  LOAD_OPERATIONS: options => options,
+  REQUEST_OPERATIONS: () => ({}),
+  SUCCESS_OPERATIONS: items => ({items}),
+  FAILURE_OPERATIONS: error => error,
+  ADD_ITEM: item => item,
+  REQUEST_ITEM: () => ({}),
+  SUCCESS_ITEM: item => item,
+  FAILURE_ITEM: error => error,
+  SAVE_HISTORY_DATE: date => ({ date }),
+  SAVE_HISTORY_TYPE: type => ({ type }),
+  CLEAR_OPERATIONS_DATA: () => ({}),
+}, { prefix: 'operations' });
