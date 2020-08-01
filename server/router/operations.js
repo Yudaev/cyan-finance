@@ -57,6 +57,7 @@ router.use('/', async (req, res, next) => {
  *            * *repetitive*    - только повторяющиеся операции.
  *            * *expense*       - только расходы (конфликтует с income).
  *            * *income*        - только доходы (конфликтует с expense).
+ *            * *deleted*       - удаленные операции.
  *        in: query
  *        schema:
  *          type: string
@@ -71,6 +72,7 @@ router.use('/', async (req, res, next) => {
  *                $ref: '#/components/schemas/Operation'
  */
 router.get('/', async (req, res) => {
+  const { user } = req;
   let pageSize = req.query.pageSize || 30;
   pageSize = parseInt(pageSize);
   let page = parseInt(req.query.page);
@@ -78,11 +80,17 @@ router.get('/', async (req, res) => {
     ? String(req.query.filter).split(',').map(item => item.trim())
     : [] ;
 
-  const filter = { user: req.user };
+  const filter = {
+    user,
+    deletedDate: '',
+  };
   if (filterArray.includes('repetitive')) {
     filter.repetitive = true;
     pageSize = 0;
     page = 1;
+  }
+  if (filterArray.includes('deleted')) {
+    filter.deletedDate = { $ne: '' };
   }
   if (filterArray.includes('income')) {
     filter.type = 'income';
