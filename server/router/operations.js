@@ -188,7 +188,6 @@ router.put('/:id', async (req, res) => {
   try {
     const operation = await Operation.findOneAndUpdate(
       { user, _id: req.params.id },
-<<<<<<< HEAD
       pick(body, [
         'value',
         'type',
@@ -199,9 +198,7 @@ router.put('/:id', async (req, res) => {
         'repetitive',
         'repetitiveDay',
       ]),
-=======
-      req.body,
->>>>>>> parent of d76f017... Merge pull request #40 from Yudaev/#49
+
       { new: true }
     ).lean();
 
