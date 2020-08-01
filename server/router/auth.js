@@ -6,6 +6,26 @@ const { tokenSecret } = require('../config.js');
 
 const User = require('../models/user');
 
+/**
+ * @swagger
+ * /auth/:
+ *   post:
+ *     tags:
+ *       - user
+ *     summary: Авторизация
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *      $ref: '#/components/requestBodies/User'
+ *     responses:
+ *       200:
+ *         description: Возвращает пользователя и его токен
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ */
+
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
 
