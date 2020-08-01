@@ -42,8 +42,8 @@ components:
             - expense
           description: 'Тип операции (income - доход, expense - расход)'
         category:
-          description: 'id категории'
-          type: string
+          description: 'объект категории с _id'
+          type: object
         date:
           type: string
           format: date-time
@@ -120,7 +120,7 @@ components:
               description:
                 type: string
               category:
-                type: string
+                type: object
               date:
                 type: string
                 format: date-time

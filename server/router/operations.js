@@ -143,7 +143,7 @@ router.post('/', async (req, res) => {
       'repetitiveDay',
     ]),
     category,
-    user
+    user,
   });
 
   try {
@@ -184,11 +184,20 @@ router.post('/', async (req, res) => {
  *              $ref: '#/components/schemas/Operation'
  */
 router.put('/:id', async (req, res) => {
-  const { user } = req;
+  const { user, body } = req;
   try {
     const operation = await Operation.findOneAndUpdate(
       { user, _id: req.params.id },
-      req.body,
+      pick(body, [
+        'value',
+        'type',
+        'title',
+        'description',
+        'category',
+        'date',
+        'repetitive',
+        'repetitiveDay',
+      ]),
       { new: true }
     ).lean();
 
