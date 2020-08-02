@@ -10,7 +10,7 @@ const router = require('./router/');
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-mongoose.connect(`mongodb://${mongoHost}:${mongoPort}/${mongoDB}`, {
+mongoose.connect(`mongodb://${ mongoHost }:${ mongoPort }/${ mongoDB }`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -23,5 +23,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(router);
 
 server.listen(port, () => {
-  console.log(`Server has been started! http://localhost:${port}`);
+  console.log(`Server has been started! http://localhost:${ port }`);
 });
