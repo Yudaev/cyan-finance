@@ -9,7 +9,7 @@ module.exports = swaggerJSDoc({
       version: '1.0.0',
       description: '',
     },
-    host: `localhost: ${port} /v1`,
+    host: `localhost:${port}/v1`,
   },
   apis: ['./router/*.js', './*.yaml'],
 });

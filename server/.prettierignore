@@ -9,3 +9,7 @@ package-lock.json
 public/
 
 prettier.config.js
+
+index.js
+
+swagger.js
