@@ -86,7 +86,6 @@ export default class PageIncExp extends Component {
               mode="currency"
               currency="RUB"
               locale="ru-RU"
-              size={37}
               placeholder={'Введите сумму'}
             />
           </div>

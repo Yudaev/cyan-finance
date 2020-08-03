@@ -114,9 +114,7 @@ export default class StatisticsPage extends React.Component {
             return <Calendar
                         inputStyle={{
                             border: 'none',
-                            backgroundColor: '#ffffff',
-                            width: '110%',
-                            padding: '0.25em 0em 0em 0.1em',
+                            backgroundColor: '#ffffff'
                         }}
                         className={cx('interval')}
                         selectionMode='range'
