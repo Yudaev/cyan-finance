@@ -7,6 +7,26 @@ const User = require('../models/user');
 const Category = require('../models/category');
 const { initialCategories } = require('../constants');
 
+/**
+ * @swagger
+ * /reg/:
+ *   post:
+ *     tags:
+ *       - user
+ *     summary: Регистрация
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/UserReg'
+ *     responses:
+ *       200:
+ *         description: Возвращает пользователя и его токен
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ */
+
 router.post('/', async (req, res) => {
   const { email, password, password2 } = req.body;
 

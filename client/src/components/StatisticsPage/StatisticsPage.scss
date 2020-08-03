@@ -25,6 +25,7 @@
                     }
 
                     .calendar {
+                        font-size: 12px;
                         text-align: right;
                         padding-right: .8em;
                         
@@ -34,12 +35,18 @@
                                 box-shadow: none;
                                 text-align: right;
                             }
+
+                            .p-datepicker {
+                                right: -19px;
+                                left: -190px !important;
+                            }
     
                             .p-datepicker-year {
                                 padding: 0em 0.5em;
                             }
 
                             .year {
+                               font-size: 12px;
                                border: none;
                                box-shadow: none;
                                padding: 0em;
@@ -80,17 +87,18 @@
                 .title-bar {
                     padding: 0.5em;
                     display: flex;
-                    align-items: center;
+                    align-items: baseline;
                     text-align: center;
 
                     .label {
-                        width: 25%
+                        text-align: left;
+                        width: 22%
                     }
 
                     .ttl-bar {
                         text-align: center;
                         float: right;
-                        width: 60%;
+                        width: 56%;
                         height: 9;
                         border-radius: 1em;
                     }
@@ -108,7 +116,8 @@
                     }
 
                     .value {
-                        width: 20%
+                        text-align: right;
+                        width: 22%
                     }
                 }
             }
@@ -118,103 +127,17 @@
             margin: 1.75em 0em;
         }
 
-        .progress-bar {
-            display: flex;
-            padding: 0.5em;
-            align-items: center;
-            text-align: center;
-
-            .pb-title {
-                width: 25%;
-            }
-
-            .pb-bar {
-                padding-left: 0.5em;
-                width: 60%;
-
-                .bar {
-                    height: 9;
-                    border-radius: 1em;
-                }
-            }
-
-            .cyan {
-                :global .p-progressbar-value {
-                    background-color: #3FBFBF;
-                }
-            }
-
-            .lilac {
-                :global .p-progressbar-value {
-                    background-color: #7A0DE7;
-                }
-            }
-
-            .pink {
-                :global .p-progressbar-value {
-                    background-color: #E70DE7;
-                }
-            }
-
-            .brown {
-                :global .p-progressbar-value {
-                    background-color: #864707;
-                }
-            }
-            
-            .violet {
-                :global .p-progressbar-value {
-                    background-color: #7247bc;
-                }
-            }
-
-            .pinkRed {
-                :global .p-progressbar-value {
-                    background-color: #FF6384;
-                }
-            }
-
-            .blue {
-                :global .p-progressbar-value {
-                    background-color: #36A2EB;
-                }
-            }
-
-            .yellow {
-                :global .p-progressbar-value {
-                    background-color: #FFCE56;
-                }
-            }
-
-            .red {
-                :global .p-progressbar-value {
-                    background-color: #C14242;
-                }
-            }
-
-            .yellowGreen {
-                :global .p-progressbar-value {
-                    background-color: #7FBF3F;
-                }
-            }
-
-            .pb-value {
-                width: 20%;
-            }
-
-            .spend {
-                color: #e91224; 
-            }
-
-            .income {
-                color: #34A835;
-            }
+        .tree {
+            width: 100%;
+            padding: 0.5em 0em;
+            border: none;
         }
 
         .footer-button {
             // position: absolute;
             padding: 1em;
             bottom: 15;  
+
             text-align: center;
             width: 100%;
         }

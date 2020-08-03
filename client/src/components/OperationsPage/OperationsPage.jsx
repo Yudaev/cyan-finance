@@ -13,8 +13,6 @@ const cx = classnames.bind(styles);
 
 export default class OperationsPage extends Component {
     state = {
-        incomeAmount: 21200,
-        expensesAmount: 17300,
         date: new Date(),
         openPopup: false,
         groups: [],
@@ -31,9 +29,8 @@ export default class OperationsPage extends Component {
 
     render() {
         const {groups: groupsMap, categories } = this.props;
+        const { onChangeDate } = this.props;
         const groupsArray = [];
-        // неожидал что Map нельзя нормально проитерировать в реакте
-        // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
         groupsMap.forEach((items, date) => groupsArray.push({ date, items }));
 
         let popup = this.state.openPopup ? (<EditOperationPage togglePopup={ this.togglePopup } />) : null;
@@ -54,7 +51,7 @@ export default class OperationsPage extends Component {
                 </div>
                 <div className={cx("header")}>
                     <div className={cx("incomeWrapper")}>
-                        <span className={cx("incomeAmount")}>{`${this.state.incomeAmount} р.`}</span>
+                        <span className={cx("incomeAmount")}>{`${this.props.stats.income} р.`}</span>
                         <span className={cx("mark")}>доход</span>
                     </div>
                     <div className="monthWrapper">
@@ -63,7 +60,7 @@ export default class OperationsPage extends Component {
                         className={cx("monthPicker")}
                         inputStyle={{minWidth: "100px"}} 
                         value={this.state.date} 
-                        onChange={(e) => this.setState({ date: e.value })} 
+                        onSelect={(e) => onChangeDate(e.value)}
                         view="month"
                         dateFormat="MM yy"
                         yearNavigator={true}
@@ -71,7 +68,7 @@ export default class OperationsPage extends Component {
                     />
                     </div>
                     <div className={cx("expensesWrapper")}>
-                        <span className={cx("expensesAmount")}>{`${this.state.expensesAmount} р.`}</span>
+                        <span className={cx("expensesAmount")}>{`${this.props.stats.expense} р.`}</span>
                         <span className={cx("mark")}>расход</span>
                     </div>
                 </div>

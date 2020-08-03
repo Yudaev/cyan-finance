@@ -1,10 +1,12 @@
 import {handleActions} from 'redux-actions';
 
-import { failureItem, failureOperations, successItem, successOperations } from "../actions/operations";
+import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate, clearOperationsData, saveHistoryType } from "../actions/operations";
 
 
 const initialState = {
   items: [],
+  date: new Date(),
+  type: 'день',
   loadOperationsError: '',
   itemError: '',
 };
@@ -36,4 +38,22 @@ export default handleActions({
       itemError: payload,
     }
   },
+  [saveHistoryDate]: (store, { payload }) => {
+    return {
+      ...store,
+      date: payload.date
+    }
+  },
+  [saveHistoryType]: (store, { payload }) => {
+    return {
+      ...store, 
+      type: payload.type
+    }
+  },
+  [clearOperationsData]: (store) => {
+    return {
+      ...store, 
+      ...initialState
+    }
+  }
 }, initialState);

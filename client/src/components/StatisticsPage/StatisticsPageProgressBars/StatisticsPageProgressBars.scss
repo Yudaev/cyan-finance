@@ -1,0 +1,174 @@
+.progress-bar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.35em 0.3em;
+  align-items: baseline;
+  text-align: center;
+  width: 100%;
+
+  .pb-icon {
+      :global .pi {
+          padding: .25em;
+          font-size: .8em;
+      }
+  }
+
+  .pb-title {
+      padding-right: .25em;
+      width: 18%;
+      text-align: left;
+
+      p {
+          height: 1.4em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+  }
+
+  .pb-bar {
+      width: 54%;
+      display: grid;
+
+      .bar {
+        height: 9;
+        border-radius: 1em;
+      }
+
+  }
+
+  .cyan {
+      :global .p-progressbar-value {
+          background-color: #3FBFBF;
+      }
+  }
+
+  .lilac {
+      :global .p-progressbar-value {
+          background-color: #7A0DE7;
+      }
+  }
+
+  .pink {
+      :global .p-progressbar-value {
+          background-color: #E70DE7;
+      }
+  }
+
+  .brown {
+      :global .p-progressbar-value {
+          background-color: #864707;
+      }
+  }
+  
+  .violet {
+      :global .p-progressbar-value {
+          background-color: #7247bc;
+      }
+  }
+
+  .pinkRed {
+      :global .p-progressbar-value {
+          background-color: #FF6384;
+      }
+  }
+
+  .blue {
+      :global .p-progressbar-value {
+          background-color: #36A2EB;
+      }
+  }
+
+  .yellow {
+      :global .p-progressbar-value {
+          background-color: #FFCE56;
+      }
+  }
+
+  .red {
+      :global .p-progressbar-value {
+          background-color: #C14242;
+      }
+  }
+
+  .yellowGreen {
+      :global .p-progressbar-value {
+          background-color: #7FBF3F;
+      }
+  }
+
+  .pb-value {
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 0.35em;
+      text-align: right;
+  }
+
+  .pb-value > p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+
+  .transaction-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto;
+
+    .transaction {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        letter-spacing: .05em;
+        font-size: 12.5px;
+        transition: opacity 1s ease-in;
+        
+        span {
+            padding: 0em .7em;
+            white-space: nowrap;
+        }
+
+        span:first-child {
+            text-align: right;
+            width: 35%;
+            padding-top: .2em;
+            color: grey;
+            opacity: .6;
+            font-size: 9.5px;
+        }
+
+        span:last-child {
+            width: 40%;
+            text-align: right;
+        }
+
+        div {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
+            span {
+                color: grey;
+                font-style: italic;
+                padding-top: .2em;
+                font-size: 9.5px;
+            }
+        }
+    }
+  }
+
+  .invisible {
+    opacity: 0;
+    display: none;
+  }
+
+  .expense {
+      color: #e91224; 
+  }
+
+  .income {
+      color: #34A835;
+  }
+}
