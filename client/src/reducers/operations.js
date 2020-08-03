@@ -1,6 +1,13 @@
-import {handleActions} from 'redux-actions';
-
-import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate, clearOperationsData, saveHistoryType } from "../actions/operations";
+import { handleActions } from 'redux-actions';
+import {
+  failureItem,
+  failureOperations,
+  successItem,
+  successOperations,
+  saveHistoryDate,
+  clearOperationsData,
+  saveHistoryType
+} from "../actions/operations";
 
 
 const initialState = {

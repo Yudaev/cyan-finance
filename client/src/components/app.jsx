@@ -9,7 +9,7 @@ import styles from './app.scss';
 import MainPage from "./MainPage/MainPage";
 import RegAuthPage from "../connectors/RegAuthPage";
 import ProfilePage from "../connectors/ProfilePage";
-import SettingsPage from "./SettingsPage/SettingsPage";
+import SettingsPage from "../connectors/SettingsPage";
 import PageIncExp from "../connectors/PageIncExp";
 import OperationsPage from "../connectors/OperationsPage";
 import StatisticsPage from "../connectors/StatisticsPage";

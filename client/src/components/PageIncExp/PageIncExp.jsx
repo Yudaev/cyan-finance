@@ -97,7 +97,7 @@ export default class PageIncExp extends Component {
               value={this.state.selectedCategory && this.state.selectedCategory.title}
               suggestions={this.state.filteredCategories}
               completeMethod={this.filterCategories}
-              dropdown={true}
+              dropdown
               style={{ height: '33px' }}
               itemTemplate={this.categoriesTemplate}
               onChange={(e) => {
