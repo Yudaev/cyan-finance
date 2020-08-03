@@ -4,6 +4,7 @@ import {
 import { logout, reset as resetUser, successAuth, successReg } from "../actions/user";
 import { loadOperations, clearOperationsData } from "../actions/operations";
 import { loadList as loadCategories, clearCategoriesData } from "../actions/categories";
+import { getIsAuth } from "../selectors/user";
 
 
 export default store => next => async action => {
@@ -12,8 +13,11 @@ export default store => next => async action => {
 
   switch(action.type) {
     case init.toString():
-      store.dispatch(loadOperations({ pageSize: 0 }));
-      store.dispatch(loadCategories());
+      const isAuth = getIsAuth(state);
+      if(isAuth) {
+        store.dispatch(loadOperations({ pageSize: 0 }));
+        store.dispatch(loadCategories());
+      }
       break;
     case logout.toString():
       store.dispatch(resetUser());
