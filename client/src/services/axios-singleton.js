@@ -8,7 +8,8 @@ function Axios (token) {
   }
   if (!Axios.instance[token]) {
     Axios.instance[token] = axios.create({
-      baseURL: 'http://localhost:8000/',
+      // baseURL: 'http://localhost:8000/',
+      baseURL: 'http://134.0.119.35:8000/',
       timeout: 4000,
       headers: token
         ? {
