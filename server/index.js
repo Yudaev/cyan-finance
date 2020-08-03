@@ -4,16 +4,20 @@ const cors = require('cors');
 const app = express();
 const server = require('http').createServer(app);
 const mongoose = require('mongoose');
-const { mongoHost, mongoPort, mongoDB, port } = require('./config.js');
-
+const { mongoHost, mongoPort, mongoDB, mongoUser, mongoPassword, port } = require('./config.js');
 const router = require('./router/');
+
+const mongoUserPassword = mongoUser ? `${mongoUser}:${mongoPassword}@` : '';
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-mongoose.connect(`mongodb://${mongoHost}:${mongoPort}/${mongoDB}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  `mongodb://${mongoUserPassword}${mongoHost}:${mongoPort}/${mongoDB}?authSource=admin`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 app.use(cors());
 app.use(express.json());
