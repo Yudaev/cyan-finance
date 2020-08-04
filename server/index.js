@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const server = require('http').createServer(app);
 const mongoose = require('mongoose');
-const { mongoHost, mongoPort, mongoDB, mongoUser, mongoPassword, port } = require('./config.js');
+const { host, mongoHost, mongoPort, mongoDB, mongoUser, mongoPassword, port } = require('./config.js');
 const router = require('./router/');
 
 const mongoUserPassword = mongoUser ? `${mongoUser}:${mongoPassword}@` : '';
@@ -27,5 +27,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(router);
 
 server.listen(port, () => {
-  console.log(`Server has been started! http://localhost:${port}`);
+  console.log(`Server has been started! http://${host}:${port}`);
 });

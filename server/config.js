@@ -1,6 +1,7 @@
 const isProduction = process.env.NODE_ENV === 'production';
 
 const {
+    HOST: host,
     PORT: port,
     MONGO_HOST: mongoHost,
     MONGO_PORT: mongoPort,
@@ -13,6 +14,7 @@ const {
 
 module.exports = isProduction
   ? {
+    host,
     port,
     mongoHost,
     mongoPort,

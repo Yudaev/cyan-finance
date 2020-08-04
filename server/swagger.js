@@ -1,5 +1,5 @@
 const swaggerJSDoc = require('swagger-jsdoc');
-const { port } = require('./config');
+const { host, port } = require('./config');
 
 module.exports = swaggerJSDoc( {
   swaggerDefinition: {
@@ -9,7 +9,7 @@ module.exports = swaggerJSDoc( {
       version: '1.0.0',
       description: '',
     },
-    host: `localhost:${port}/v1`,
+    host: `${host}:${port}/v1`,
 
   },
   apis: ['./router/*.js', './*.yaml'],
