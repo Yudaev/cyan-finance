@@ -18,6 +18,7 @@ $elemPadding: 1.5em 1em;
             justify-content: space-between;
             align-content: flex-start;
             margin-bottom: 20px;
+            width: 100%;
 
             .incomeWrapper,
             .expensesWrapper {
@@ -25,6 +26,7 @@ $elemPadding: 1.5em 1em;
                 flex-direction: column;
                 justify-content: start;
                 align-items: center;
+                width: 30%;
 
                 .mark {
                     color: #888;
@@ -32,8 +34,13 @@ $elemPadding: 1.5em 1em;
                 }
             }
 
+            .monthWrapper {
+                width: 40%;
+                display: flex;
+                justify-content: center;
+            }
+
             .monthPicker {
-                min-width: 100px;
                 border: none;
                 text-align: center;
 
@@ -42,6 +49,12 @@ $elemPadding: 1.5em 1em;
                         font-weight: 600;
                         text-align: center;
                         border: none;
+                        width: 100%;
+                    }
+
+                    .p-datepicker-monthpicker {
+                        width: 150%;
+                        left: -25% !important;
                     }
 
                     .pi-chevron-down {

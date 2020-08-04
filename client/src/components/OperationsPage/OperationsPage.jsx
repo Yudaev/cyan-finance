@@ -54,7 +54,7 @@ export default class OperationsPage extends Component {
                         <span className={cx("incomeAmount")}>{`${this.props.stats.income} р.`}</span>
                         <span className={cx("mark")}>доход</span>
                     </div>
-                    <div className="monthWrapper">
+                    <div className={cx("monthWrapper")}>
                     <Calendar
                         locale={calendarSettings}
                         className={cx("monthPicker")}
