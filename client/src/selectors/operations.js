@@ -6,7 +6,6 @@ import dayjsRU from 'dayjs/locale/ru';
 dayjs.locale(dayjsRU);
 
 const selectOperations = state => state.operations || {};
-const selectDate = state => state.operations|| {};
 
 export const getOperationList = createSelector(
   selectOperations,
@@ -29,14 +28,14 @@ export const getGroupsByDate = createSelector(
       const formatDate = itemDate.format(`DD MMMM ${year}, dd`);
 
       const groupItems = groups.get(formatDate) || [];
-      groups.set(formatDate, [ ...groupItems, item])
+      groups.set(formatDate, [ ...groupItems, item]);
     });
     return groups;
   }
 );
 
 export const getDate = createSelector(
-  selectDate,
+  selectOperations,
   propOr({}, 'date'),
 );
 
@@ -61,11 +60,31 @@ export const getValuesByMonth = createSelector(
     items.forEach(item => {
       const itemDatesObject = {
         month: dayjs(item.date).month(),
-        year: dayjs(item.date).year()
+        year: dayjs(item.date).year(),
       }
-      if (item.type === 'income' && JSON.stringify(currentDatesObject) === JSON.stringify(itemDatesObject)) stats.income += Number(item.value);
-      if (item.type === 'expense' && JSON.stringify(currentDatesObject) === JSON.stringify(itemDatesObject)) stats.expense += Number(item.value);
+      if (item.type === 'income' && JSON.stringify(currentDatesObject) === JSON.stringify(itemDatesObject))
+        stats.income += Number(item.value);
+      if (item.type === 'expense' && JSON.stringify(currentDatesObject) === JSON.stringify(itemDatesObject))
+        stats.expense += Number(item.value);
     });
     return stats;
+  }
+);
+
+export const getRepetitiveOperations = createSelector(
+  getOperationList,
+  items => {
+    const repetitiveGroups = new Map();
+
+    items.forEach(item => {
+      const itemDate = dayjs(item.date);
+      const year = dayjs(itemDate).year() === dayjs().year() ? '' : ' YYYY';
+      const formatDate = itemDate.format(`DD MMMM ${year}, dd`);
+
+      const groupItems = repetitiveGroups.get(formatDate) || [];
+      if (item.repetitive === true) repetitiveGroups.set(formatDate, [ ...groupItems, item]);
+    });
+
+    return repetitiveGroups;
   }
 );

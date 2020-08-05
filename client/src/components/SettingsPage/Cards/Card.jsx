@@ -10,7 +10,7 @@ export default ({ type, repetitive, value, title, handlePopUp, category }) => {
     let typeOf = type === 'income' ? `${cx("greenCard")}` : `${cx("redCard")}`;
 
     return(
-        <div className={cx("card")} onClick={handlePopUp}>
+        <div className={cx('card')} onClick={handlePopUp}>
             <Card className={typeOf}>
               <div className={cx('left')}>
                 {category && <div className={cx('category')}>{category.title}</div>}
