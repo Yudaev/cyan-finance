@@ -9,6 +9,8 @@ export const {
   requestItem,
   successItem,
   failureItem,
+  updateItem,
+  successEditItem,
 } = createActions({
   LOAD_OPERATIONS: options => options,
   REQUEST_OPERATIONS: () => ({}),
@@ -18,4 +20,6 @@ export const {
   REQUEST_ITEM: () => ({}),
   SUCCESS_ITEM: item => item,
   FAILURE_ITEM: error => error,
+  UPDATE_ITEM: item => item,
+  SUCCESS_EDIT_ITEM: item => item,
 }, { prefix: 'operations' });
