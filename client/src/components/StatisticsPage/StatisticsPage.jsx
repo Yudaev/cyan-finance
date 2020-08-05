@@ -17,6 +17,9 @@ const cx = classnames.bind(styles);
 export default class StatisticsPage extends React.Component {
     state = {
         date: new Date(),
+        month: new Date(),
+        year: new Date(),
+        intervalValue: this.props.yearNow || new Date(),
         intervalArray: [
             {label: 'День', value: 'день'},   
             {label: 'Месяц', value: 'месяц'},
@@ -24,6 +27,13 @@ export default class StatisticsPage extends React.Component {
             {label: 'Все время', value: 'все время'},
             {label: 'Интервал', value: 'интервал'},
         ],
+    }
+
+    componentDidUpdate(prevProps) {
+        const { yearNow } = this.props;
+        if (yearNow !== prevProps.yearNow) {
+            this.setState({ intervalValue: prevProps.yearNow });
+        }
     }
 
     makeChart = () => {
@@ -52,9 +62,11 @@ export default class StatisticsPage extends React.Component {
 
         const { onChangeDate, type } = this.props;
         const { yearNow } = this.props;
+        const formatYear = dayjs(this.state.year).year();
 
-        if (type === 'день') {
-            return <Calendar
+        switch (type) {
+            case 'день': {
+                return <Calendar
                         inputStyle={{
                             padding: '.25em 0em 0em 0em',
                             border: 'none',
@@ -68,50 +80,44 @@ export default class StatisticsPage extends React.Component {
                         dateFormat='dd MM yy'
                         readOnlyInput
                         value={this.state.date}
-                        onSelect={e => onChangeDate(e.value)}
-                    />
-        }
-
-        if (type === 'месяц') {
-            return <Calendar
-                        inputStyle={{
-                            border: 'none',
-                            backgroundColor: '#ffffff',
-                            padding: '.25em 0em 0em 0em',
-                        }}
-                        placeholder={`${this.state.date}`}
-                        view='month'
-                        monthNavigator                        
-                        yearNavigator
-                        locale={calendarSettings}
-                        yearRange='2010:2030'
-                        readOnlyInput
-                        value={this.state.date}
-                        dateFormat='MM yy'
-                        onSelect={e => onChangeDate(e.value)} 
-                    />
-        }
-
-        if (type === 'год') {
-            
-            const { years } = this.props;
-            const formatYear = dayjs(this.state.year).year();
-
-            return <Dropdown
-                        placeholder={`${formatYear}`}
-                        value={yearNow}
-                        options={years}
-                        className={cx('year')}
                         onChange={e => onChangeDate(e.value)}
                     />
-        }
-
-        if (type === 'все время') {
-            return null
-        }
-    
-        if (type === 'интервал') {
-            return <Calendar
+            };
+            case 'месяц': {
+                const formatMonth = dayjs(this.state.month).format('MMMM YYYY');
+                return <Calendar
+                            inputStyle={{
+                                border: 'none',
+                                backgroundColor: '#ffffff',
+                                padding: '.25em 0em 0em 0em',
+                            }}
+                            placeholder={`${formatMonth}`}
+                            view='month'
+                            monthNavigator                        
+                            yearNavigator
+                            locale={calendarSettings}
+                            yearRange='2010:2030'
+                            readOnlyInput
+                            value={this.state.month}
+                            dateFormat='MM yy'
+                            onChange={e => onChangeDate(e.value)} 
+                        />
+            };
+            case 'год': {
+                const { years } = this.props;
+                return <Dropdown
+                            placeholder={`${formatYear}`}
+                            value={yearNow}
+                            options={years}
+                            className={cx('year')}
+                            onChange={e => onChangeDate(e.value)}
+                        />
+            };
+            case 'все время': {
+                return null;
+            };
+            case 'интервал': {
+                return <Calendar
                         inputStyle={{
                             border: 'none',
                             backgroundColor: '#ffffff'
@@ -125,6 +131,10 @@ export default class StatisticsPage extends React.Component {
                         value={yearNow}
                         onChange={e => onChangeDate(e.value) }
                     />
+            };
+            default: {
+                return yearNow;
+            }
         }
     }
 

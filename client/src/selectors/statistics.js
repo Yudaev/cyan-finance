@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import propOr from 'lodash/fp/propOr';
 import dayjs from 'dayjs';
 import dayjsRU from 'dayjs/locale/ru';
-import { uniqWith, isEqual } from 'lodash/fp';
+import { uniqWith, isEqual, isDate } from 'lodash/fp';
 
 const isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
@@ -46,7 +46,7 @@ export const getCurrentDatesObject = createSelector(
     const currentDates = {
       day: dayjs(date).date(),
       month: dayjs(date).month(),
-      year: dayjs(date).year()
+      year: dayjs(date).year(),
     };
     return currentDates;
   },
@@ -63,25 +63,33 @@ export const getValuesByType = createSelector(
       const itemDates = {
         day: dayjs(item.date).date(),
         month: dayjs(item.date).month(),
-        year: dayjs(item.date).year()
+        year: dayjs(item.date).year(),
       }
       switch (type) {
         case 'день': 
-          if (item.type === 'income' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) stats.income += Number(item.value);
-          if (item.type === 'expense' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) stats.expense += Number(item.value);
+          if (item.type === 'income' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
+            stats.income += Number(item.value);
+          if (item.type === 'expense' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
+            stats.expense += Number(item.value);
           break;
         case 'месяц':
           delete currentDates.day;
           delete itemDates.day;
-            if (item.type === 'income' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) stats.income += Number(item.value);
-            if (item.type === 'expense' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) stats.expense += Number(item.value);
+            if (item.type === 'income' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
+              stats.income += Number(item.value);
+            if (item.type === 'expense' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
+              stats.expense += Number(item.value);
           break;
         case 'год':
-            if (item.type === 'income' && date == itemDates.year) stats.income += Number(item.value);
-            else if (dayjs(date).year() == itemDates.year && item.type === 'income') stats.income += Number(item.value);
+            if (item.type === 'income' && date == itemDates.year) 
+              stats.income += Number(item.value);
+            else if (dayjs(date).year() == itemDates.year && item.type === 'income') 
+              stats.income += Number(item.value);
 
-            if (item.type === 'expense' && date == itemDates.year) stats.expense += Number(item.value);
-            else if (dayjs(date).year() == itemDates.year && item.type === 'expense') stats.expense += Number(item.value);
+            if (item.type === 'expense' && date == itemDates.year) 
+              stats.expense += Number(item.value);
+            else if (dayjs(date).year() == itemDates.year && item.type === 'expense') 
+              stats.expense += Number(item.value);
           break;
         case 'все время':
             if (item.type === 'income') stats.income += Number(item.value);
