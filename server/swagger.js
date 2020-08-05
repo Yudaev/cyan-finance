@@ -1,7 +1,7 @@
 const swaggerJSDoc = require('swagger-jsdoc');
 const { port } = require('./config');
 
-module.exports = swaggerJSDoc({
+module.exports = swaggerJSDoc( {
   swaggerDefinition: {
     openapi: '3.0.1',
     info: {

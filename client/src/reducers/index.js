@@ -1,20 +1,20 @@
-import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import categoriesReducer from './categories';
-import operationsReducer from './operations';
-import userReducer from './user';
 import appReducer from './app';
+import userReducer from './user';
+import operationsReducer from './operations';
+import categoriesReducer from './categories';
+import { combineReducers } from 'redux';
+import {connectRouter} from "connected-react-router";
+import {createBrowserHistory} from "history";
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 export const history = createBrowserHistory();
 
 const userPersistConfig = {
   key: 'user',
-  storage,
+  storage: storage,
   blacklist: ['authError', 'regError'],
-};
+}
 
 const reducer = combineReducers({
   app: appReducer,

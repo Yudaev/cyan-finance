@@ -1,14 +1,7 @@
-import { handleActions } from 'redux-actions';
+import {handleActions} from 'redux-actions';
 
-import {
-  failureItem,
-  failureOperations,
-  successItem,
-  successOperations,
-  saveHistoryDate,
-  clearOperationsData,
-  saveHistoryType,
-} from '../actions/operations';
+import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate, clearOperationsData, saveHistoryType } from "../actions/operations";
+
 
 const initialState = {
   items: [],
@@ -18,38 +11,49 @@ const initialState = {
   itemError: '',
 };
 
-export default handleActions(
-  {
-    [successOperations]: (store, { payload: items }) => ({
+export default handleActions({
+  [successOperations]: (store, { payload: items }) => {
+    return {
       ...store,
       items,
       loadOperationsError: null,
-    }),
-    [failureOperations]: (store, { payload }) => ({
+    }
+  },
+  [failureOperations]: (store, { payload }) => {
+    return {
       ...store,
       loadOperationsError: payload,
-    }),
-    [successItem]: (store, { payload }) => ({
+    }
+  },
+  [successItem]: (store, { payload }) => {
+    return {
       ...store,
-      items: [...store.items, payload],
+      items: [ ...store.items, payload],
       itemError: null,
-    }),
-    [failureItem]: (store, { payload }) => ({
+    }
+  },
+  [failureItem]: (store, { payload }) => {
+    return {
       ...store,
       itemError: payload,
-    }),
-    [saveHistoryDate]: (store, { payload }) => ({
-      ...store,
-      date: payload.date,
-    }),
-    [saveHistoryType]: (store, { payload }) => ({
-      ...store,
-      type: payload.type,
-    }),
-    [clearOperationsData]: (store) => ({
-      ...store,
-      ...initialState,
-    }),
+    }
   },
-  initialState,
-);
+  [saveHistoryDate]: (store, { payload }) => {
+    return {
+      ...store,
+      date: payload.date
+    }
+  },
+  [saveHistoryType]: (store, { payload }) => {
+    return {
+      ...store, 
+      type: payload.type
+    }
+  },
+  [clearOperationsData]: (store) => {
+    return {
+      ...store, 
+      ...initialState
+    }
+  }
+}, initialState);

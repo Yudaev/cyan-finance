@@ -1,60 +1,64 @@
 $elemPadding: 1.5em 1em;
 
 * {
-  font-family: 'Roboto', sans-serif;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  font-size: 1em;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: $elemPadding;
-
-  .header {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1em;
     display: flex;
-    justify-content: space-between;
-    align-content: flex-start;
-    margin-bottom: 20px;
+    flex-direction: column;
+    padding: .5em 1em;
+    height: calc(100vh - 110px);
 
-    .incomeWrapper,
-    .expensesWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-content: flex-start;
+            margin-bottom: 20px;
 
-      .mark {
-        color: #888;
-        font-size: 0.8em;
-      }
-    }
+            .incomeWrapper,
+            .expensesWrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
 
-    .monthPicker {
-      min-width: 100px;
-      border: none;
-      text-align: center;
+                .mark {
+                    color: #888;
+                    font-size: .8em;
+                }
+            }
 
-      :global {
-        .p-inputtext {
-          font-weight: 600;
-          text-align: center;
-          border: none;
+            .monthPicker {
+                min-width: 100px;
+                border: none;
+                text-align: center;
+
+                :global {
+                    .p-inputtext {
+                        font-weight: 600;
+                        text-align: center;
+                        border: none;
+                    }
+
+                    .pi-chevron-down {
+                        font-size: .8em;
+                    }
+                } 
+            }
         }
 
-        .pi-chevron-down {
-          font-size: 0.8em;
+        .body {
+            height: calc(100vh - 145px);
+            overflow-y: auto;
         }
-      }
-    }
-  }
 
-  .upBtnWrapper {
-    position: fixed;
-    // bottom: 20px;
-    right: -200px;
-    z-index: 5;
-  }
-}
+        .upBtnWrapper {
+            position: fixed;
+            right: -200px;
+            z-index: 5;
+        }
+     }
