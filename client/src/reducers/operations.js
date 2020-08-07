@@ -31,7 +31,6 @@ export default handleActions({
     }
   },
   [successEditItem]: (store, { payload }) => {
-    console.log(payload);
     return {
       ...store,
       items: store.items.map(item => item._id === payload._id ? payload : item),

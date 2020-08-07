@@ -83,11 +83,10 @@ export const editItem = async (state, action) => {
   const token = getToken(state);
   const axios = getAxios(token);
   const params = action.payload;
-  params._id = "5f26da5c5eb7da714071cd23";
-  params.title = "RTY";
-  console.log(params);
+  params.category = params.selectedCategory._id;
+
   try {
-    const response = await axios.put(`/operations/5f26da5c5eb7da714071cd23`, params);
+    const response = await axios.put(`/operations/${params._id}`, params);
     return {
       type: successEditItem.toString(),
       payload: response.data

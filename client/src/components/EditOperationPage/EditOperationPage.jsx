@@ -15,7 +15,7 @@ const cx = classnames.bind(styles);
 
 export default class EditOperationPage extends Component {
   state = {
-    id: this.props.data.id,
+    _id: this.props.data.id,
     title: this.props.data.title || undefined,
     value: this.props.data.value,
     type: this.props.data.type,
@@ -49,7 +49,7 @@ export default class EditOperationPage extends Component {
   };
 
   render() {
-    console.log(this.state)
+    //console.log(this.state.selectedCategory);
     return (
       <div className={cx("container", "content")}>
         <div className={cx("backIconWrapper")}>
@@ -62,7 +62,7 @@ export default class EditOperationPage extends Component {
               className={cx("inputItem")}
               placeholder="Название операции"
               value={this.state.title}
-              onChange={(e) => this.setState({title: e.value})}
+              onChange={(e) => this.setState({title: e.target.value})}
             />
             <InputNumber
               className={cx("inputItem")}
@@ -151,7 +151,7 @@ export default class EditOperationPage extends Component {
               placeholder="Описание"
               autoResize={true}
               value={this.state.description}
-              onChange={(e) => this.setState({description: e.value})}
+              onChange={(e) => this.setState({description: e.target.value})}
             />
           </div>
           <div className={cx("formFooter")}>
@@ -164,9 +164,10 @@ export default class EditOperationPage extends Component {
               <Button
                 label="ОК"
                 className={cx("p-button-raised", "p-button-primary", "editPageBtn")}
-                onClick={e => {
+                onClick={async e => {
                   e.preventDefault();
-                  this.props.onUpdateItem({a:1});
+                  this.props.onUpdateItem(this.state);
+                  this.props.togglePopup(this.state._id);
                 }}
               />
             </div>
