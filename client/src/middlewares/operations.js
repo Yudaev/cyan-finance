@@ -9,6 +9,8 @@ import {
   successItem,
   updateItem,
   successEditItem,
+  deleteItem,
+  successDeleteItem,
 } from "../actions/operations";
 import {
   postItem as postCategoryItem,
@@ -38,6 +40,10 @@ export default store => next => async action => {
     case updateItem.toString():
       store.dispatch(requestItem());
       store.dispatch(await editItem(state, action));
+      break;
+    case deleteItem.toString():
+      store.dispatch(requestItem());
+      store.dispatch(await deletingItem(state, action));
       break;
     default:
       break;
@@ -83,12 +89,30 @@ export const editItem = async (state, action) => {
   const token = getToken(state);
   const axios = getAxios(token);
   const params = action.payload;
-  params.category = params.selectedCategory._id;
+  if (params.selectedCategory) params.category = params.selectedCategory._id;
 
   try {
     const response = await axios.put(`/operations/${params._id}`, params);
     return {
       type: successEditItem.toString(),
+      payload: response.data
+    };
+  } catch (error) {
+    const { data } = error.response || {};
+    console.error(data && data.message);
+    return failureItem(data || { message: 'Connect error. Try later' });
+  }
+};
+
+export const deletingItem = async (state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
+  const params = action.payload;
+
+  try {
+    const response = await axios.delete(`/operations/${params._id}`, params);
+    return {
+      type: successDeleteItem.toString(),
       payload: response.data
     };
   } catch (error) {

@@ -45,13 +45,20 @@ export default class OperationsPage extends Component {
   }
 
   render() {
-    const {groups: groupsMap, categories, onUpdateItem} = this.props;
+    const {groups: groupsMap, categories, onUpdateItem, onDeleteItem} = this.props;
     const groupsArray = [];
     // неожидал что Map нельзя нормально проитерировать в реакте
     // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
     groupsMap.forEach((items, date) => groupsArray.push({date, items}));
 
-    let popup = this.state.openPopup ? (<EditOperationPage togglePopup={this.togglePopup} data={this.state.popupData} onUpdateItem={onUpdateItem}/>) : null;
+    let popup = this.state.openPopup ? (
+      <EditOperationPage
+        togglePopup={this.togglePopup}
+        data={this.state.popupData}
+        onUpdateItem={onUpdateItem}
+        onDeleteItem={onDeleteItem}
+      />
+      ) : null;
     let calendarSettings = {
       firstDayOfWeek: 1,
       dayNames: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],

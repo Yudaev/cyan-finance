@@ -159,12 +159,16 @@ export default class EditOperationPage extends Component {
               <Button
                 label="Удалить"
                 className={cx("p-button-raised", "p-button-secondary", "p-button-danger", "editPageBtn")}
-                onClick={e => e.preventDefault()}
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.onDeleteItem(this.state);
+                  this.props.togglePopup(this.state._id);
+                }}
               />
               <Button
                 label="ОК"
                 className={cx("p-button-raised", "p-button-primary", "editPageBtn")}
-                onClick={async e => {
+                onClick={e => {
                   e.preventDefault();
                   this.props.onUpdateItem(this.state);
                   this.props.togglePopup(this.state._id);

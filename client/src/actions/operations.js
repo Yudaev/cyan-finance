@@ -11,6 +11,8 @@ export const {
   failureItem,
   updateItem,
   successEditItem,
+  deleteItem,
+  successDeleteItem
 } = createActions({
   LOAD_OPERATIONS: options => options,
   REQUEST_OPERATIONS: () => ({}),
@@ -22,4 +24,6 @@ export const {
   FAILURE_ITEM: error => error,
   UPDATE_ITEM: item => item,
   SUCCESS_EDIT_ITEM: item => item,
+  DELETE_ITEM: item => item,
+  SUCCESS_DELETE_ITEM: item => item,
 }, { prefix: 'operations' });

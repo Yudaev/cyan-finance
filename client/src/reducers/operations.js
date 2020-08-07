@@ -1,6 +1,13 @@
 import {handleActions} from 'redux-actions';
 
-import { failureItem, failureOperations, successItem, successOperations, successEditItem } from "../actions/operations";
+import {
+  failureItem,
+  failureOperations,
+  successItem,
+  successOperations,
+  successEditItem,
+  successDeleteItem
+} from "../actions/operations";
 
 
 const initialState = {
@@ -34,6 +41,13 @@ export default handleActions({
     return {
       ...store,
       items: store.items.map(item => item._id === payload._id ? payload : item),
+      itemError: null,
+    }
+  },
+  [successDeleteItem]: (store, { payload }) => {
+    return {
+      ...store,
+      items: store.items.filter(item => item._id !== payload._id),
       itemError: null,
     }
   },
