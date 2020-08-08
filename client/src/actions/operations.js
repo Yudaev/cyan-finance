@@ -12,7 +12,10 @@ export const {
   updateItem,
   successEditItem,
   deleteItem,
-  successDeleteItem
+  successDeleteItem,
+  saveHistoryDate,
+  saveHistoryType,
+  clearOperationsData,
 } = createActions({
   LOAD_OPERATIONS: options => options,
   REQUEST_OPERATIONS: () => ({}),
@@ -26,4 +29,7 @@ export const {
   SUCCESS_EDIT_ITEM: item => item,
   DELETE_ITEM: item => item,
   SUCCESS_DELETE_ITEM: item => item,
+  SAVE_HISTORY_DATE: date => ({ date }),
+  SAVE_HISTORY_TYPE: type => ({ type }),
+  CLEAR_OPERATIONS_DATA: () => ({}),
 }, { prefix: 'operations' });

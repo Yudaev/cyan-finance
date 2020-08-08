@@ -9,10 +9,10 @@ import styles from './app.scss';
 import MainPage from "./MainPage/MainPage";
 import RegAuthPage from "../connectors/RegAuthPage";
 import ProfilePage from "../connectors/ProfilePage";
-import SettingsPage from "./SettingsPage/SettingsPage";
+import SettingsPage from "../connectors/SettingsPage";
 import PageIncExp from "../connectors/PageIncExp";
 import OperationsPage from "../connectors/OperationsPage";
-import StatisticsPage from "./StatisticsPage/StatisticsPage";
+import StatisticsPage from "../connectors/StatisticsPage";
 
 const cx = classnames.bind(styles);
 
@@ -26,7 +26,7 @@ export const App = ({ isAuth, logout }) => {
   return (
     <Router>
       {isAuth && (
-        <header>
+        <header className='main-header'>
           <div className={headerClass}>
             <NavLink to='/statistics'><i className="pi pi-chart-bar"></i></NavLink>
             <NavLink to='/history'><i className="pi pi-clock"></i></NavLink>

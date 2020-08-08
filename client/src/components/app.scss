@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  overflow-y: auto;
 }
 
 * {
@@ -21,6 +22,17 @@ html, body {
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1.02em;
+    height: calc(99vh - 52px);
+    padding-top: 52px;
+  }
+
+  .main-header {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: #fff;
   }
 }
 

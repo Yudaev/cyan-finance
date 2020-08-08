@@ -31,7 +31,7 @@ class SettingsPage extends Component {
         return ( 
             <div className={cx("container", "content")}>
                 <div className={show}>
-                  {/*<EditOperationPage openPopUp={this.state.openPopUp} togglePopup={() => this.handlePopUp}/>*/}
+                  <EditOperationPage openPopUp={this.state.openPopUp} togglePopup={() => this.handlePopUp}/>
                 </div>
                 <ScrollPanel className={cx("cardList")}>
                     <Card handlePopUp={this.handlePopUp} />

@@ -8,16 +8,17 @@ $elemPadding: 1.5em 1em;
     max-width: 1200px;
     margin: 0 auto;
     font-size: 1em;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: $elemPadding;
+    padding: .5em 1em;
+    height: calc(100vh - 110px);
 
         .header {
             display: flex;
             justify-content: space-between;
             align-content: flex-start;
             margin-bottom: 20px;
+            width: 100%;
 
             .incomeWrapper,
             .expensesWrapper {
@@ -25,6 +26,7 @@ $elemPadding: 1.5em 1em;
                 flex-direction: column;
                 justify-content: start;
                 align-items: center;
+                width: 30%;
 
                 .mark {
                     color: #888;
@@ -32,8 +34,13 @@ $elemPadding: 1.5em 1em;
                 }
             }
 
+            .monthWrapper {
+                width: 40%;
+                display: flex;
+                justify-content: center;
+            }
+
             .monthPicker {
-                min-width: 100px;
                 border: none;
                 text-align: center;
 
@@ -42,6 +49,12 @@ $elemPadding: 1.5em 1em;
                         font-weight: 600;
                         text-align: center;
                         border: none;
+                        width: 100%;
+                    }
+
+                    .p-datepicker-monthpicker {
+                        width: 150%;
+                        left: -25% !important;
                     }
 
                     .pi-chevron-down {
@@ -51,9 +64,13 @@ $elemPadding: 1.5em 1em;
             }
         }
 
+        .body {
+            height: calc(100vh - 145px);
+            overflow-y: auto;
+        }
+
         .upBtnWrapper {
             position: fixed;
-            // bottom: 20px;
             right: -200px;
             z-index: 5;
         }

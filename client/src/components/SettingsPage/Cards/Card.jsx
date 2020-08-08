@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames/bind';
-import {Card} from 'primereact/card';
+import { Card } from 'primereact/card';
 import styles from './Card.scss';
 
 const cx = classnames.bind(styles);

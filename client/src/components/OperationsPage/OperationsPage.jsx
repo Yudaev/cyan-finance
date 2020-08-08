@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import classnames from 'classnames/bind';
+import React, { Component } from 'react';
+import classnames from 'classnames/bind';   
 
-import {Button} from 'primereact/button';
+import { Button } from 'primereact/button';
 import {Dropdown} from 'primereact/dropdown';
-import {Calendar} from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
 import styles from './OperationsPage.scss';
 
 import OperationsPageDateBlock from './OperationPageDateBlock/OperationPageDateBlock.jsx';
@@ -13,8 +13,6 @@ const cx = classnames.bind(styles);
 
 export default class OperationsPage extends Component {
   state = {
-    incomeAmount: 21200,
-    expensesAmount: 17300,
     date: new Date(),
     openPopup: false,
     popupData: {},

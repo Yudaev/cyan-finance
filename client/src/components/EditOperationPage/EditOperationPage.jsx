@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import classnames from 'classnames/bind';
+import React, { Component } from 'react';
+import classnames from 'classnames/bind';   
 
-import {Button} from 'primereact/button';
+import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {InputNumber} from 'primereact/inputnumber';
-import {AutoComplete} from 'primereact/autocomplete';
-import {Calendar} from 'primereact/calendar';
+import { AutoComplete } from 'primereact/autocomplete';
+import { Calendar } from 'primereact/calendar';
 import {Checkbox} from 'primereact/checkbox';
 import {InputTextarea} from 'primereact/inputtextarea';
 import styles from './EditOperationPage.scss';
@@ -49,7 +49,6 @@ export default class EditOperationPage extends Component {
   };
 
   render() {
-    //console.log(this.state.selectedCategory);
     return (
       <div className={cx("container", "content")}>
         <div className={cx("backIconWrapper")}>
