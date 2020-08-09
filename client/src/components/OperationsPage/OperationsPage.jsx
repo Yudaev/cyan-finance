@@ -50,6 +50,7 @@ export default class OperationsPage extends Component {
       onDeleteItem,
       onChangeDate
     } = this.props;
+
     const groupsArray = [];
     // неожидал что Map нельзя нормально проитерировать в реакте
     // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
@@ -101,7 +102,7 @@ export default class OperationsPage extends Component {
             <span className={cx("mark")}>расход</span>
           </div>
         </div>
-        <div className={cx("body")}>
+        <div className={cx("body")} style={{display: this.state.openPopup ? 'none' : null}}>
           {groupsArray.map(({date, items}, key) => (
             <OperationsPageDateBlock
               key={key}
