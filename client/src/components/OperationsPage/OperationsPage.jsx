@@ -102,7 +102,7 @@ export default class OperationsPage extends Component {
             <span className={cx("mark")}>расход</span>
           </div>
         </div>
-        <div className={cx("body")}>
+        <div className={cx("body")} style={{display: this.state.openPopup ? 'none' : null}}>
           {groupsArray.map(({date, items}, key) => (
             <OperationsPageDateBlock
               key={key}

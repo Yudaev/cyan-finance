@@ -5,7 +5,7 @@ import styles from './Card.scss';
 
 const cx = classnames.bind(styles);
 
-export default ({ _id, title, value, type, category, date, repetitive, repetitiveDay, description, handlePopUp, categories }) => {
+export default ({ _id, title, value, type, category, date, repetitive, repetitiveDay, description, handlePopUp }) => {
   const typeText = type === 'income' ? 'Доход' : 'Расход';
   let typeOf = type === 'income' ? `${cx("greenCard")}` : `${cx("redCard")}`;
   let itemData = {
@@ -18,7 +18,6 @@ export default ({ _id, title, value, type, category, date, repetitive, repetitiv
     repetitive: repetitive,
     repetitiveDay: repetitiveDay,
     description: description,
-    categories: categories
   }
 
   return (
