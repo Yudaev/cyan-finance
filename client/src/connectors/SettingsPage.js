@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/operations';
+import {addItem, deleteItem, updateItem} from '../actions/operations';
 import SettingsPage from '../components/SettingsPage/SettingsPage';
 import { getRepetitiveOperations } from '../selectors/operations';
 import {
@@ -11,10 +11,13 @@ import {
 const mapStateToProps = (store) => ({
   repetitiveOperations: getRepetitiveOperations(store),
   categories: getCategoryList(store),
+  categoriesList: getCategoryList(store),
   categoriesAsObject: getCategoryListAsObject(store),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  onUpdateItem: (item) => updateItem(item),
+  onDeleteItem: (item) => deleteItem(item),
   addRepetitiveOperation: data => addItem(data)
 }, dispatch);
 

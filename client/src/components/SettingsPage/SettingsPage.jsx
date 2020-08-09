@@ -17,20 +17,53 @@ class SettingsPage extends Component {
     openPopUp: false
   };
 
-  handlePopUp = () => {
-    this.setState(prevState => ({ openPopUp: !prevState.openPopUp }))
-  };
+  // handlePopUp = () => {
+  //   this.setState(prevState => ({ openPopUp: !prevState.openPopUp }))
+  // };
+
+  togglePopup = ({ id, title , value, type, category, date, repetitive, repetitiveDay, description }) => {
+    //console.log(this.props);
+
+    this.setState(state => {
+      return {
+        openPopup: !state.openPopup,
+        popupData: {
+          ...state.popupData,
+          id: id,
+          value: value,
+          type: type,
+          title: title,
+          category: category,
+          repetitive: repetitive,
+          date: date,
+          repetitiveDay: repetitiveDay,
+          description: description,
+          categories: this.props.categoriesList
+        }
+      }
+    });
+  }
 
   render() {
-
-    let show = this.state.openPopUp === true ? `${cx('popUp')}` : `${cx('noPopUp')}`;
-
     const {
       repetitiveOperations: repetitiveOperationsMap,
       categories,
       categoriesAsObject,
-      addRepetitiveOperation
+      addRepetitiveOperation,
+      onUpdateItem,
+      onDeleteItem,
     } = this.props;
+
+    // let show = this.state.openPopUp === true ? `${cx('popUp')}` : `${cx('noPopUp')}`;
+    let popup = this.state.openPopup ? (
+      <EditOperationPage
+        togglePopup={this.togglePopup}
+        data={this.state.popupData}
+        onUpdateItem={onUpdateItem}
+        onDeleteItem={onDeleteItem}
+      />
+    ) : null;
+
     const repetitiveOperationsArray = [];
     repetitiveOperationsMap.forEach((items, date) =>
       repetitiveOperationsArray.push({ items, date })
@@ -38,18 +71,15 @@ class SettingsPage extends Component {
 
     return (
       <div className={cx("container", "content")}>
-        <div className={show}>
-          <EditOperationPage
-            togglePopup={this.handlePopUp}
-            categories={categories}
-            addRepetitiveOperation={addRepetitiveOperation}
-          />
+        <div className={cx("popupWrapper")}>
+          {popup}
         </div>
-        <ScrollPanel className={cx("cardList")}>
+        <ScrollPanel className={cx("cardList")} style={{display: this.state.openPopup ? 'none' : null}}>
           {repetitiveOperationsArray.map(({ items, date }, key) =>
             (<OperationPageDateBlock
               key={key}
-              handlePopUp={this.handlePopUp}
+              // handlePopUp={this.handlePopUp}
+              togglePopup={ this.togglePopup }
               items={items}
               date={date}
               categories={categoriesAsObject}
@@ -59,7 +89,8 @@ class SettingsPage extends Component {
         <Button
           label="ДОБАВИТЬ ЗАПИСЬ"
           className="p-button-raised p-button-secondary"
-          onClick={() => this.handlePopUp()}
+          onClick={() => this.togglePopup()}
+          style={{display: this.state.openPopup ? 'none' : null}}
         />
       </div>
     )
