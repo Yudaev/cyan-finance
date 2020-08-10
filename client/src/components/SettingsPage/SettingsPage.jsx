@@ -29,7 +29,7 @@ class SettingsPage extends Component {
                    repetitiveDay,
                    description
   }) => {
-    console.log('1')
+    //console.log('1')
     this.setState(state => {
       return {
         openPopup: !state.openPopup,
