@@ -1,9 +1,11 @@
 .container {
-  padding-bottom: 20px;
-  margin: 0;
-  box-sizing: border-box;
-  overflow-y: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
   padding: .5em 1em;
+  height: calc(100vh - 110px);
 
   .noPopUp {
     display: none;
@@ -17,7 +19,6 @@
 }
 
 .content {
-  text-align: center;
   height: calc(100vh - 110px);
 }
     
