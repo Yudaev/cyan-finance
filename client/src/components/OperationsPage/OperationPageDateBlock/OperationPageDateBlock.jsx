@@ -8,13 +8,17 @@ const cx = classnames.bind(styles);
 
 export default class OperationPageDateBlock extends React.Component {
   render() {
-    const { date, items, togglePopup, categories } = this.props;
+    const { date, items, togglePopup, categories, header=true } = this.props;
     return (
       <div className={cx("container")}>
-        <div className={cx("header")}>
-          <h2>{ date }</h2>
-        </div>
-
+        {
+          header ?
+            <div className={cx("header")}>
+              <h2>{date}</h2>
+            </div>
+            :
+            null
+        }
         {items && items.map((item, key) => (
           <Cart key={key} {...item} category={categories[item.category]} handlePopUp={ togglePopup } />
         ))}

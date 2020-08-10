@@ -1,6 +1,16 @@
 import {handleActions} from 'redux-actions';
 
-import { failureItem, failureOperations, successItem, successOperations, saveHistoryDate, clearOperationsData, saveHistoryType } from "../actions/operations";
+import {
+  failureItem,
+  failureOperations,
+  successItem,
+  successOperations,
+  successEditItem,
+  successDeleteItem,
+  saveHistoryDate,
+  clearOperationsData,
+  saveHistoryType
+} from "../actions/operations";
 
 
 const initialState = {
@@ -32,6 +42,20 @@ export default handleActions({
       itemError: null,
     }
   },
+  [successEditItem]: (store, { payload }) => {
+    return {
+      ...store,
+      items: store.items.map(item => item._id === payload._id ? payload : item),
+      itemError: null,
+    }
+  },
+  [successDeleteItem]: (store, { payload }) => {
+    return {
+      ...store,
+      items: store.items.filter(item => item._id !== payload._id),
+      itemError: null,
+    }
+  },
   [failureItem]: (store, { payload }) => {
     return {
       ...store,
@@ -46,13 +70,13 @@ export default handleActions({
   },
   [saveHistoryType]: (store, { payload }) => {
     return {
-      ...store, 
+      ...store,
       type: payload.type
     }
   },
   [clearOperationsData]: (store) => {
     return {
-      ...store, 
+      ...store,
       ...initialState
     }
   }

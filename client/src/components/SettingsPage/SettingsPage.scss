@@ -1,19 +1,24 @@
- .container {
-    height: 100vh;
-    margin: 0;
+.container {
+  padding-bottom: 20px;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: .5em 1em;
 
-    .noPopUp {
-        display: none;
-    }
+  .noPopUp {
+    display: none;
+  }
 
-     .cardList {
-        text-align: left;
-        height: 90vh;
-    }
- }
+  .cardList {
+    text-align: left;
+    height: calc(100vh - 160px);
+    overflow-y: auto;
+  }
+}
 
 .content {
-    text-align: center;
+  text-align: center;
+  height: calc(100vh - 110px);
 }
     
     

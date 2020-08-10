@@ -10,7 +10,6 @@ module.exports = swaggerJSDoc( {
       description: '',
     },
     host: `${host}:${port}/v1`,
-
   },
   apis: ['./router/*.js', './*.yaml'],
 });
