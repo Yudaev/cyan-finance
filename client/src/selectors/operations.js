@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import propOr from 'lodash/fp/propOr';
+import prop from 'lodash/fp/prop';
 import dayjs from 'dayjs';
 import dayjsRU from 'dayjs/locale/ru';
 
@@ -87,4 +88,9 @@ export const getRepetitiveOperations = createSelector(
 
     return repetitiveGroups;
   }
+);
+
+export const getAddItemsStatus = createSelector(
+  selectOperations,
+  prop('addItemStatus')
 );

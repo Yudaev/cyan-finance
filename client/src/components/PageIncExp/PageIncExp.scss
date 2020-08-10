@@ -114,3 +114,17 @@ $elemPadding: 1.5em 1em;
 .content {
     text-align: center;
 }
+
+.messages-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 40px;
+
+    :global .p-messages-close-icon,
+    :global .p-messages-icon  {
+        font-size: 12px !important;
+        font-weight: bold;
+    }
+}
