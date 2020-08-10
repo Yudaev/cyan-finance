@@ -4,8 +4,8 @@
   "mongoHost": "localhost",
   "mongoPort": 27017,
   "mongoDB": "db",
-  "mongoUser": "root",
-  "mongoPassword": "toor",
+  "mongoUser": "",
+  "mongoPassword": "",
   "tokenSecret": "secret",
   "saltRounds": 5
 }
