@@ -180,21 +180,24 @@ export default class EditOperationPage extends Component {
                     this.props.addOperation(this.state);
                   this.state._id ?
                     this.props.togglePopup(this.state._id):
-                      this.state.value === undefined ||
-                      this.state.type !== ('income' || 'expense') ?
-                        console.log(this.state.type) :
-                        this.props.togglePopup('new');
+                      this.state.value !== undefined ?
+                        this.state.type === 'income' ||
+                        this.state.type ==='expense' ?
+                          this.props.togglePopup('new') :
+                          null :
+                      null;
                 }}
               />
             </div>
             {
               this.state.try === true ?
                 this.state.value === undefined ||
-                this.state.type !== 'income' || 'expense' ?
+                this.state.type !== 'income' ||
+                this.state.type !== 'expense'?
                   <div>
                     Заполните обязательные поля:
                     {this.state.value === undefined ? <div>Сумма</div> : null}
-                    {this.state.type !== ('income' || 'expense') ? <div>Доход / Расход</div> : null}
+                    {this.state.type === 'income' || this.state.type === 'expense' ? null : <div>Доход / Расход</div>}
                   </div>
                   :
                   null
