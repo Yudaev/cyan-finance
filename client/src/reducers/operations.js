@@ -1,6 +1,7 @@
 import {handleActions} from 'redux-actions';
 
 import {
+  requestItem,
   failureItem,
   failureOperations,
   successItem,
@@ -9,7 +10,7 @@ import {
   successDeleteItem,
   saveHistoryDate,
   clearOperationsData,
-  saveHistoryType
+  saveHistoryType,
 } from "../actions/operations";
 
 
@@ -19,6 +20,7 @@ const initialState = {
   type: 'день',
   loadOperationsError: '',
   itemError: '',
+  addItemStatus: {},
 };
 
 export default handleActions({
@@ -35,11 +37,23 @@ export default handleActions({
       loadOperationsError: payload,
     }
   },
+  [requestItem]: (store, { payload }) => {
+    return {
+      ...store,
+      addItemStatus: { type: 'request' },
+    }
+  },
   [successItem]: (store, { payload }) => {
     return {
       ...store,
       items: [ ...store.items, payload],
-      itemError: null,
+      addItemStatus: { type: 'success' },
+    }
+  },
+  [failureItem]: (store, { payload }) => {
+    return {
+      ...store,
+      addItemStatus: { type: 'error', ...payload },
     }
   },
   [successEditItem]: (store, { payload }) => {
@@ -54,12 +68,6 @@ export default handleActions({
       ...store,
       items: store.items.filter(item => item._id !== payload._id),
       itemError: null,
-    }
-  },
-  [failureItem]: (store, { payload }) => {
-    return {
-      ...store,
-      itemError: payload,
     }
   },
   [saveHistoryDate]: (store, { payload }) => {
