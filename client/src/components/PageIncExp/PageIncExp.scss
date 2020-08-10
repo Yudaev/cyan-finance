@@ -1,9 +1,51 @@
 $elemPadding: 1.5em 1em;
 
-* {
-    font-family: 'Roboto', sans-serif;
-}
+.stats {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto 20px;
+    .stats-block {
+        display: flex;
+        flex-direction: column;
 
+        &:first-child {
+            text-align: left;
+        }
+        &:last-child {
+            text-align: right;
+        }
+
+        .title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: .5em;
+            @media screen and (max-width: 400px) {
+                font-size: 1em;
+            }
+        }
+
+        .period {
+            font-size: 12px;
+            color: rgb(160, 160, 160);
+            margin-bottom: 1.5em;
+        }
+
+        .value {
+            font-size: 1.8em;
+            &.plus {
+                color: green;
+            }
+            &.minus {
+                color: red;
+            }
+
+            @media screen and (max-width: 400px) {
+                font-size: 1.4em;
+            }
+        }
+    }
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -13,45 +55,6 @@ $elemPadding: 1.5em 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    .incexp-header { 
-        width: 80%;
-        margin: 0 auto;      
-    }
-
-    .incexp-header-text {   
-        padding-bottom: 1.5em; 
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .incexp-header-text:nth-child(1) {
-        padding-bottom: 0.5em;
-    }
-
-    .incexp-header-span {
-        font-size: 1.2em;
-        font-weight: bold;
-    }
-
-    .incexp-header-span-opt {
-        font-size: 12px;
-        color: rgb(160, 160, 160);
-    }
-
-    .incexp-header-exp {
-        font-size: 2em;
-    }
-
-    .incexp-header-bud {
-        font-size: 2em;  
-        color: green;  
-    }
-
-    .incexp-header-bal {
-        font-size: 2em;   
-        color: red; 
-    }
 
     .incexp-body {
         width: 80%;
@@ -73,7 +76,7 @@ $elemPadding: 1.5em 1em;
             :global .p-autocomplete {
                 width: 100%;
             }
-            
+
             :global .p-inputtext {
                 border-radius: 3px 0 0 3px;
                 border-right: 0;

@@ -4,7 +4,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { AutoComplete } from 'primereact/autocomplete';
 import { Button } from 'primereact/button';
 import styles from './PageIncExp.scss';
-import { Messages } from "primereact/messages";
+import { Messages } from 'primereact/messages';
 
 const cx = classnames.bind(styles);
 
@@ -78,37 +78,41 @@ export default class PageIncExp extends Component {
   }
 
   render () {
+    const { expenseOfMonth, expenseOfDay, budgetOfMonth, currentMonth } = this.props;
+    
     return (
-      <div className={cx("container", "content")}>
-        <div className={cx("incexp-header")}>
-          <div className={cx("incexp-header-text")}>
-            <span className={cx("incexp-header-span")}>Расход</span>
-            <span className={cx("incexp-header-span")}>Бюджет</span>
-            <span className={cx("incexp-header-span")}>Остаток</span>
+      <div className={cx('container', 'content')}>
+        <div className={cx('stats')}>
+          <div className={cx('stats-block')}>
+            <span className={cx('title')}>Расход</span>
+            <span className={cx('period')}>за сегодня</span>
+            <span className={cx('value')}>{expenseOfDay}</span>
           </div>
-          <div className={cx("incexp-header-text")}>
-            <span className={cx("incexp-header-span-opt")}>за день</span>
-            <span className={cx("incexp-header-span-opt")}>за месяц</span>
-            <span className={cx("incexp-header-span-opt")}>за день</span>
+          <div className={cx('stats-block')}>
+            <span className={cx('title')}>Расход</span>
+            <span className={cx('period')}>за {currentMonth}</span>
+            <span className={cx('value')}>{expenseOfMonth}</span>
           </div>
-          <div className={cx("incexp-header-text")}>
-            <span className={cx("incexp-header-exp")}>900</span>
-            <span className={cx("incexp-header-bud")}>516</span>
-            <span className={cx("incexp-header-bal")}>-384</span>
+          <div className={cx('stats-block')}>
+            <span className={cx('title')}>Бюджет</span>
+            <span className={cx('period')}>на месяц</span>
+            <span
+              className={cx('value', Number(budgetOfMonth) >= 0 ? 'plus' : 'minus')}
+            >{budgetOfMonth}</span>
           </div>
         </div>
-        <div className={cx("incexp-body")}>
-          <div className={cx("incexp-body-input")}>
+        <div className={cx('incexp-body')}>
+          <div className={cx('incexp-body-input')}>
             <InputNumber
               value={this.state.valueNum}
               onChange={(e) => this.setState({ valueNum: e.value })}
-              mode="currency"
-              currency="RUB"
-              locale="ru-RU"
+              mode='currency'
+              currency='RUB'
+              locale='ru-RU'
               placeholder={'Введите сумму'}
             />
           </div>
-          <div className={cx("incexp-body-input", 'category')}>
+          <div className={cx('incexp-body-input', 'category')}>
             <AutoComplete
               placeholder={'Выберите категорию'}
               size={32}
@@ -131,15 +135,15 @@ export default class PageIncExp extends Component {
               }}
             />
           </div>
-          <div className={cx("incexp-body-button")}>
+          <div className={cx('incexp-body-button')}>
             <div className={cx('buttons-container')}>
               <Button
-                label="Доход"
+                label='Доход'
                 className='p-button-secondary'
                 onClick={() => this.onButtonClick('income')}
               />
               <Button
-                label="Расход"
+                label='Расход'
                 className='p-button-secondary'
                 onClick={() => this.onButtonClick('expense')}
               />

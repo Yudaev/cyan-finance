@@ -94,3 +94,51 @@ export const getAddItemsStatus = createSelector(
   selectOperations,
   prop('addItemStatus')
 );
+
+export const getExpenseByCurrentMonth = createSelector(
+  [getOperationList],
+  (items) => {
+    const currentMonth = dayjs().month();
+    const currentMonthItems = items.filter(
+      item => item.type === 'expense' && dayjs(item.date).month() === currentMonth
+    );
+    return currentMonthItems.reduce((sum, item)=> sum + item.value, 0);
+  }
+);
+
+export const getExpenseByCurrentDay = createSelector(
+  [getOperationList],
+  (items) => {
+    const currentDate = dayjs().format('DD-MM-YYY');
+    const currentDayItems = items.filter(
+      item => item.type === 'expense' && dayjs(item.date).format('DD-MM-YYY') === currentDate
+    );
+    return currentDayItems.reduce((sum, item)=> sum + item.value, 0);
+  }
+);
+
+
+export const getBudgetByCurrentMonth = createSelector(
+  [getOperationList],
+  (items) => {
+    const currentMonth = dayjs().month();
+    let income = 0;
+    let expense = 0;
+
+    items.forEach(item => {
+      if(!item.repetitive && item.type === 'expense' && dayjs(item.date).month() === currentMonth) {
+        expense+=Number(item.value);
+      }
+      if (!item.repetitive && item.type === 'income' && dayjs(item.date).month() === currentMonth) {
+        income+=Number(item.value);
+      }
+      if (item.repetitive && item.type === 'expense') {
+        expense+=Number(item.value);
+      }
+      if (item.repetitive && item.type === 'income') {
+        income+=Number(item.value);
+      }
+    });
+    return income - expense;
+  }
+);
