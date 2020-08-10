@@ -4,6 +4,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { AutoComplete } from 'primereact/autocomplete';
 import { Button } from 'primereact/button';
 import styles from './PageIncExp.scss';
+import { Messages } from "primereact/messages";
 
 const cx = classnames.bind(styles);
 
@@ -19,22 +20,33 @@ export default class PageIncExp extends Component {
     const { addOperation } = this.props;
     const { valueNum: value, selectedCategory: category } = this.state;
 
+    !value && this.showError('Не заполнена сумма');
+    !type && this.showError('Не выбран тип операции');
+
     if (value && type) {
       addOperation({ value, category, type });
-      this.setState({
-        valueBut: null,
-        selectedCategory: null,
-        valueNum: null,
-      });
     }
   }
 
   componentDidUpdate (prevProps) {
-    const { categories } = this.props;
+    const { categories, addItemStatus = {} } = this.props;
     if (categories !== prevProps.categories) {
       this.setState({
         categories
       })
+    }
+    if(addItemStatus.type !== prevProps.addItemStatus.type) {
+      if(addItemStatus.type === 'success') {
+        this.showSuccess('Операция добавлена');
+        this.setState({
+          valueBut: null,
+          selectedCategory: null,
+          valueNum: null,
+        });
+      }
+      if(addItemStatus.type === 'error') {
+        this.showError(addItemStatus._message || 'Ошибка. Попробуйте еще раз');
+      }
     }
   };
 
@@ -57,6 +69,13 @@ export default class PageIncExp extends Component {
       <div style={{ fontSize: '16px' }}>{category.title}</div>
     );
   };
+
+  showError(summary, detail) {
+    this.messages.show({severity: 'error', summary, detail});
+  }
+  showSuccess(summary, detail) {
+    this.messages.show({severity: 'success', summary, detail});
+  }
 
   render () {
     return (
@@ -127,6 +146,10 @@ export default class PageIncExp extends Component {
             </div>
 
           </div>
+        </div>
+
+        <div className={cx('messages-container')}>
+          <Messages ref={(el) => this.messages = el} />
         </div>
       </div>
     )
