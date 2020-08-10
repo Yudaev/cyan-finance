@@ -1,0 +1,77 @@
+$elemPadding: 1.5em 1em;
+
+* {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    padding: .5em 1em;
+    height: calc(100vh - 110px);
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-content: flex-start;
+            margin-bottom: 20px;
+            width: 100%;
+
+            .incomeWrapper,
+            .expensesWrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                width: 30%;
+
+                .mark {
+                    color: #888;
+                    font-size: .8em;
+                }
+            }
+
+            .monthWrapper {
+                width: 40%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .monthPicker {
+                border: none;
+                text-align: center;
+
+                :global {
+                    .p-inputtext {
+                        font-weight: 600;
+                        text-align: center;
+                        border: none;
+                        width: 100%;
+                    }
+
+                    .p-datepicker-monthpicker {
+                        width: 150%;
+                        left: -25% !important;
+                    }
+
+                    .pi-chevron-down {
+                        font-size: .8em;
+                    }
+                } 
+            }
+        }
+
+        .body {
+            height: calc(100vh - 145px);
+            overflow-y: auto;
+        }
+
+        .upBtnWrapper {
+            position: fixed;
+            right: -200px;
+            z-index: 5;
+        }
+     }

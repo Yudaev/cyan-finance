@@ -1,0 +1,133 @@
+$elemPadding: 1.5em 1em;
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto 20px;
+    .stats-block {
+        display: flex;
+        flex-direction: column;
+
+        &:first-child {
+            text-align: left;
+        }
+        &:last-child {
+            text-align: right;
+        }
+
+        .title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: .5em;
+            @media screen and (max-width: 400px) {
+                font-size: 1em;
+            }
+        }
+
+        .period {
+            font-size: 12px;
+            color: rgb(160, 160, 160);
+            margin-bottom: 1.5em;
+        }
+
+        .value {
+            font-size: 1.8em;
+            &.plus {
+                color: green;
+            }
+            &.minus {
+                color: red;
+            }
+
+            @media screen and (max-width: 400px) {
+                font-size: 1.4em;
+            }
+        }
+    }
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1em;
+    min-height: calc(100vh - 110px);
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .incexp-body {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .incexp-body-input {
+        padding-top: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        :global .p-inputnumber {
+            width: 100%;
+        }
+
+        &.category {
+            :global .p-autocomplete {
+                width: 100%;
+            }
+
+            :global .p-inputtext {
+                border-radius: 3px 0 0 3px;
+                border-right: 0;
+                width: calc(100% - 33px);
+            }
+            :global .p-button {
+                border-radius: 0 3px 3px 0;
+            }
+        }
+    }
+
+    .incexp-body-button {
+        padding: $elemPadding;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .buttons-container {
+            width: 288px;
+            border: 1px solid #c8c8c8;
+            border-radius: 3px;
+        }
+
+        button {
+            width: 50%;
+            height: 35px;
+
+            font-weight: bold;
+            border-radius: 0;
+
+            &:first-child {
+                border-right: 1px solid #c8c8c8;
+            }
+        }
+    }
+}
+
+.content {
+    text-align: center;
+}
+
+.messages-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 40px;
+
+    :global .p-messages-close-icon,
+    :global .p-messages-icon  {
+        font-size: 12px !important;
+        font-weight: bold;
+    }
+}

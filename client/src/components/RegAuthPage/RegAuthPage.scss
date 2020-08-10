@@ -1,0 +1,23 @@
+@import '../variables.scss';
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.switch-link {
+  text-align: right;
+}
+
+.forgot {
+  @media screen and (max-width: $sm) {
+    text-align: right;
+  }
+}

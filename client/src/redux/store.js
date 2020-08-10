@@ -1,23 +1,24 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducer from '../reducers';
+import reducer, { history } from '../reducers';
+import { persistStore } from 'redux-persist';
+import { routerMiddleware } from 'connected-react-router';
 import appMiddleware from "../middlewares/app";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
-const persistConfig = {
-  key: 'cyanFinance',
-  storage,
-  //whitelist: ['user'], // предположительно будет скидывать в локал сторадж данные о юзере
-};
+import userMiddleware from "../middlewares/user";
+import operationsMiddleware from "../middlewares/operations";
+import categoriesMiddleware from "../middlewares/categories";
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 export const initStore = (preloadedState = undefined) => {
   const store = createStore(
-    persistReducer(persistConfig, reducer),
+    reducer,
     preloadedState,
     composeEnhancers(applyMiddleware(
+      routerMiddleware(history),
       appMiddleware,
+      userMiddleware,
+      operationsMiddleware,
+      categoriesMiddleware,
     ))
   );
 

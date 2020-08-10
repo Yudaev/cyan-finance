@@ -1,0 +1,146 @@
+    .body {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 110px);
+        overflow-y: auto;
+
+        .control-panel {
+            position: fixed;
+            top: 52px;
+            background-color: #fff;
+            z-index: 10;
+            width: 100%;
+            padding-top: 10px;
+
+                .controls {
+                    height: 2.5em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    
+
+                    .dropdown {
+                        border: none;
+                        box-shadow: none;
+                    }
+
+                    .calendar {
+                        font-size: 12px;
+                        text-align: right;
+                        padding-right: .8em;
+                        
+                        :global {
+
+                            .p-inputtext {
+                                box-shadow: none;
+                                text-align: right;
+                            }
+
+                            .p-datepicker {
+                                right: -19px;
+                                left: -190px !important;
+                            }
+    
+                            .p-datepicker-year {
+                                padding: 0em 0.5em;
+                            }
+
+                            .year {
+                               font-size: 12px;
+                               border: none;
+                               box-shadow: none;
+                               padding: 0em;
+
+                               :global .p-dropdown-trigger {
+                                   display: none;
+                               }
+                            }
+
+                        }
+                       
+                    }
+
+                    &:hover {
+                        border: none;
+                    }
+    
+                    .control-button-spend,
+                    .control-button-income {
+                        border: none;
+                        background: #ffffff;
+                        opacity: 0.5;
+
+                        &:hover {
+                            cursor: pointer;
+                            font-weight: 700;
+                            opacity: 1;
+                            border-bottom: 2px solid black;
+                        }
+                    }
+                }
+            }
+        
+        .preview {
+            margin-top: 55px;
+
+            .title {
+                .title-bar {
+                    padding: 0.5em;
+                    display: flex;
+                    align-items: baseline;
+                    text-align: center;
+
+                    .label {
+                        text-align: left;
+                        width: 22%
+                    }
+
+                    .ttl-bar {
+                        text-align: center;
+                        float: right;
+                        width: 56%;
+                        height: 9;
+                        border-radius: 1em;
+                    }
+
+                    .incomes {
+                        :global .p-progressbar-value {
+                            background-color: #34A835;
+                        }
+                    }
+
+                    .expense {
+                        :global .p-progressbar-value {
+                            background-color: #e91224;
+                        }
+                    }
+
+                    .value {
+                        text-align: right;
+                        width: 22%
+                    }
+                }
+            }
+        }
+
+        .chart {
+            margin: 1.75em 0em;
+        }
+
+        .tree {
+            width: 100%;
+            padding: 0.5em 0em;
+            border: none;
+        }
+
+        .footer-button {
+            display: none;
+            padding: 1em;
+            bottom: 15;  
+
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    

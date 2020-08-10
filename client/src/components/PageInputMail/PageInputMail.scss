@@ -1,0 +1,45 @@
+$elemPadding: 1.5em 1em;
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1em;
+    min-height: 100%;
+
+    .inpmail-icon {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0.5em 0.5em 0 0;
+    }
+
+    .inpmail-header {
+        padding-top: 15em;        
+    }
+
+    .inpmail-header-text {   
+        padding-bottom: 0.5em; 
+    }
+
+    .inpmail-header-span {
+        font-weight: bold;
+    }
+
+    .inpmail-body-input {
+        padding-top: 2.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+    }
+
+    .inpmail-body-button {
+        padding: $elemPadding;
+    }
+}
+
+.content {
+    text-align: center;
+}

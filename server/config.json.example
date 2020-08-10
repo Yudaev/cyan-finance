@@ -1,0 +1,11 @@
+{
+  "host": "localhost",
+  "port": 8000,
+  "mongoHost": "localhost",
+  "mongoPort": 27017,
+  "mongoDB": "db",
+  "mongoUser": "",
+  "mongoPassword": "",
+  "tokenSecret": "secret",
+  "saltRounds": 5
+}

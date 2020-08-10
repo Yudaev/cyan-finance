@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const argv = require('minimist')(process.argv.slice(2));
 
 module.exports = {
   entry: [
@@ -21,7 +22,7 @@ module.exports = {
       {
         test: /\.(sa|sc)ss$/,
         use: [
-          process.env.NODE_ENV === 'production'
+          argv.mode === 'production'
             ? MiniCssExtractPlugin.loader
             : 'style-loader',
           {
@@ -39,7 +40,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          process.env.NODE_ENV === 'production'
+          argv.mode === 'production'
             ? MiniCssExtractPlugin.loader
             : 'style-loader',
           {
@@ -62,6 +63,15 @@ module.exports = {
           'file-loader',
         ],
       },
+      {
+        test: /config\.js$/,
+        loader: 'file-replace-loader',
+        options: {
+          condition: argv.mode === 'development',
+          replacement: path.resolve(__dirname, 'src', 'config.dev.js'),
+          async: true,
+        }
+      }
     ]
   },
   resolve: {
@@ -79,7 +89,15 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: 'src',
+    historyApiFallback: true,
     port: 7000,
-    proxy: {}
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:8000/',
+        pathRewrite: { '/api/': '' },
+        secure: false,
+        changeOrigin: true,
+      }
+    }
   }
 };

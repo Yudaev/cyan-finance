@@ -1,0 +1,80 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+
+  .backIconWrapper {
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .editOperationForm {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    .formBody {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding-top: 1em;
+
+      .inputItem {
+        margin-bottom: 1em;
+
+        button {
+          height: 33px;
+        }
+      }
+
+      .checkboxWrapper {
+        margin-bottom: 1em;
+
+        .checkboxLabel {
+          margin-left: 1em;
+
+          .regularity {
+            text-decoration: underline;
+          }
+
+          .regularDate {
+            color: #a84e4e;
+          }
+        }
+      }
+    }
+
+    .formFooter {
+      flex: 0 0 auto;
+    }
+
+    .btnWrapper {
+      margin-bottom: 1em;
+      display: flex;
+      justify-content: center;
+
+      .editPageBtn {
+        margin: auto 20px;
+        min-width: 120px;
+      }
+    }
+
+    .chkWrapper {
+      margin-bottom: 1em;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  .incexp-body-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 33px);
+    borderTopRightRadius: 0;
+    borderBottomRightRadius: 0;
+    borderRight: none;
+  }
+}

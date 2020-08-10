@@ -1,0 +1,46 @@
+$elemPadding: 1.5em 1em;
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1em;
+    min-height: 100%;
+
+    .recovery-header {
+        padding-top: 11em;        
+    }
+
+    .recovery-header-main-text {
+        padding: $elemPadding; 
+        font-size: 1.25em;   
+    }
+
+    .recovery-header-text {
+        a { text-decoration: underline; }    
+        padding-bottom: 1.5em; 
+    }
+
+    .recovery-header-span {
+        padding: $elemPadding;
+        font-size: 1em;
+    }
+
+    .recovery-body-input {
+        padding: 1em 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+    }
+
+    .recovery-body-button {
+        padding-top: 2em;
+    }
+}
+
+.content {
+    text-align: center;
+}

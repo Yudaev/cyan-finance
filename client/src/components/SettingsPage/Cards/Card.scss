@@ -1,0 +1,55 @@
+.card {
+    width: 99%;
+    margin-bottom: 8px;
+    font-size: 20px;
+
+    :global .p-card-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .left {
+        flex-grow: 1;
+    }
+    .category {
+        font-weight: 700;
+        margin-bottom: .5em;
+        font-size: 1.5em;
+    }
+
+    .description {
+
+    }
+
+    .type,
+    .repetitive,
+    .title {
+        display: inline-block;
+        margin-right: 4px;
+    }
+
+    .type {
+        font-style: italic;
+    }
+
+    .repetitive {
+        font-style: italic;
+    }
+
+    .title {}
+
+
+    .right {
+        font-size: 20px;
+    }
+
+    .greenCard {
+        border-left: 4px solid #34A835;
+    }
+
+    .redCard {
+        border-left: 4px solid #d90026;
+    }
+}
