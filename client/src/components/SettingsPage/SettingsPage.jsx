@@ -14,16 +14,22 @@ const cx = classnames.bind(styles);
 class SettingsPage extends Component {
 
   state = {
+    date: new Date(),
     openPopUp: false
   };
 
-  // handlePopUp = () => {
-  //   this.setState(prevState => ({ openPopUp: !prevState.openPopUp }))
-  // };
-
-  togglePopup = ({ id, title , value, type, category, date, repetitive, repetitiveDay, description }) => {
-    //console.log(this.props);
-
+  togglePopup = ({
+                   id,
+                   title ,
+                   value,
+                   type,
+                   category,
+                   date,
+                   repetitive=true,
+                   repetitiveDay,
+                   description
+  }) => {
+    console.log('1')
     this.setState(state => {
       return {
         openPopup: !state.openPopup,
@@ -35,8 +41,8 @@ class SettingsPage extends Component {
           title: title,
           category: category,
           repetitive: repetitive,
-          date: date,
-          repetitiveDay: repetitiveDay,
+          date: date ? date : this.state.date,
+          repetitiveDay: repetitiveDay ? repetitiveDay : 1,
           description: description,
           categories: this.props.categoriesList
         }
@@ -49,18 +55,18 @@ class SettingsPage extends Component {
       repetitiveOperations: repetitiveOperationsMap,
       categories,
       categoriesAsObject,
-      addRepetitiveOperation,
       onUpdateItem,
       onDeleteItem,
+      addOperation,
     } = this.props;
 
-    // let show = this.state.openPopUp === true ? `${cx('popUp')}` : `${cx('noPopUp')}`;
     let popup = this.state.openPopup ? (
       <EditOperationPage
         togglePopup={this.togglePopup}
         data={this.state.popupData}
         onUpdateItem={onUpdateItem}
         onDeleteItem={onDeleteItem}
+        addOperation={addOperation}
       />
     ) : null;
 
@@ -78,7 +84,6 @@ class SettingsPage extends Component {
           {repetitiveOperationsArray.map(({ items, date }, key) =>
             (<OperationPageDateBlock
               key={key}
-              // handlePopUp={this.handlePopUp}
               togglePopup={ this.togglePopup }
               items={items}
               date={date}
@@ -89,7 +94,7 @@ class SettingsPage extends Component {
         <Button
           label="ДОБАВИТЬ ЗАПИСЬ"
           className="p-button-raised p-button-secondary"
-          onClick={() => this.togglePopup()}
+          onClick={this.togglePopup}
           style={{display: this.state.openPopup ? 'none' : null}}
         />
       </div>

@@ -25,7 +25,8 @@ export default class EditOperationPage extends Component {
     date: new Date(this.props.data.date) || undefined,
     repetitive: this.props.data.repetitive || false,
     repetitiveDay: this.props.data.repetitiveDay || undefined,
-    description: this.props.data.description || undefined
+    description: this.props.data.description || undefined,
+    try: false
   }
 
   filterCategories = (event) => {
@@ -70,6 +71,7 @@ export default class EditOperationPage extends Component {
               mode="currency"
               currency='RUB'
               onChange={(e) => this.setState({value: e.value})}
+              required={true}
             />
             <div className={cx("chkWrapper")}>
               <div className={cx("chkElem")}>
@@ -155,25 +157,47 @@ export default class EditOperationPage extends Component {
           </div>
           <div className={cx("formFooter")}>
             <div className={cx("btnWrapper")}>
-              <Button
-                label="Удалить"
-                className={cx("p-button-raised", "p-button-secondary", "p-button-danger", "editPageBtn")}
-                onClick={e => {
-                  e.preventDefault();
-                  this.props.onDeleteItem(this.state);
-                  this.props.togglePopup(this.state._id);
-                }}
-              />
+              {this.state._id ?
+                <Button
+                  label="Удалить"
+                  className={cx("p-button-raised", "p-button-secondary", "p-button-danger", "editPageBtn")}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.props.onDeleteItem(this.state);
+                    this.props.togglePopup(this.state._id);
+                  }}
+                /> :
+                null
+              }
               <Button
                 label="ОК"
                 className={cx("p-button-raised", "p-button-primary", "editPageBtn")}
                 onClick={e => {
                   e.preventDefault();
-                  this.props.onUpdateItem(this.state);
-                  this.props.togglePopup(this.state._id);
+                  this.setState({try: true})
+                  this.state._id ?
+                    this.props.onUpdateItem(this.state):
+                    this.props.addOperation(this.state);
+                  this.state._id ?
+                    this.props.togglePopup(this.state._id):
+                    this.props.togglePopup('new');
                 }}
               />
             </div>
+            {
+              this.state.try === true ?
+                this.state.value === undefined ||
+                this.state.type !== 'income' || 'expense' ?
+                  <div>
+                    Заполните обязательные поля:
+                    {this.state.value === undefined ? <div>Сумма</div> : null}
+                    {this.state.type !== 'income' || 'expense' ? <div>Доход / Расход</div> : null}
+                  </div>
+                  :
+                  null
+                :
+                null
+              }
           </div>
         </form>
       </div>

@@ -79,7 +79,7 @@ export default class OperationsPage extends Component {
         <div className={cx("popupWrapper")}>
           {popup}
         </div>
-        <div className={cx("header")}>
+        <div className={cx("header")}  style={{display: this.state.openPopup ? 'none' : null}}>
           <div className={cx("incomeWrapper")}>
             <span className={cx("incomeAmount")}>{`${this.props.stats.income} р.`}</span>
             <span className={cx("mark")}>доход</span>

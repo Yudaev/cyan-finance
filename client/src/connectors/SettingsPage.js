@@ -18,7 +18,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   onUpdateItem: (item) => updateItem(item),
   onDeleteItem: (item) => deleteItem(item),
-  addRepetitiveOperation: data => addItem(data)
+  addOperation: data => addItem(data)
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
