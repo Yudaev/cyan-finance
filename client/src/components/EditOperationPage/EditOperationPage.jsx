@@ -101,8 +101,8 @@ export default class EditOperationPage extends Component {
               suggestions={this.state.filteredCategories}
               completeMethod={this.filterCategories}
               itemTemplate={this.categoriesTemplate}
-              dropdown={true}
-              placeholder="Выберте категорию"
+              dropdown
+              placeholder="Выберите категорию"
               inputStyle={{
                 width: "calc(100% - 33px)",
                 borderTopRightRadius: "0",
@@ -177,7 +177,7 @@ export default class EditOperationPage extends Component {
                   this.setState({try: true})
                   this.state._id ?
                     this.props.onUpdateItem(this.state):
-                    this.props.addOperation(this.state);
+                    this.props.addOperation({...this.state, category: this.state.selectedCategory});
                   this.state._id ?
                     this.props.togglePopup(this.state._id):
                       this.state.value !== undefined ?
