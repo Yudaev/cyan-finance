@@ -88,6 +88,7 @@ class SettingsPage extends Component {
               items={items}
               date={date}
               categories={categoriesAsObject}
+              header={false}
             />)
           )}
         </ScrollPanel>
