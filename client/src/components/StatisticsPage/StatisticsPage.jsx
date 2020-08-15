@@ -158,7 +158,7 @@ export default class StatisticsPage extends React.Component {
         });
 
         const groupsArray = [];
-        groups.forEach((children, label) => groupsArray.push({ children, label }));
+        groups.forEach((children, label) => children.length !== 0 && groupsArray.push({ children, label }));
         return groupsArray;
     }
 
