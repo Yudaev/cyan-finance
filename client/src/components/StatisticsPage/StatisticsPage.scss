@@ -84,14 +84,31 @@
             margin-top: 55px;
 
             .title {
+
+                :global {
+                    .p-tabview-nav {
+                        width: 100.7%;
+
+                        .p-unselectable-text > a {
+                            width: 100%;
+                            text-align: center;
+                            font-weight: normal;
+                            letter-spacing: 0.1em;
+                            background-color: white;
+                            color: black;
+                            border-color: #c8c8c8;
+                        }
+                    }
+                }
+
                 .title-bar {
                     padding: 0.5em;
                     display: flex;
-                    align-items: baseline;
-                    text-align: center;
+                    align-items: center;
+                    justify-content: center;
 
                     .label {
-                        text-align: left;
+                        text-align: center;
                         width: 22%
                     }
 
@@ -116,8 +133,8 @@
                     }
 
                     .value {
-                        text-align: right;
-                        width: 22%
+                        font-size: 22px;
+                        font-weight: bold;
                     }
                 }
             }

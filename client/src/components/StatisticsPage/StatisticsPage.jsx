@@ -1,16 +1,18 @@
 import React from 'react';
 import classnames from 'classnames/bind';
+import dayjs from 'dayjs';
 
 import styles from './StatisticsPage.scss';
 
 import StatisticsPageProgressBars from './StatisticsPageProgressBars/StatisticsPageProgressBars';
 
+import { TabView, TabPanel } from 'primereact/tabview';
 import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { Chart } from 'primereact/chart';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
-import dayjs from 'dayjs';
+
 
 const cx = classnames.bind(styles);
 
@@ -20,6 +22,7 @@ export default class StatisticsPage extends React.Component {
         month: new Date(),
         year: new Date(),
         intervalValue: this.props.yearNow || new Date(),
+        activeIndex: 0,
         intervalArray: [
             {label: 'День', value: 'день'},   
             {label: 'Месяц', value: 'месяц'},
@@ -44,7 +47,8 @@ export default class StatisticsPage extends React.Component {
               backgroundColor: [ '#FF6384', '#36A2EB', '#FFCE56', '#C14242', '#7FBF3F' ],
               incBackgroundColor: [ '#3FBFBF', '#7A0DE7', '#E70DE7', '#864707', '#7247bc' ]
             }]
-        }
+        };
+
         return data;
     }
 
@@ -132,9 +136,9 @@ export default class StatisticsPage extends React.Component {
                         onChange={e => onChangeDate(e.value) }
                     />
             };
-            default: {
-                return yearNow;
-            }
+            default: 
+                return 'день';
+            
         }
     }
 
@@ -151,14 +155,17 @@ export default class StatisticsPage extends React.Component {
             const operationsId = [];
             const otherId = [];
             Object.values(operations).filter(item => { 
-                if (item.category !== null && item.category == category._id) operationsId.push(item);
-                if (item.category == null) otherId.push(item);  
+                if (item.category !== null && item.category == category._id) 
+                    operationsId.push(item);
+                if (item.category == null) 
+                    otherId.push(item);  
             });
             groups.set(category.title, [...operationsId]).set('Прочее', otherId);
         });
 
         const groupsArray = [];
-        groups.forEach((children, label) => children.length !== 0 && groupsArray.push({ children, label }));
+        groups.forEach((children, label) => 
+            children.length !== 0 && groupsArray.push({ children, label }));
         return groupsArray;
     }
 
@@ -182,8 +189,11 @@ export default class StatisticsPage extends React.Component {
                         </div>
                     </div>
                     <div className={cx('preview')}>
-                        <div className={cx('title')} key={Date.now()} >
-                                <div className={cx('title-bar')}>
+                        <TabView 
+                            activeIndex={this.state.activeIndex}
+                            onTabChange={e => this.setState({ activeIndex: e.index })}
+                            className={cx('title')}>
+                                {/* <div className={cx('title-bar')}>
                                     <div className={cx('label')}>
                                         <span>Баланс</span>
                                     </div>
@@ -195,36 +205,38 @@ export default class StatisticsPage extends React.Component {
                                     <div className={cx('value')}>
                                         <span>{stats.income - stats.expense} p.</span>
                                     </div>
-                                </div>
-
+                                </div> */}
+                            <TabPanel 
+                                header='Доход' 
+                                headerStyle={{ 
+                                    width: '50%', 
+                                }}
+                            >
                                 <div className={cx('title-bar')}>
                                     <div className={cx('label')}> 
                                         <span>Доход</span>
                                     </div>
-                                        <ProgressBar
-                                            value={stats.income}
-                                            className={cx('ttl-bar', 'incomes')}
-                                            showValue={false}
-                                        />
                                     <div className={cx('value')}>
                                         <span>{stats.income} p.</span>
                                     </div>
                                 </div>
-
+                            </TabPanel>
+                            <TabPanel
+                                header='Расход'
+                                headerStyle={{
+                                    width: '49%'
+                                }}
+                            >
                                 <div className={cx('title-bar')}>
                                     <div className={cx('label')}>
                                         <span>Расход</span>
                                     </div>
-                                        <ProgressBar
-                                            value={stats.expense}
-                                            className={cx('ttl-bar', 'expense')}
-                                            showValue={false}
-                                        />
                                     <div className={cx('value')}>
                                         <span>{stats.expense} p.</span>
                                     </div>
                                 </div>
-                        </div>
+                            </TabPanel>
+                        </TabView>
                     </div>
                     <div className={cx('chart')}>
                         <Chart type='doughnut' data={this.makeChart()}/>
@@ -240,7 +252,10 @@ export default class StatisticsPage extends React.Component {
                         />
                     ))}
                     <div className={cx('footer-button')}>
-                        <Button label='Выгрузить статистику' className='p-button-raised p-button-secondary' />
+                        <Button 
+                            label='Выгрузить статистику' 
+                            className='p-button-raised p-button-secondary' 
+                        />
                     </div>
                 </div>
             )
