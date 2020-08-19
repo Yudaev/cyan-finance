@@ -42,19 +42,27 @@ export default class OperationsPage extends Component {
     });
   }
 
+  handleDate(date) {
+      const onChangeDate = this.props.onChangeDate;
+      this.setState({date});
+      onChangeDate(date);
+  }
+
   render() {
     const {
       groups: groupsMap,
       categories,
       onUpdateItem,
-      onDeleteItem,
-      onChangeDate
+      onDeleteItem
     } = this.props;
 
     const groupsArray = [];
     // неожидал что Map нельзя нормально проитерировать в реакте
     // пришлось преобразовать в массив, @todo: избавиться от Map в компоненте
-    groupsMap.forEach((items, date) => groupsArray.push({date, items}));
+    groupsMap.forEach((items, date) => {
+      let filteredItems = items.filter(item => new Date(item.date).getMonth() === new Date(this.state.date).getMonth())
+      filteredItems.length > 0 && groupsArray.push({date, filteredItems})
+    });
 
     let popup = this.state.openPopup ? (
       <EditOperationPage
@@ -90,7 +98,7 @@ export default class OperationsPage extends Component {
               className={cx("monthPicker")}
               inputStyle={{minWidth: "100px"}}
               value={this.state.date}
-              onSelect={(e) => onChangeDate(e.value)}
+              onSelect={(e) => this.handleDate(e.value)}
               view="month"
               dateFormat="MM yy"
               yearNavigator={true}
@@ -103,11 +111,11 @@ export default class OperationsPage extends Component {
           </div>
         </div>
         <div className={cx("body")} style={{display: this.state.openPopup ? 'none' : null}}>
-          {groupsArray.map(({date, items}, key) => (
+          {groupsArray.map(({date, filteredItems}, key) => (
             <OperationsPageDateBlock
               key={key}
               date={date}
-              items={items}
+              items={filteredItems}
               togglePopup={ this.togglePopup }
               categories={categories}
             />
