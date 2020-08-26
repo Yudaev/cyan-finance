@@ -35,7 +35,9 @@ export const getGroupByYears = createSelector(
         const currentYear = dayjs(item.date).year();
         years.push(currentYear);
       });
+
     const onlyUniq = _.uniqWith(years, _.isEqual);
+
     return onlyUniq;
   }
 );
@@ -48,6 +50,7 @@ export const getCurrentDatesObject = createSelector(
       month: dayjs(date).month(),
       year: dayjs(date).year(),
     };
+
     return currentDates;
   },
 );
@@ -64,21 +67,20 @@ export const getValuesByType = createSelector(
         day: dayjs(item.date).date(),
         month: dayjs(item.date).month(),
         year: dayjs(item.date).year(),
-      }
+      };
+
       switch (type) {
         case 'день': 
-          if (item.type === 'income' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
-            stats.income += Number(item.value);
-          if (item.type === 'expense' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
-            stats.expense += Number(item.value);
+          if (JSON.stringify(currentDates) === JSON.stringify(itemDates)) {
+            if (item.type === 'income') stats.income += Number(item.value);
+            if (item.type === 'expense') stats.expense += Number(item.value);
+          }
           break;
         case 'месяц':
-          delete currentDates.day;
-          delete itemDates.day;
-            if (item.type === 'income' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
-              stats.income += Number(item.value);
-            if (item.type === 'expense' && JSON.stringify(currentDates) === JSON.stringify(itemDates)) 
-              stats.expense += Number(item.value);
+          if (currentDates.month === itemDates.month && currentDates.year === itemDates.year) {
+            if (item.type === 'income') stats.income += Number(item.value);
+            if (item.type === 'expense') stats.expense += Number(item.value);
+          }
           break;
         case 'год':
             if (item.type === 'income' && date == itemDates.year) 
@@ -108,6 +110,7 @@ export const getValuesByType = createSelector(
           return stats;
       }
     });
+    
     return stats;
   }
 );
