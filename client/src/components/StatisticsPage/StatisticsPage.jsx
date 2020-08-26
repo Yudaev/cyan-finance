@@ -205,7 +205,7 @@ export default class StatisticsPage extends React.Component {
                         <TabPanel 
                             header={`Доход ${stats.income} р.`} 
                             headerStyle={{ 
-                                width: '50%', 
+                                width: '50%',
                             }}
                         />
                         <TabPanel

@@ -95,9 +95,14 @@
                             font-weight: normal;
                             letter-spacing: 0.1em;
                             background-color: white;
-                            color: black;
-                            border-color: #c8c8c8;
+                            color: #333333;                                
                         }
+
+                        .p-tabview-selected > a {
+                            background-color: #007ad9;
+                            color: white;
+                        }
+
                     }
 
                     .p-tabview-panels {
