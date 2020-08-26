@@ -43,7 +43,7 @@ export default class StatisticsPage extends React.Component {
         let data = {
             labels: this.createGroups().map(item => { return item.label }),
             datasets: [{
-              data: this.createGroups().map(({children}) => this.categoriesValues(children)),
+              data: this.createGroups().map(({ children }) => this.categoriesValues(children)),
               backgroundColor: [ '#FF6384', '#36A2EB', '#FFCE56', '#C14242', '#7FBF3F' ],
               incBackgroundColor: [ '#3FBFBF', '#7A0DE7', '#E70DE7', '#864707', '#7247bc' ]
             }]
@@ -71,21 +71,21 @@ export default class StatisticsPage extends React.Component {
         switch (type) {
             case 'день': {
                 return <Calendar
-                        inputStyle={{
-                            padding: '.25em 0em 0em 0em',
-                            border: 'none',
-                            backgroundColor: '#ffffff'
-                        }}
-                        placeholder={`${this.state.date}`}
-                        monthNavigator
-                        yearNavigator
-                        locale={calendarSettings}
-                        yearRange='2010:2030'
-                        dateFormat='dd MM yy'
-                        readOnlyInput
-                        value={this.state.date}
-                        onChange={e => onChangeDate(e.value)}
-                    />
+                            inputStyle={{
+                                padding: '.25em 0em 0em 0em',
+                                border: 'none',
+                                backgroundColor: '#ffffff'
+                            }}
+                            placeholder={`${this.state.date}`}
+                            monthNavigator
+                            yearNavigator
+                            locale={calendarSettings}
+                            yearRange='2010:2030'
+                            dateFormat='dd MM yy'
+                            readOnlyInput
+                            value={this.state.date}
+                            onChange={e => onChangeDate(e.value)}
+                        />
             };
             case 'месяц': {
                 const formatMonth = dayjs(this.state.month).format('MMMM YYYY');
@@ -122,19 +122,19 @@ export default class StatisticsPage extends React.Component {
             };
             case 'интервал': {
                 return <Calendar
-                        inputStyle={{
-                            border: 'none',
-                            backgroundColor: '#ffffff'
-                        }}
-                        className={cx('interval')}
-                        selectionMode='range'
-                        placeholder='Выберите интервал...'
-                        locale={calendarSettings}
-                        dateFormat='d M y'
-                        readOnlyInput
-                        value={yearNow}
-                        onChange={e => onChangeDate(e.value) }
-                    />
+                            inputStyle={{
+                                border: 'none',
+                                backgroundColor: '#ffffff'
+                            }}
+                            className={cx('interval')}
+                            selectionMode='range'
+                            placeholder='Выберите интервал...'
+                            locale={calendarSettings}
+                            dateFormat='d M y'
+                            readOnlyInput
+                            value={yearNow}
+                            onChange={e => onChangeDate(e.value) }
+                        />
             };
             default: 
                 return 'день';
@@ -154,11 +154,19 @@ export default class StatisticsPage extends React.Component {
         Object.values(categories).forEach(category => {
             const operationsId = [];
             const otherId = [];
-            Object.values(operations).filter(item => { 
-                if (item.category !== null && item.category == category._id) 
-                    operationsId.push(item);
-                if (item.category == null) 
-                    otherId.push(item);  
+            Object.values(operations).filter(item => {
+                if (this.state.activeIndex === 0 && item.type === 'income') {
+                    if (item.category !== null && item.category == category._id) 
+                        operationsId.push(item);
+                    if (item.category == null) 
+                        otherId.push(item);  
+                }
+                if (this.state.activeIndex === 1 && item.type === 'expense') {
+                    if (item.category !== null && item.category == category._id) 
+                        operationsId.push(item);
+                    if (item.category == null) 
+                        otherId.push(item);  
+                }
             });
             groups.set(category.title, [...operationsId]).set('Прочее', otherId);
         });
@@ -173,92 +181,62 @@ export default class StatisticsPage extends React.Component {
         const { stats, onChangeType, type } = this.props;
 
         return(
-                <div className={cx('body')}>
-                    <div className={cx('control-panel')}>
-                        <div className={cx('controls')}>
-                            <Dropdown
-                                className={cx('dropdown')}
-                                value={`Показать за ` + type}
-                                onChange={ e => onChangeType(e.value) }
-                                placeholder={'Показать за ' + type}
-                                options={this.state.intervalArray}
-                            />
-                            <div className={cx('calendar')}>
-                                {this.switchCalendars()}
-                            </div>
+            <div className={cx('body')}>
+                <div className={cx('control-panel')}>
+                    <div className={cx('controls')}>
+                        <Dropdown
+                            className={cx('dropdown')}
+                            value={`Показать за ` + type}
+                            onChange={ e => onChangeType(e.value) }
+                            placeholder={'Показать за ' + type}
+                            options={this.state.intervalArray}
+                        />
+                        <div className={cx('calendar')}>
+                            {this.switchCalendars()}
                         </div>
                     </div>
-                    <div className={cx('preview')}>
-                        <TabView 
-                            activeIndex={this.state.activeIndex}
-                            onTabChange={e => this.setState({ activeIndex: e.index })}
-                            className={cx('title')}>
-                                {/* <div className={cx('title-bar')}>
-                                    <div className={cx('label')}>
-                                        <span>Баланс</span>
-                                    </div>
-                                        <ProgressBar
-                                            value={stats.income - stats.expense}
-                                            className={cx('ttl-bar')}
-                                            showValue={false}
-                                        />
-                                    <div className={cx('value')}>
-                                        <span>{stats.income - stats.expense} p.</span>
-                                    </div>
-                                </div> */}
-                            <TabPanel 
-                                header='Доход' 
-                                headerStyle={{ 
-                                    width: '50%', 
-                                }}
-                            >
-                                <div className={cx('title-bar')}>
-                                    <div className={cx('label')}> 
-                                        <span>Доход</span>
-                                    </div>
-                                    <div className={cx('value')}>
-                                        <span>{stats.income} p.</span>
-                                    </div>
-                                </div>
-                            </TabPanel>
-                            <TabPanel
-                                header='Расход'
-                                headerStyle={{
-                                    width: '49%'
-                                }}
-                            >
-                                <div className={cx('title-bar')}>
-                                    <div className={cx('label')}>
-                                        <span>Расход</span>
-                                    </div>
-                                    <div className={cx('value')}>
-                                        <span>{stats.expense} p.</span>
-                                    </div>
-                                </div>
-                            </TabPanel>
-                        </TabView>
-                    </div>
-                    <div className={cx('chart')}>
-                        <Chart type='doughnut' data={this.makeChart()}/>
-                    </div>
-                    {this.createGroups().map(({ children, label }, key) => (
-                        <StatisticsPageProgressBars
-                            income={stats.income}
-                            num={key}
-                            key={key}
-                            label={label}
-                            children={children}
-                            value={this.categoriesValues(children)}
-                        />
-                    ))}
-                    <div className={cx('footer-button')}>
-                        <Button 
-                            label='Выгрузить статистику' 
-                            className='p-button-raised p-button-secondary' 
-                        />
-                    </div>
                 </div>
-            )
+                <div className={cx('preview')}>
+                    <TabView 
+                        activeIndex={this.state.activeIndex}
+                        onTabChange={e => this.setState({ activeIndex: e.index })}
+                        className={cx('title')}                        
+                    >
+                        <TabPanel 
+                            header={`Доход ${stats.income} р.`} 
+                            headerStyle={{ 
+                                width: '50%', 
+                            }}
+                        />
+                        <TabPanel
+                            header={`Расход ${stats.expense} р.`}
+                            headerStyle={{
+                                width: '49%'
+                            }}
+                        />
+                    </TabView>
+                </div>
+                <div className={cx('chart')}>
+                    <Chart type='doughnut' data={this.makeChart()}/>
+                </div>
+                {this.createGroups().map(({ children, label }, key) => (
+                    <StatisticsPageProgressBars
+                        income={stats.income}
+                        num={key}
+                        key={key}
+                        label={label}
+                        children={children}
+                        value={this.categoriesValues(children)}
+                    />
+                ))}
+                <div className={cx('footer-button')}>
+                    <Button 
+                        label='Выгрузить статистику' 
+                        className='p-button-raised p-button-secondary' 
+                    />
+                </div>
+            </div>
+        )
     }
 }
 
