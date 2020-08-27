@@ -95,12 +95,17 @@
                             font-weight: normal;
                             letter-spacing: 0.1em;
                             background-color: white;
-                            color: #333333;                                
+                            color: #333333;
+                            border: 1px solid gray;                              
                         }
 
                         .p-tabview-selected > a {
                             background-color: #007ad9;
                             color: white;
+                            
+                            &:hover {
+                                background-color: #007ad9;
+                            }
                         }
 
                     }
