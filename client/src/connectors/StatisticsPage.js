@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import StatisticsPage from "../components/StatisticsPage/StatisticsPage";
 import { saveHistoryDate } from "../actions/operations";
 import { saveHistoryType } from "../actions/operations";
-import { getTypeSwitch, getValuesByType, getGroupByYears, getDate, getOperations } from "../selectors/statistics";
+import {
+  getTypeSwitch,
+  getValuesByType,
+  getGroupByYears, 
+  getDate, 
+  getOperations, 
+  getOperationsByType
+} from "../selectors/statistics";
 import { getCategoryListAsObject } from "../selectors/categories";
 
 
 const mapStateToProps = (store) => ({
   operations: getOperations(store),
+  filteredOperations: getOperationsByType(store),
   categories: getCategoryListAsObject(store),
   yearNow: getDate(store),
   years: getGroupByYears(store),

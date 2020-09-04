@@ -115,9 +115,56 @@ export const getValuesByType = createSelector(
   }
 );
 
+export const getOperationsByType = createSelector(
+  [getCurrentDatesObject, getOperations, getTypeSwitch],
+  (currentDates, items, type, date) => {
+    const transactions = [];
+    items.forEach(item => {
+      const itemDates = {
+        day: dayjs(item.date).date(),
+        month: dayjs(item.date).month(),
+        year: dayjs(item.date).year(),
+      };
 
+      switch (type) {
+        case 'день': 
+          if (JSON.stringify(currentDates) === JSON.stringify(itemDates)) {
+            return transactions.push(item);
+          }
+          break;
+        case 'месяц':
+          if (currentDates.month === itemDates.month
+            && currentDates.year === itemDates.year) {
+            return transactions.push(item);
+          }
+          break;
+        case 'год':
+            if (date == itemDates.year) 
+              return transactions.push(item);
+            else if (dayjs(date).year() == itemDates.year)
+              return transactions.push(item);
 
-
-
-
-
+            if (date == itemDates.year) 
+              return transactions.push(item);
+            else if (dayjs(date).year() == itemDates.year) 
+              return transactions.push(item);
+          break;
+        case 'все время':
+          return transactions.push(item);
+        case 'интервал':
+          const isDate = _.isDate(date);
+            if (isDate) return true;
+            else {
+              const isBetween = dayjs(item.date).isBetween(date[0], date[1], 'day', '[]');
+              if (isBetween) return transactions.push(item);
+              if (isBetween ) return transactions.push(item);
+            }
+          break;
+        default: 
+          return item;
+      }
+    });
+    
+    return transactions;
+  }
+);
