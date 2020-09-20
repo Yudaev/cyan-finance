@@ -143,7 +143,24 @@ export default class EditOperationPage extends Component {
               <label htmlFor="regularTrue" className={cx("checkboxLabel")}>
                 {`Повторять `}
                 <span className={cx("regularity")}>ежемесячно</span>
-                <span className={cx("regularDate")}>{` ${this.state.repetitiveDay} `}</span>
+                <InputNumber
+                  className={cx("inputRepetativeDay")}
+                  inputStyle={{width: "50px"}}
+                  value={this.state.repetitiveDay}
+                  placeholder="День"
+                  onBlur={(e) => {
+                    console.log(e.target.value);
+                    if (e.target.value < 1) {
+                      this.setState({repetitiveDay: 1})
+                    }
+                    else if (e.target.value > 31) {
+                      this.setState({repetitiveDay: 31})
+                    }
+                    else {
+                      this.setState({repetitiveDay: +(e.target.value)})
+                    }
+                  }}
+                />
                 числа
               </label>
             </div>
