@@ -82,7 +82,7 @@ router.get('/', async (req, res) => {
 
   const filter = {
     user,
-    deletedDate: '',
+    $or: [{ repetitive: true }, { repetitive: false, deletedDate: '' }]
   };
   if (filterArray.includes('repetitive')) {
     filter.repetitive = true;
