@@ -149,7 +149,6 @@ export default class EditOperationPage extends Component {
                   value={this.state.repetitiveDay}
                   placeholder="День"
                   onBlur={(e) => {
-                    console.log(e.target.value);
                     if (e.target.value < 1) {
                       this.setState({repetitiveDay: 1})
                     }
