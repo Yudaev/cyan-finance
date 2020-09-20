@@ -83,7 +83,7 @@ export const getRepetitiveOperations = createSelector(
       const formatDate = itemDate.format(`DD MMMM ${year}, dd`);
 
       const groupItems = repetitiveGroups.get(formatDate) || [];
-      if (item.repetitive === true) repetitiveGroups.set(formatDate, [ ...groupItems, item]);
+      if (item.repetitive === true && !item.deletedDate) repetitiveGroups.set(formatDate, [ ...groupItems, item]);
     });
 
     return repetitiveGroups;
