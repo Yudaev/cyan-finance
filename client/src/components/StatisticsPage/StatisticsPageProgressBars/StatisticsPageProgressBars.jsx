@@ -17,13 +17,30 @@ export default class StatisticsPageProgressBars extends React.Component {
   }
 
   render() {
-    let { children, label, num, value, income } = this.props;
+    const {
+      children,
+      label,
+      num,
+      value,
+      income,
+    } = this.props;
 
     let invisible = this.state.visible ? 'transaction-list' : 'invisible';
 
     let icon = this.state.visible ? 'pi pi-caret-down' : 'pi pi-caret-right';
     
-    let spendColorClasses = ['pinkRed', 'blue', 'yellow', 'red', 'yellowGreen', 'cyan', 'lilac', 'pink', 'brown', 'violet'];
+    let spendColorClasses = [
+      'pinkRed',
+      'blue',
+      'yellow',
+      'red',
+      'yellowGreen',
+      'cyan',
+      'lilac',
+      'pink',
+      'brown',
+      'violet'
+    ];
 
     return(
       <div className={cx('progress-bar')} onClick={ e => this.handleClick(e)}>
@@ -41,24 +58,24 @@ export default class StatisticsPageProgressBars extends React.Component {
           />
         </div>
         <div className={cx('pb-value')}>
-          <p> {value} р.</p>
+          <p>{value} р.</p>
         </div>
         <div className={cx(invisible)}>
-              {Object.values(children).map((transaction) => (
-                <div key={transaction._id} className={cx('transaction', transaction.type)}>
-                  <span> 
-                    {dayjs(transaction.date).format('D.MM.YYг.')} 
-                  </span>
-                  <div>
-                    <span>
-                      {transaction.title == undefined ? 'Описание отсутствует' : transaction.title}
-                    </span>
-                  </div>
-                  <span className={cx(transaction.type)}>
-                    {transaction.type === 'income' ? '+' : '-'} {transaction.value} р.
-                  </span>
-                </div>
-              ))}
+          {Object.values(children).map(transaction => (
+            <div key={transaction._id} className={cx('transaction', transaction.type)}>
+              <span> 
+                {dayjs(transaction.date).format('D.MM.YYг.')} 
+              </span>
+              <div>
+                <span>
+                  {transaction.title == undefined ? 'Описание отсутствует' : transaction.title}
+                </span>
+              </div>
+              <span className={cx(transaction.type)}>
+                {transaction.type === 'income' ? '+' : '-'} {transaction.value} р.
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     )

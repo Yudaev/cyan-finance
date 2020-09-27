@@ -22,7 +22,6 @@ export default class StatisticsPage extends React.Component {
         month: new Date(),
         year: new Date(),
         intervalValue: this.props.yearNow || new Date(),
-        activeIndex: 0,
         intervalArray: [
             {label: 'День', value: 'день'},   
             {label: 'Месяц', value: 'месяц'},
@@ -30,6 +29,7 @@ export default class StatisticsPage extends React.Component {
             {label: 'Все время', value: 'все время'},
             {label: 'Интервал', value: 'интервал'},
         ],
+        activeIndex: 0,
     }
 
     componentDidUpdate(prevProps) {
@@ -138,7 +138,6 @@ export default class StatisticsPage extends React.Component {
             };
             default: 
                 return 'день';
-            
         }
     }
 
@@ -149,12 +148,12 @@ export default class StatisticsPage extends React.Component {
     }
 
     createGroups = () => {
-        const { categories, operations } = this.props;
+        const { categories, filteredOperations } = this.props;
         const groups = new Map();
         Object.values(categories).forEach(category => {
             const operationsId = [];
             const otherId = [];
-            Object.values(operations).filter(item => {
+            Object.values(filteredOperations).filter(item => {
                 if (this.state.activeIndex === 0 && item.type === 'income') {
                     if (item.category !== null && item.category == category._id) 
                         operationsId.push(item);
@@ -174,6 +173,7 @@ export default class StatisticsPage extends React.Component {
         const groupsArray = [];
         groups.forEach((children, label) => 
             children.length !== 0 && groupsArray.push({ children, label }));
+
         return groupsArray;
     }
 
